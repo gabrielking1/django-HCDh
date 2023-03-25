@@ -21,3 +21,4 @@ MarkupSafe==2.1.2
 jsonfield==3.1.0
 django-ajax-chat==0.2
 django-celery-beat==2.1.0
+Pillow==9.4.0
