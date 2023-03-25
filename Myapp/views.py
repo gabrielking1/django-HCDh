@@ -48,6 +48,9 @@ class ProfileView(SessionWizardView):
             profile = form_list[1].save(commit=False)
             profile.username =  userr
             profile.save()
+            return redirect('login')
+        else:
+            print("something is wrong ")
             
         return redirect('index')
 
