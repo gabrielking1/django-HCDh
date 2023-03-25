@@ -534,9 +534,9 @@ def contact(request):
         
 def create(request):
     if request.user.is_active and request.user.is_authenticated:
-        
+        notify = Notification.objects.filter(username=request.user.username,isread="Unread")
         if request.method == "POST":
-            notify = Notification.objects.filter(username=request.user.username,isread="Unread")
+            
             form = conForm(request.POST, request.FILES)
     #       {{content|safe }}
             if form.is_valid():
@@ -568,9 +568,9 @@ def create(request):
     
 def question(request):
     if request.user.is_active and request.user.is_authenticated:
-       
+        notify = Notification.objects.filter(username=request.user.username,isread="Unread")
         if request.method == "POST":
-            notify = Notification.objects.filter(username=request.user.username,isread="Unread")
+            
             form = QForm(request.POST, request.FILES)
     #       {{content|safe }}
             if form.is_valid():
