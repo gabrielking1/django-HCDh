@@ -1,0 +1,788 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from zwin.io/html/malixhost/home-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Feb 2023 19:27:09 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fpe Coding Community</title>
+    <!-- favicon -->
+    <link rel=icon href=favicon.png sizes="20x20" type="image/png">
+    <!-- animate -->
+    <link rel="stylesheet" href="/static/assets/css/animate.css">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+    <!-- magnific popup -->
+    <link rel="stylesheet" href="/static/assets/css/magnific-popup.css">
+    <!-- owl carousel -->
+    <link rel="stylesheet" href="/static/assets/css/owl.carousel.min.css">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="/static/assets/css/fontawesome-all.min.css">
+    <!-- flaticon -->
+    <link rel="stylesheet" href="/static/assets/css/flaticon.css">
+    <!-- slick slider -->
+    <link rel="stylesheet" href="/static/assets/css/slick.css" />
+    <!-- slick slider Theme -->
+    <link rel="stylesheet" href="/static/assets/css/slick-theme.css" />
+    <!-- selectbox -->
+    <link href="/static/assets/css/selectbox.min.css" rel="stylesheet">
+    <!-- Date Picker -->
+    <link href="/static/assets/css/datepicker.min.css" rel="stylesheet" type="text/css">
+    <!-- Time Picker -->
+    <link rel="stylesheet" href="/static/assets/css/wickedpicker.min.css">
+    <!-- Off Canvas Menu Stylesheet -->
+    <link rel="stylesheet" href="/static/assets/css/jquery.popuplayer.min.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <!-- responsive Stylesheet -->
+    <link rel="stylesheet" href="/static/assets/css/responsive.css">   
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons" media="all">
+    <style>
+        .wrapper {
+            position:relative;
+            display: flex;
+            
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+          }
+          
+          .bell .material-icons { 
+            /* font-size:12rem !important; */
+            /* font-size:36px !important; */
+            font-size:3rem !important;
+          }
+          
+          .bell {
+            position:relative;
+            display:inline-block;  
+            /* border:dashed 1px rgba(0,0,0,.25); */
+            margin:0;
+            padding:0;  
+          }
+          
+          .bell .anchor {
+            transform-origin:center top;
+            display:inline-block;
+            margin:0;
+            padding:0;       
+          }
+          
+          .bell .layer-1 {
+            color:#007FFF;
+            z-index:9;
+            animation: animation-layer-1 5000ms infinite;      
+            opacity:0;  
+          }
+          
+          .bell .layer-2 {
+            color:#007FFF;
+            z-index:8;
+            position:absolute;top:0;left:0;   
+            animation: animation-layer-2 5000ms infinite;    
+          }
+          
+          .bell .layer-3 {
+            color:#333642;
+            z-index:7;
+            position:absolute;top:0;left:0; 
+            animation: animation-layer-3 5000ms infinite;    
+          }
+          
+          @keyframes animation-layer-1 {
+            0% { transform: rotate(0deg);opacity:0; }
+            8.0% { transform: rotate(0deg);opacity:0; }
+            12.0% { transform: rotate(42deg);opacity:.5; }
+            16.0% { transform: rotate(-35deg);opacity:.4; }
+            20.0% { transform: rotate(0deg);opacity:.1; }
+            23.0% { transform: rotate(28deg);opacity:.3; }
+            26.0% { transform: rotate(-20deg);opacity:.2; }
+            29.0% { transform: rotate(0deg);opacity:.1; }
+            31.0% { transform: rotate(16deg);opacity:0; }
+            33.0% { transform: rotate(-12deg);opacity:0; }
+            35.0% { transform: rotate(0deg);opacity:0; }	
+            37.0% { transform: rotate(-6deg);opacity:0; }
+            39.0% { transform: rotate(0deg);opacity:0; }
+          }
+          
+          @keyframes animation-layer-2 {
+            0% { transform: rotate(0deg); }
+            8.0% { transform: rotate(0deg); }
+            12.0% { transform: rotate(42deg); }
+            16.0% { transform: rotate(-35deg); }
+            20.0% { transform: rotate(0deg); }
+            23.0% { transform: rotate(28deg); }
+            26.0% { transform: rotate(-20deg); }
+            29.0% { transform: rotate(0deg); }
+            31.0% { transform: rotate(16deg); }
+            33.0% { transform: rotate(-12deg); }
+            35.0% { transform: rotate(0deg); }	
+            37.0% { transform: rotate(-6deg); }
+            39.0% { transform: rotate(0deg); }
+            40.0% { transform: rotate(6deg); }
+            44.0% { transform: rotate(-3deg); }
+            49.0% { transform: rotate(2deg);}
+            55.0% { transform: rotate(0deg); }
+            62.0% { transform: rotate(1deg); }
+            70.0% { transform: rotate(0deg); }  
+          }
+          
+          @keyframes animation-layer-3 {
+            0% { transform: rotate(0deg);opacity:1; }
+            8.0% { transform: rotate(0deg);opacity:1; }
+            12.0% { transform: rotate(52deg);opacity:.5; }
+            16.0% { transform: rotate(-48deg);opacity:.4; }
+            20.0% { transform: rotate(0deg);opacity:1; }
+            23.0% { transform: rotate(42deg);opacity:.3; }
+            26.0% { transform: rotate(-30deg);opacity:.2; }
+            29.0% { transform: rotate(0deg);opacity:1; }
+            31.0% { transform: rotate(26deg);opacity:.15; }
+            33.0% { transform: rotate(-18deg);opacity:.1; }
+            35.0% { transform: rotate(0deg);opacity:1; }	
+            37.0% { transform: rotate(-12deg);opacity:.8; }
+            40.0% { transform: rotate(6deg);opacity:1; }
+            44.0% { transform: rotate(-3deg);opacity:.8; }
+            49.0% { transform: rotate(2deg);opacity:1; }
+            55.0% { transform: rotate(0deg);opacity:1; }
+            62.0% { transform: rotate(1deg);opacity:1; }
+            70.0% { transform: rotate(0deg);opacity:1; }
+          }
+        </style>                                                                                                                                                                                                             
+</head>
+
+<body style="background-image:url(/static/assets/img/bluee.jpg);">
+    
+    <!-- preloader area end -->
+    <nav class="navbar navbar-area navbar-expand-lg nav-absolute">
+        <div class="container nav-container">
+            <div class="navbar-brand">
+                <a href="{% url 'index' %}" class="site-logo"><img src="{% static 'assets/img/logo.png' %}" style= "height:120px" alt="Malix Host"></a>
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                    data-target="#malixhost_main_menu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon-"><i class="fa fa-bars"></i></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" id="malixhost_main_menu">
+                <ul class="navbar-nav">
+                    <li class="menu-item-has-children">
+                        <a href="{% url 'index' %}">Home </a>
+                        
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="#">Question</a>
+                        <ul class="sub-menu">
+                            <li><a href="/question/">Ask A Question</a></li>
+                            <li><a href="/answer/">Q & A</a></li>
+                            
+                        </ul>
+                    </li>
+                    <li><a href="/about/">About Us</a></li>
+                    <!-- <li><a href="whmcs.html">Whmcs</a></li> -->
+                    <li class="menu-item-has-children">
+                        <a href="#">Pages</a>
+                        <ul class="sub-menu">
+                            <li><a href="/report/">Report an Abuse</a></li>
+                           
+                            
+                            <li><a href="/login/">Sign In</a></li>
+                            <li><a href="/registration/">Sign Up</a></li>
+                           
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="#">Content</a>
+                        <ul class="sub-menu">
+                            <li><a href="/create/">Create a Content</a></li>
+                            <li><a href="/blogs/">Content Lists</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="https://wa.me/2347067208917">Contact Us</a></li>
+                    <li class="menu-item-has-children">
+                        
+                        {%if notify|length != 0%}
+                        <a href="#">
+                            
+                            <div class="wrapper">
+
+                                <div class="bell" id="bell-1">
+                                    <i class="flaticon-cart-item-num" style="background-color:black;colorwhite;
+                                    font-weight: bold;border:3px;border-radius:5px">{{notify|length}}</i>
+                                  <div class="anchor material-icons layer-1">notifications_active</div>
+                                  <div class="anchor material-icons layer-2">notifications</div>
+                                  <div class="anchor material-icons layer-3">notifications</div>
+                                  
+                                </div>
+                              
+                              </div>
+                             
+                             
+                              
+                              
+                        </a>
+                        {%endif%}
+                        <ul class="sub-menu">
+                            {%for note in notify reversed%}
+                            {%if note.isread == "Unread" %}
+                            <li><b><a href="/view/{{note.ids}}">{{note.user}} {{note.topic}}</a></b>
+                                <form action="{% url 'read' %}?next={{ request.path }}" class="form-inline" method="post" >
+                                    {% csrf_token %}
+                            <input type = "text" value = "{{note.id}}" name="like" hidden >
+                            <button type="submit" style="border:none;background:inherit;font-weight: bold;font: 18px Arial, Helvetica, sans-serif;"><img src="{% static 'assets/img/correct.png' %}" style="height:35px !important" alt=""
+                                class="float-bob-y"></button>
+                                </form>
+                            </li>
+                            {%endif%}
+                            {%endfor%}
+                            
+                        </ul>
+                        
+                        {% comment %} {%endif%} {% endcomment %}
+                    </li>
+                    
+                </ul>
+            </div>
+            <div class="nav-right-content">
+                <ul>
+                    
+                    {% if request.user.is_authenticated%}
+                    <li><a href="/logout/" class="signin-btn">Sign out</a></li>
+                    <li><a href="/profile/{{user.username}}" class="signin-btn">Profile</a></li>
+                    {%else%}
+                    <li><a href="/login/" class="signin-btn">Sign in</a></li>
+                    
+                    {%endif%}
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- header Part Start-->
+    <header>
+        <div class="header-bg header-three" style="background-image:url(/static/assets/img/home3/4.png);">
+            <div class="container slider">
+                <div class="slider-item">
+                    <div class="row">
+                        <div class="col-xl-5 col-lg-5 offset-lg-1 col-md-7 content-center ">
+                            <div class="left-slider-content-wrapper">
+                                <!--Header Text-->
+                                <div class="slider-inner-content">
+                                    <h1 class="showcase-sec-heading margin-bottom-10">Welcome to Federal polytechnic Ede Coding Community</h1>
+                                    <p class="showcase-sec-para" style="color:black !important">Here you have an open access to unlimited resources.</p>
+                                   
+                                </div>
+                               
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-5">
+                            <div class="slider-img-wrapper">
+                                <img src="{% static 'assets/img/home3/1.png' %}" alt="img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-item">
+                    <div class="row">
+                        <div class="col-xl-5 col-lg-5 offset-lg-1 col-md-7 content-center ">
+                            <div class="left-slider-content-wrapper">
+                                <!--Header Text-->
+                                <div class="slider-inner-content">
+                                    <h1 class="showcase-sec-heading margin-bottom-10">This is a community just for you </h1>
+                                    <p class="showcase-sec-para" style="color:black !important">With little or no experience in TECH, Here you have the opportunity to become a TECH Giant.</p>
+                                   
+                                </div>
+                               
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-5">
+                            <div class="slider-img-wrapper">
+                                <img src="{% static 'assets/img/home3/2.png' %}" alt="img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-item">
+                    <div class="row">
+                        <div class="col-xl-5 col-lg-5 offset-lg-1 col-md-7 content-center ">
+                            <div class="left-slider-content-wrapper">
+                                <!--Header Text-->
+                                <div class="slider-inner-content">
+                                    <h1 class="showcase-sec-heading margin-bottom-10">Connecting the World</h1>
+                                    <p class="showcase-sec-para">Strong connection and collaboration with other developers within the institution and beyond.</p>
+                                    
+                                </div>
+                                <!--Header Text End-->
+                                <!--Header Quote-->
+                                
+                                <!--Header Quote End-->
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-5">
+                            <div class="slider-img-wrapper">
+                                <img src="{% static 'assets/img/home3/3.png' %}" alt="img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+            <!--slider-social-->
+            
+            <!--slider-controller-->
+            <div class="header-slider-controller"> 
+            </div>
+            <!--scroll icon start-->
+            <a class="js-scroll-trigger" href="#domain">
+                <div class="scroll-wrapper">
+                    <div class="big-arrow"> 
+                        <div class="line">
+                        </div>
+                    </div>
+                    <p>Scroll</p>
+                </div>
+            </a>
+            
+             <!--scroll icon End-->
+        </div>
+    </header>
+    <!-- header Part END-->
+    <!-- Main Sec Part Start Here-->
+
+ 
+    <!--Domain Sec End-->
+
+    <section class="our-service-sec margin-top-120 mobile-mt-70" style=" !important">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 margin-bottom-40" style="margin-top:10px">
+                   <div class="purple-title-wrapper margin-bottom-20  wow fadeInDown" data-delay="5s">
+                        <h3 class="purple-title">Our Services</h3>
+                   </div>
+                   <div class="sec-content-wrapper  wow fadeInDown" data-delay="5s">
+                       <h3 class="sec-subtitle">Why Choose Fpe Cc?</h3>
+                   </div>
+                </div>
+                <div class="col-xl-12">
+                    <div class="row margin-bottom-30">
+                        <div class="col-xl-3 col-md-6 col-12">
+                            <div class="quality-card-wrapper quality-card-active  wow fadeInDown" data-delay="5s">
+                                <div class="card-icon-wrapper">
+                                    <div class="icon">
+                                        <i class="flaticon-laptop"></i>
+                                    </div>
+                                </div>
+                                <div class="card-content-wrapper">
+                                    <i class="flaticon-laptop"></i>
+                                    <div class="margin-bottom-20">
+                                        <h4>Web Design</h4>
+                                    </div>
+                                    <p>Creating customized and optimized websites that meet the specific needs and goals of our clients..</p>                                
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-12">
+                            <div class="quality-card-wrapper  wow fadeInUp" data-delay="5s">
+                                <div class="card-icon-wrapper">
+                                    <div class="icon">
+                                        <i class="flaticon-cloud-computing"></i>
+                                    </div>
+                                </div>
+                                <div class="card-content-wrapper">
+                                    <i class="flaticon-cloud-computing"></i>
+                                    <div class="margin-bottom-20">
+                                        <h4>Web Developmet</h4>
+                                    </div>
+                                    <p>Building and maintaining functional and dynamic websites that are user-friendly and meet the technical requirements of your clients.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-12">
+                            <div class="quality-card-wrapper  wow fadeInDown" data-delay="5s">
+                                <div class="card-icon-wrapper">
+                                    <div class="icon">
+                                        <i class="flaticon-paper-plane"></i>
+                                       
+                                    </div>
+                                </div>
+                                <div class="card-content-wrapper">
+                                    <i class="flaticon-paper-plane"></i>
+                                   <div class="margin-bottom-20">
+                                        <h4>UI/UX Design</h4>
+                                   </div>
+                                    <p> Intuitive and visually appealing interfaces that enhance the user experience and ensure customer satisfaction for your clients..</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-12">
+                            <div class="quality-card-wrapper  wow fadeInDown" data-delay="5s">
+                                <div class="card-icon-wrapper">
+                                    <div class="icon">
+                                        <i class="flaticon-shield"></i>
+                                    </div>
+                                </div>
+                                <div class="card-content-wrapper">
+                                    <i class="flaticon-shield"></i>
+                                   <div class="margin-bottom-20">
+                                        <h4>Web Security</h4>
+                                   </div>
+                                    <p>Protecting clients' websites and online data from potential threats and attacks through 
+                                        the implementation of robust security measures and regular vulnerability assessments..</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6 col-12">
+                            <div class="quality-card-wrapper  wow fadeInUp" data-delay="5s">
+                                <div class="card-icon-wrapper">
+                                    <div class="icon">
+                                        <i class="flaticon-work"></i>
+                                    </div>
+                                </div>
+                                <div class="card-content-wrapper">
+                                    <i class="flaticon-work"></i>
+                                    <div class="margin-bottom-20">
+                                        <h4>Programming</h4>
+                                    </div>
+                                    <p>Developing customized software solutions that meet the specific needs and requirements of your clients, 
+                                        while ensuring high performance and reliability..</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-12">
+                            <div class="quality-card-wrapper  wow fadeInDown" data-delay="5s">
+                                <div class="card-icon-wrapper">
+                                    <div class="icon">
+                                        <i class="flaticon-server"></i>
+                                    </div>
+                                </div>
+                                <div class="card-content-wrapper">
+                                    <i class="flaticon-server"></i>
+                                    <div class="margin-bottom-20">
+                                        <h4>Cloud Hosting</h4>
+                                    </div>
+                                    <p>Offering scalable and reliable hosting solutions that allow your clients to store and access their website 
+                                    and online data on the cloud, while ensuring high availability and security.
+
+                                        .</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-12">
+                            <div class="quality-card-wrapper  wow fadeInUp" data-delay="5s">
+                                <div class="card-icon-wrapper">
+                                    <div class="icon">
+                                        <i class="flaticon-http"></i>
+                                    </div>
+                                </div>
+                                <div class="card-content-wrapper">
+                                    <i class="flaticon-http"></i>
+                                    <div class="margin-bottom-20">
+                                        <h4>Domain Registration</h4>
+                                    </div>
+                                    <p>Choose and register client's desired domain names, while ensuring the availability and legality of the chosen domains.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-12">
+                            <div class="quality-card-wrapper  wow fadeInDown" data-delay="5s">
+                                <div class="card-icon-wrapper">
+                                    <div class="icon">
+                                        <i class="flaticon-work"></i>
+                                    </div>
+                                </div>
+                                <div class="card-content-wrapper">
+                                    <i class="flaticon-work"></i>
+                                   <div class="margin-bottom-20">
+                                        <h4>Start Using</h4>
+                                   </div>
+                                    <p>Start using any of services immediately after rendering or deployment.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Our Service Sec Start-->
+    <section class="our-service-sec margin-top-120 mobile-mt-70" style="!important">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 margin-bottom-40">
+                   <div class="purple-title-wrapper margin-bottom-20  wow fadeInDown" data-delay="5s">
+                        <h3 class="purple-title" style="margin-top:20px">Our Community</h3>
+                   </div>
+                   <div class="sec-content-wrapper  wow fadeInDown" data-delay="5s">
+                       <h3 class="sec-subtitle">Join Today</h3>
+                   </div>
+                </div>
+                <div class="col-xl-12">
+                    <div class="row margin-bottom-30">
+                        
+                        <div class="col-xl-3 col-md-6 col-12">
+                            <div class="quality-card-wrapper  wow fadeInDown" data-delay="5s">
+                                <div class="card-icon-wrapper">
+                                    <div class="icon">
+                                        <i class="flaticon-shield"></i>
+                                    </div>
+                                </div>
+                                <div class="card-content-wrapper">
+                                    <i class="flaticon-shield"></i>
+                                   <div class="margin-bottom-20">
+                                        <h4><a href="/register/">Create Account</a></h4>
+                                   </div>
+                                   <p>Create an account with us .</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 col-12">
+                            <div class="quality-card-wrapper  wow fadeInDown" data-delay="5s">
+                                <div class="card-icon-wrapper">
+                                    <div class="icon">
+                                        <i class="flaticon-shield"></i>
+                                    </div>
+                                </div>
+                                <div class="card-content-wrapper">
+                                    <i class="flaticon-shield"></i>
+                                   <div class="margin-bottom-20">
+                                        <h4><a href="/about/"> Read Rules</a></h4>
+                                   </div>
+                                   <p>Abide by the Community Rules.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-12">
+                            <div class="quality-card-wrapper  wow fadeInDown" data-delay="5s">
+                                <div class="card-icon-wrapper">
+                                    <div class="icon">
+                                        <i class="flaticon-shield"></i>
+                                    </div>
+                                </div>
+                                <div class="card-content-wrapper">
+                                    <i class="flaticon-shield"></i>
+                                   <div class="margin-bottom-20">
+                                        <h4><a href="/question/">Ask Question</a></h4>
+                                   </div>
+                                   <p>Ask a question about a problem that gives you sleepless nights.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xl-3 col-md-6 col-12">
+                            <div class="quality-card-wrapper  wow fadeInDown" data-delay="5s">
+                                <div class="card-icon-wrapper">
+                                    <div class="icon">
+                                        <i class="flaticon-shield"></i>
+                                    </div>
+                                </div>
+                                <div class="card-content-wrapper">
+                                    <i class="flaticon-shield"></i>
+                                   <div class="margin-bottom-20">
+                                        <h4> <a href="/answer/">Get Solution</a></h4>
+                                   </div>
+                                   <p>Get relevant solutions.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6 col-12">
+                            <div class="quality-card-wrapper  wow fadeInDown" data-delay="5s">
+                                <div class="card-icon-wrapper">
+                                    <div class="icon">
+                                        <i class="flaticon-shield"></i>
+                                    </div>
+                                </div>
+                                <div class="card-content-wrapper">
+                                    <i class="flaticon-shield"></i>
+                                   <div class="margin-bottom-20">
+                                        <h4><a href ="/create/">Create </a></h4>
+                                   </div>
+                                    <p>Share your knowledge with others by meaningful contents or tutorials</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 col-12">
+                            <div class="quality-card-wrapper  wow fadeInDown" data-delay="5s">
+                                <div class="card-icon-wrapper">
+                                    <div class="icon">
+                                        <i class="flaticon-shield"></i>
+                                    </div>
+                                </div>
+                                <div class="card-content-wrapper">
+                                    <i class="flaticon-shield"></i>
+                                   <div class="margin-bottom-20">
+                                        <h4><a>Well Document</a></h4>
+                                   </div>
+                                   <p>Interactively provide access to world-class materials for catalysts.</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    
+    <!--About us Sec End-->
+    
+    <!--Pricing Sec Start-->
+    
+    <!--Pricing Sec End-->
+    <!--Testimonail Sec Start-->
+    
+    <!--Question Sec End-->
+    
+    <!--Banner Sec Start-->
+    
+     <!--Banner Sec End-->
+    
+    <!--Footer Start-->
+    <footer class="footer-sec">
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-xl-11">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+                            <div class="footer-widget widget">
+                              <div class="widget-white">
+                                    <div class="footer-logo">
+                                        <img src="{% static 'assets/img/logo.jpg' %}" style= "height:120px" alt="Logo" class="img-responsive"> 
+                                    </div>
+                                    <div class="widget-contact margin-top-20">
+                                        <ul>
+                                            <li class="link">
+                                                <i class="flaticon-mail"></i>
+                                                <p class="address-text mb-text m-0-auto"><a href="mailto:princegeestar@gmail.com">help@FpeCc.com</a></p>
+                                            </li>
+                                            <li class="link">
+                                                <i class="flaticon-placeholder"></i>
+                                                <p class="address-text mb-text ">The Federal Polytechnic, Ede</p>
+                                            </li>
+                                            <li class="link">
+                                                <i class="flaticon-phone-call"></i>
+                                                <p class="address-text mb-text m-0-auto">+234 7067 2089 17</p>
+                                            </li>                                 
+                                        </ul>
+                                    </div>
+                                    
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-3 offset-xl-1 col-md-6">
+                            <div class="footer-widget widget margin-top-30">
+                                <h3 class="widget-title">Company</h3>
+                                <div class="footer-widget widget widget_pages margin-bottom-20">
+                                    <ul>
+                                        <li><a href="/about/">About us</a></li>
+                                        <li><a href="https://wa.me/2347067208917">Contact Us</a></li>
+                                      
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="col-xl-2 col-lg-2 col-md-6">
+                            <div class="footer-widget widget margin-top-30">
+                                <h3 class="widget-title">Explore</h3>
+                                <div class="footer-widget widget widget_pages margin-bottom-20">
+                                    <ul>
+                                       
+                                        <li><a href="/question/">Questions</a></li>
+                                        <li><a href="/blogs/">Contents</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-12">
+                            <div class="copyright-area">
+                                <p class="copyright-text">© <script>document.write(/\d{4}/.exec(Date())[0])</script>,  <span
+                                        class="fas fa-star"></span> by <strong>Gabriel</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--Footer End-->
+
+
+
+    <!-- back to top area start -->
+    <div class="back-to-top">
+        <span class="back-top"><svg class="icon" height="12px" width="12px" version="1.1" id="Capa_1"
+                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 284.929 284.929" style="enable-background:new 0 0 284.929 284.929;" xml:space="preserve">
+                <g>
+                    <path d="M282.082,195.285L149.028,62.24c-1.901-1.903-4.088-2.856-6.562-2.856s-4.665,0.953-6.567,2.856L2.856,195.285
+            C0.95,197.191,0,199.378,0,201.853c0,2.474,0.953,4.664,2.856,6.566l14.272,14.271c1.903,1.903,4.093,2.854,6.567,2.854
+            c2.474,0,4.664-0.951,6.567-2.854l112.204-112.202l112.208,112.209c1.902,1.903,4.093,2.848,6.563,2.848
+            c2.478,0,4.668-0.951,6.57-2.848l14.274-14.277c1.902-1.902,2.847-4.093,2.847-6.566
+            C284.929,199.378,283.984,197.188,282.082,195.285z"></path>
+                </g>
+            </svg></span>
+    </div>
+    <!-- back to top area end -->
+
+   
+
+    <!-- jquery -->
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery-migrate.min.js' %}"></script>
+    <!-- Plugin JavaScript -->
+    <script src="{% static 'assets/js/jquery.easing.min.js' %}"></script>
+    <!-- popper -->
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <!-- bootstrap -->
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script  src="{% static 'assets/js/slick.min.js' %}"></script>
+    <!-- Scrolling Nav Plugin -->
+    <script src="{% static 'assets/js/scrolling-nav.js' %}"></script>
+    <!-- magnific popup -->
+    <script src="{% static 'assets/js/jquery.magnific-popup.js' %}"></script>
+    <!-- wow -->
+    <script src="{% static 'assets/js/wow.min.js' %}"></script>
+    <!-- owl carousel -->
+    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+    <!-- waypoint -->
+    <script src="{% static 'assets/js/waypoints.min.js' %}"></script>
+    <!-- counterup -->
+    <script src="{% static 'assets/js/jquery.counterup.min.js' %}"></script>
+    <!-- imageloaded -->
+    <script src="{% static 'assets/js/imagesloaded.pkgd.min.js' %}"></script>
+    <!-- isotope -->
+    <script src="{% static 'assets/js/isotope.pkgd.min.js' %}"></script>
+    <!-- DropDown Select Plugin -->
+    <script src="{% static 'assets/js/selectbox.min.js' %}"></script>
+    <!-- Date Picker -->
+    <script src="{% static 'assets/js/datepicker.min.js' %}"></script>
+    <script src="{% static 'assets/js/datepicker.en.js' %}"></script>
+    <!-- Time Picker -->
+    <script src="{% static 'assets/js/wickedpicker.min.js' %}"></script>
+    <!-- Offcanvas Menu -->
+    <script src="{% static 'assets/js/jquery.popuplayer.min.js' %}"></script>
+    <!-- main js -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+
+
+    
+    
+</body>
+
+
+<!-- Mirrored from zwin.io/html/malixhost/home-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Feb 2023 19:27:36 GMT -->
+</html>

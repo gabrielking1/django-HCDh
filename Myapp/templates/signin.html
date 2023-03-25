@@ -1,0 +1,189 @@
+{% load static%}
+{% load crispy_forms_tags %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from zwin.io/html/malixhost/contactus.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Feb 2023 19:32:24 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fpe Coding Community </title>
+    <!-- favicon -->
+    <link rel=icon href=favicon.png sizes="20x20" type="image/png">
+    <!-- animate -->
+    <link rel="stylesheet" href="/static/assets/css/animate.css">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+    <!-- magnific popup -->
+    <link rel="stylesheet" href="/static/assets/css/magnific-popup.css">
+    <!-- owl carousel -->
+    <link rel="stylesheet" href="/static/assets/css/owl.carousel.min.css">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="/static/assets/css/fontawesome-all.min.css">
+    <!-- flaticon -->
+    <link rel="stylesheet" href="/static/assets/css/flaticon.css">
+    <!-- slick slider -->
+    <link rel="stylesheet" href="/static/assets/css/slick.css" />
+    <!-- slick slider Theme -->
+    <link rel="stylesheet" href="/static/assets/css/slick-theme.css" />
+    <!-- selectbox -->
+    <link href="/static/assets/css/selectbox.min.css" rel="stylesheet">
+    <!-- Date Picker -->
+    <link href="/static/assets/css/datepicker.min.css" rel="stylesheet" type="text/css">
+    <!-- Time Picker -->
+    <link rel="stylesheet" href="/static/assets/css/wickedpicker.min.css">
+    <!-- Off Canvas Menu Stylesheet -->
+    <link rel="stylesheet" href="/static/assets/css/jquery.popuplayer.min.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+    <!-- responsive Stylesheet -->
+    <link rel="stylesheet" href="/static/assets/css/responsive.css">
+        
+
+</head>
+
+<body>
+     <!-- preloader area start -->
+     <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <div class="spinner">
+                <div class="dot1"></div>
+                <div class="dot2"></div>
+            </div>
+        </div>
+    </div>
+    <!-- preloader area end -->
+
+    <nav class="navbar navbar-area navbar-expand-lg nav-absolute">
+        <div class="container nav-container">
+            <div class="navbar-brand">
+                <a href="{% url 'index' %}.html" class="site-logo"><img src="{% static 'assets/img/logo.jpg' %}" style= "height:120px" alt="Malix Host"></a>
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#bizcoxx_main_menu" aria-expanded="false" aria-label="Toggle navigation">
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- header Part Start-->
+    <header>
+        <div class="signup-sec">
+                <div class="container-fluid ">
+                    <div class="row">
+                        <div class="col-lg-5 no-padding">
+                            <div class="signup-img-wrapper">
+                                <img src="{% static 'assets/img/signinup.png' %}" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-7 right-class ">
+                            <div class="signup-wrapper">
+                                <div class="signup-header-wrapper">
+                                    <div class="signup-header-title-wrapper">
+                                        <p class="signup-header-title">Sign in !</p>
+                                    </div>
+                                    <div class="signin-btn-wrapper">
+                                        <a href="/login/" class="signin">Sign in</a>
+                                    </div>
+                                </div>
+                                {% for message in messages %}
+								<div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									{{ message }}
+								</div>
+								{% endfor %}
+                                <div class="signup-from-wrapper">
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        {{form|crispy}}
+                                       
+                                        <div class="btn-wrapper margin-top-40 desktop-center">
+                                            <button class="primary-home-sec-btn purple">Sign in</button>
+                                        </div>
+                                        <div class="sign-in-now-wrapper margin-top-30">
+                                            <p>Not registered yet,</p>
+                                            <a href="/register/" class="sign-in-now">Sign up now</a>
+                                        </div>
+                                        {% comment %} <div class="sign-in-now-wrapper margin-top-30">
+                                            <p>forgot password?</p>
+                                            <a href="/changepassword/" class="sign-in-now">Reset it </a>
+                                        </div>     {% endcomment %}
+                                    </form>
+                                </div>
+                            </div>
+                            
+                
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </header>
+    <!-- header Part END-->
+    <!-- Main Sec Part Start Here-->
+ 
+    <!-- Main Sec Part End Here-->
+
+    <!-- back to top area start -->
+    <div class="back-to-top">
+        <span class="back-top"><svg class="icon" height="12px" width="12px" version="1.1" id="Capa_1"
+                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 284.929 284.929" style="enable-background:new 0 0 284.929 284.929;" xml:space="preserve">
+                <g>
+                    <path d="M282.082,195.285L149.028,62.24c-1.901-1.903-4.088-2.856-6.562-2.856s-4.665,0.953-6.567,2.856L2.856,195.285
+            C0.95,197.191,0,199.378,0,201.853c0,2.474,0.953,4.664,2.856,6.566l14.272,14.271c1.903,1.903,4.093,2.854,6.567,2.854
+            c2.474,0,4.664-0.951,6.567-2.854l112.204-112.202l112.208,112.209c1.902,1.903,4.093,2.848,6.563,2.848
+            c2.478,0,4.668-0.951,6.57-2.848l14.274-14.277c1.902-1.902,2.847-4.093,2.847-6.566
+            C284.929,199.378,283.984,197.188,282.082,195.285z"></path>
+                </g>
+            </svg></span>
+    </div>
+    <!-- back to top area end -->
+
+   
+
+    <!-- jquery -->
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery-migrate.min.js' %}"></script>
+    <!-- Plugin JavaScript -->
+    <script src="{% static 'assets/js/jquery.easing.min.js' %}"></script>
+    <!-- popper -->
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <!-- bootstrap -->
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/slick.min.js' %}"></script>
+    <!-- Scrolling Nav Plugin -->
+    <script src="{% static 'assets/js/scrolling-nav.js' %}"></script>
+    <!-- magnific popup -->
+    <script src="{% static 'assets/js/jquery.magnific-popup.js' %}"></script>
+    <!-- wow -->
+    <script src="{% static 'assets/js/wow.min.js' %}"></script>
+    <!-- owl carousel -->
+    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+    <!-- waypoint -->
+    <script src="{% static 'assets/js/waypoints.min.js' %}"></script>
+    <!-- counterup -->
+    <script src="{% static 'assets/js/jquery.counterup.min.js' %}"></script>
+    <!-- imageloaded -->
+    <script src="{% static 'assets/js/imagesloaded.pkgd.min.js' %}"></script>
+    <!-- isotope -->
+    <script src="{% static 'assets/js/isotope.pkgd.min.js' %}"></script>
+    <!-- DropDown Select Plugin -->
+    <script src="{% static 'assets/js/selectbox.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.countdown.min.js' %}"></script>
+    <!-- Date Picker -->
+    <script src="{% static 'assets/js/datepicker.min.js' %}"></script>
+    <script src="{% static 'assets/js/datepicker.en.js' %}"></script>
+    <!-- Time Picker -->
+    <script src="{% static 'assets/js/wickedpicker.min.js' %}"></script>
+    <!-- main js -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    
+</body>
+
+
+<!-- Mirrored from zwin.io/html/malixhost/registration.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Feb 2023 19:24:20 GMT -->
+</html>

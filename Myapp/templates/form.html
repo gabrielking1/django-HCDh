@@ -1,0 +1,22 @@
+<div class="blog-banner margin-bottom-20" id="p">
+    <div class="blog-quote-wrapper margin-top-20">
+        <h3 class="blog-quote blog-pad">
+            {% if like %}
+            <form  hx-post ="{% url 'unlike_content' blog.slug %}" hx-boost="true" hx-target="#p" hx-swap="outerHTML">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-link">
+                    <span><img src = "/static/assets/img/heart1.png" style="height:50px"></span>
+                </button>
+            </form>
+        {% else %}
+            <form  hx-post ="{% url 'like_content' blog.slug %}" hx-boost="true" hx-target="#p" hx-swap="outerHTML">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-link">
+                    <span><img src = "/static/assets/img/heart.png" style="height:50px"></span>
+                </button>
+            </form>
+        {% endif %}
+        </h3>
+        <h4 class="bloger-name margin-top-20">{{clike}} users like this content</h4>
+    </div>
+</div>
