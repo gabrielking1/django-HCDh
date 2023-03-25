@@ -563,8 +563,8 @@ def create(request):
             form = conForm(initial = {'username':request.user.id,'title':request.user.username})
             return render(request,'create.html',{'form':form,'notify':notify})
     else:
-        messages.error(request, 'you are not authenticated')
-        return render(request,template_name="error.html")
+        messages.error(request, 'log in to create content')
+        return redirect('login')
     
 def question(request):
     if request.user.is_active and request.user.is_authenticated:
@@ -596,8 +596,8 @@ def question(request):
             return render(request,'question.html',{'form':form,'notify':notify})
     else:
         messages.error(request, 'login to ask a question')
-        form = QForm(initial = {'username':request.user.id})
-        return render(request,'question.html',{'form':form,})
+        # form = QForm(initial = {'username':request.user.id})
+        return redirect('login')
     
 
 def update(request, slug):
