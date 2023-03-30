@@ -148,6 +148,9 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -180,6 +183,23 @@ AXES_LOCKOUT_TEMPLATE = 'axes.html'
 
 
 
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        # 'toolbar': [
+        #     ['Undo', 'Redo',
+        #      '-', 'Bold', 'Italic', 'Underline',
+        #      '-', 'Link', 'Unlink', 'Anchor',
+        #      '-', 'Format',
+             
+        #      '-', 'Maximize',
+             
+        #     ],
+        # ],  
+        'width': 'auto',
+        'toolbarCanCollapse': True,
+    },
+}
 
 
 

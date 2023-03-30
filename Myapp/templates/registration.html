@@ -1,206 +1,413 @@
 {% load static%}
 {% load crispy_forms_tags %}
-
-
 {% load i18n %}
-<!DOCTYPE html>
-<html lang="en">
 
+<!doctype html>
+<html class="no-js" lang="zxx">
 
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fpe Coding Community </title>
-    <!-- favicon -->
-    <link rel=icon href=favicon.png sizes="20x20" type="image/png">
-    <!-- animate -->
-    <link rel="stylesheet" href="/static/assets/css/animate.css">
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
-    <!-- magnific popup -->
-    <link rel="stylesheet" href="/static/assets/css/magnific-popup.css">
-    <!-- owl carousel -->
-    <link rel="stylesheet" href="/static/assets/css/owl.carousel.min.css">
-    <!-- fontawesome -->
-    <link rel="stylesheet" href="/static/assets/css/fontawesome-all.min.css">
-    <!-- flaticon -->
-    <link rel="stylesheet" href="/static/assets/css/flaticon.css">
-    <!-- slick slider -->
-    <link rel="stylesheet" href="/static/assets/css/slick.css" />
-    <!-- slick slider Theme -->
-    <link rel="stylesheet" href="/static/assets/css/slick-theme.css" />
-    <!-- selectbox -->
-    <link href="/static/assets/css/selectbox.min.css" rel="stylesheet">
-    <!-- Date Picker -->
-    <link href="/static/assets/css/datepicker.min.css" rel="stylesheet" type="text/css">
-    <!-- Time Picker -->
-    <link rel="stylesheet" href="/static/assets/css/wickedpicker.min.css">
-    <!-- Off Canvas Menu Stylesheet -->
-    <link rel="stylesheet" href="/static/assets/css/jquery.popuplayer.min.css">
-    <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="/static/assets/css/style.css">
-    <!-- responsive Stylesheet -->
-    <link rel="stylesheet" href="/static/assets/css/responsive.css">
-        
+   <meta charset="utf-8">
+   <meta http-equiv="x-ua-compatible" content="ie=edge">
+   <title>FPE Coding Community</title>
+   <meta name="description" content="">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+   <!-- Place favicon.ico in the root directory -->
+   <link rel="shortcut icon" type="image/x-icon" href="/static/assets/img/logo/logo1.jpg">
+
+   <!-- CSS here -->
+   <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+   <link rel="stylesheet" href="/static/assets/css/animate.css">
+   <link rel="stylesheet" href="/static/assets/css/custom-animation.css">
+   <link rel="stylesheet" href="/static/assets/css/swiper-bundle.css">
+   <link rel="stylesheet" href="/static/assets/css/slick.css">
+   <link rel="stylesheet" href="/static/assets/css/nice-select.css">
+   <link rel="stylesheet" href="/static/assets/css/flaticon.css">
+   <link rel="stylesheet" href="/static/assets/css/meanmenu.css">
+   <link rel="stylesheet" href="/static/assets/css/font-awesome-pro.css">
+   <link rel="stylesheet" href="/static/assets/css/magnific-popup.css">
+   <link rel="stylesheet" href="/static/assets/css/spacing.css">
+   <link rel="stylesheet" href="/static/assets/css/style.css">
+   
 </head>
 
 <body>
-     <!-- preloader area start -->
-     <div class="preloader" id="preloader">
-        <div class="preloader-inner">
-            <div class="spinner">
-                <div class="dot1"></div>
-                <div class="dot2"></div>
-            </div>
-        </div>
-    </div>
-    <!-- preloader area end -->
 
-    <nav class="navbar navbar-area navbar-expand-lg nav-absolute">
-        <div class="container nav-container">
-            <div class="navbar-brand">
-                <a href="{% url 'index' %}" class="site-logo"><img src="{% static 'assets/img/logo.png' %}" style= "height:120px" alt="Malix Host"></a>
-                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#bizcoxx_main_menu" aria-expanded="false" aria-label="Toggle navigation">
-                </button>
-            </div>
-        </div>
-    </nav>
-    <!-- header Part Start-->
-    <header>
-        <div class="signup-sec">
-                <div class="container-fluid ">
-                    <div class="row">
-                        <div class="col-lg-5 no-padding">
-                            <div class="signup-img-wrapper">
-                                <img src="{% static 'assets/img/signinup.png' %}" alt="">
-                            </div>
-                        </div>
-                        <div class="col-lg-7 right-class ">
-                            <div class="signup-wrapper">
-                                <div class="signup-header-wrapper">
-                                    <div class="signup-header-title-wrapper">
-                                        <p class="signup-header-title">Registration for an account!</p>
-                                    </div>
-                                    <div class="signin-btn-wrapper">
-                                        <a href="/register/" class="signin"><i class="flaticon-user"></i>Sign Up</a>
-                                    </div>
-                                </div>
-                                {% for message in messages %}
-								<div class="alert {{ message.tags }} alert-dismissible" role="alert" >
-									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-									{{ message }}
-								</div>
-								{% endfor %}
-                                <div class="signup-from-wrapper">
-                                   
-                                        {% block head %}
-                                        {{ wizard.form.media }}
-                                        {% endblock %}
-                        
-                                        
-                                        <p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
-                                        <form class="form_group"  method="post" enctype="multipart/form-data">
-                                            {% csrf_token %}
-                                        <table>
-                                        {{ wizard.management_form }}
-                                        {% if wizard.form.forms %}
-                                            {{ wizard.form.management_form }}
-                                            {% for form in wizard.form.forms %}
-                                                {{ form|crispy }}
-                                            {% endfor %}
-                                        {% else %}
-                                            {{ wizard.form|crispy }}
-                                        {% endif %}
-                                        </table>
-                                        {% if wizard.steps.prev %}
-                                        <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% trans "first step" %}</button>
-                                        <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% trans "prev step" %}</button>
-                                        {% endif %}
-                                        <input type="submit" value="{% trans "submit" %}"/>
-                                        <div class="sign-in-now-wrapper margin-top-30">
-                                            <p>Already registered ?,</p>
-                                            <a href="/login/" class="sign-in-now">Sign in now</a>
-                                        </div>
-                                        </form>
-                                        
-                                    
-                                </div>
-                            </div>
-                            
-                
-                        </div>
-                    </div>
+   <!-- preloader -->
+   <div id="preloader">
+      <div class="preloader">
+         <span></span>
+         <span></span>
+      </div>
+   </div>
+   <!-- preloader end  -->
+
+   <!-- back-to-top-start  -->
+   <button class="scroll-top scroll-to-target" data-target="html">
+      <i class="far fa-angle-double-up"></i>
+   </button>
+   <!-- back-to-top-end  -->
+
+
+
+   <header>
+    <!-- tp-header-area-start -->
+    <div class="tp-header__top-area theme-bg tp-header__space-3 d-none d-sm-block">
+       <div class="container-fluid">
+          <div class="row align-items-center">
+             <div class="col-xxl-8 col-xl-8 col-lg-6 col-md-6 col-6">
+                <div class="tp-header__top-left">
+                   <a href="tel:+2347067208917">
+                      <svg width="14" height="19" viewBox="0 0 14 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                         <circle cx="2" cy="2" r="2" fill="#3EB7FD" />
+                         <circle cx="7" cy="2" r="2" fill="#3EB7FD" />
+                         <circle cx="12" cy="2" r="2" fill="#3EB7FD" />
+                         <circle cx="12" cy="7" r="2" fill="#3EB7FD" />
+                         <circle cx="12" cy="12" r="2" fill="#3EB7FD" />
+                         <circle cx="7" cy="7" r="2" fill="#3EB7FD" />
+                         <circle cx="7" cy="12" r="2" fill="#3EB7FD" />
+                         <circle cx="7" cy="17" r="2" fill="#3EB7FD" />
+                         <circle cx="2" cy="7" r="2" fill="#3EB7FD" />
+                         <circle cx="2" cy="12" r="2" fill="#3EB7FD" />
+                      </svg>
+                      <span>Help Desk : <b class="frist-child">+2347067208917 </b></span>
+                   </a>
+                   {% comment %} <a class="last-child" href="#">
+                      <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                         <path
+                            d="M16 7.3125C16 6.68359 15.6445 6.10938 15.125 5.80859V1.65234C15.125 1.40625 14.9336 0.75 14.25 0.75C14.0312 0.75 13.8398 0.832031 13.7031 0.96875L11.3516 2.82812C10.2031 3.75781 8.72656 4.25 7.25 4.25H2C1.01562 4.25 0.25 5.04297 0.25 6V8.625C0.25 9.60938 1.01562 10.375 2 10.375H2.90234C2.875 10.6758 2.84766 10.9766 2.84766 11.25C2.84766 12.3438 3.09375 13.3828 3.55859 14.2852C3.69531 14.5859 3.99609 14.75 4.32422 14.75H6.34766C7.05859 14.75 7.49609 13.957 7.05859 13.3828C6.62109 12.7812 6.34766 12.0703 6.34766 11.25C6.34766 10.9492 6.40234 10.6758 6.45703 10.375H7.25C8.72656 10.375 10.2031 10.8945 11.3516 11.8242L13.7031 13.6836C13.8125 13.793 14.0586 13.875 14.2227 13.875C14.9062 13.875 15.0977 13.2734 15.0977 13V8.84375C15.6445 8.54297 16 7.96875 16 7.3125ZM13.375 11.1953L12.4453 10.457C10.9688 9.28125 9.13672 8.625 7.25 8.625V6C9.13672 6 10.9688 5.37109 12.4453 4.19531L13.375 3.45703V11.1953Z"
+                            fill="#3EB7FD" />
+                      </svg>
+                      <span><b>Now Hiring: </b>Are you a driven and motivated 1st Line IT Support Engineer?</span>
+                   </a> {% endcomment %}
                 </div>
-        </div>
-    </header>
-    <!-- header Part END-->
-    <!-- Main Sec Part Start Here-->
- 
-    <!-- Main Sec Part End Here-->
-
-    <!-- back to top area start -->
-    <div class="back-to-top">
-        <span class="back-top"><svg class="icon" height="12px" width="12px" version="1.1" id="Capa_1"
-                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                viewBox="0 0 284.929 284.929" style="enable-background:new 0 0 284.929 284.929;" xml:space="preserve">
-                <g>
-                    <path d="M282.082,195.285L149.028,62.24c-1.901-1.903-4.088-2.856-6.562-2.856s-4.665,0.953-6.567,2.856L2.856,195.285
-            C0.95,197.191,0,199.378,0,201.853c0,2.474,0.953,4.664,2.856,6.566l14.272,14.271c1.903,1.903,4.093,2.854,6.567,2.854
-            c2.474,0,4.664-0.951,6.567-2.854l112.204-112.202l112.208,112.209c1.902,1.903,4.093,2.848,6.563,2.848
-            c2.478,0,4.668-0.951,6.57-2.848l14.274-14.277c1.902-1.902,2.847-4.093,2.847-6.566
-            C284.929,199.378,283.984,197.188,282.082,195.285z"></path>
-                </g>
-            </svg></span>
+             </div>
+             
+          </div>
+       </div>
     </div>
-    <!-- back to top area end -->
+
+    <div id="header-sticky"
+       class="tp-header__area tp-header__space-3 tp-header__transparent z-index-5 tp-header__bottom p-relative">
+       <div class="container-fluid">
+          <div class="row align-items-center">
+             <div class="col-xl-2 col-lg-2 col-md-6 col-7">
+                <div class="tp-header__logo">
+                   <a href="{% url 'index' %}">
+                      <img src="{% static 'assets/img/logo/logo3.png' %}"  style="height:100px" alt="">
+                   </a>
+                </div>
+             </div>
+             <div class="col-xl-7 col-lg-7 d-none d-lg-block">
+                <div class="tp-header__main-menu tp-header__black-menu tp-header__menu-3">
+                   <nav id="mobile-menu">
+                      <ul>
+                         <li><a href="{% url 'index' %}">Home</a>
+                           
+                         </li>
+                         <li><a href="#">Pages</a>
+                            <ul class="submenu">
+                               <li><a href="/profile/{{user.username}}">Profile</a></li>
+                               <li><a href="/about/">About Us</a></li>
+                               
+                            </ul>
+                         </li>
+                         <li><a href="#">Content</a>
+                            <ul class="submenu">
+                               <li><a href="/create/">Create Content</a></li>
+                               <li><a href="/blogs/">Content Lists</a></li>
+                            </ul>
+                         </li>
+                         <li><a href="#">Question</a>
+                            <ul class="submenu">
+                               <li><a href="/question/">Ask A Question</a></li>
+                               <li><a href="/answer/">Q & A</a></li>
+                            </ul>
+                         </li>
+                         <li><a href="https://wa.me/2347067208917">Contact</a></li>
+                         <li>
+                      
+                            {%if notify|length != 0%}
+                            <a href="#">
+                                
+                                <div class="wrapper">
+    
+                                    <div class="bell" id="bell-1">
+                                        <i class="flaticon-cart-item-num" style="background-color:black;colorwhite;
+                                        font-weight: bold;border:3px;border-radius:5px">{{notify|length}}</i>
+                                      <div class="anchor material-icons layer-1">notifications_active</div>
+                                      <div class="anchor material-icons layer-2">notifications</div>
+                                      <div class="anchor material-icons layer-3">notifications</div>
+                                      
+                                    </div>
+                                  
+                                  </div>
+                                 
+                                 
+                                  
+                                  
+                            </a>
+                            {%endif%}
+                            <ul class="sub-menu">
+                                {%for note in notify reversed%}
+                                {%if note.isread == "Unread" %}
+                                <li><b><a href="/view/{{note.ids}}">{{note.user}} {{note.topic}}</a></b>
+                                    <form action="{% url 'read' %}?next={{ request.path }}" class="form-inline" method="post" >
+                                        {% csrf_token %}
+                                <input type = "text" value = "{{note.id}}" name="like" hidden >
+                                <button type="submit" style="border:none;background:inherit;font-weight: bold;font: 18px Arial, Helvetica, sans-serif;"><img src="{% static 'assets/img/correct.png' %}" style="height:35px !important" alt=""
+                                    class="float-bob-y"></button>
+                                    </form>
+                                </li>
+                                {%endif%}
+                                {%endfor%}
+                                
+                            </ul>
+                            
+                            {% comment %} {%endif%} {% endcomment %}
+                        </li>
+                      </ul>
+                   </nav>
+                </div>
+             </div>
+             <div class="col-xl-3 col-lg-3 col-md-6 col-5">
+                <div class="tp-header__right-two d-flex align-items-center justify-content-end">
+                   <a class="tp-btn-blue-square d-none d-md-block" href="/register/"><span>Get Started</span></a>
+                   <a class="tp-header__bars tp-menu-bar d-lg-none" href="#"><i class="far fa-bars"></i></a>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+
+    <!-- tp-header-area-end -->
+ </header>
+
+   <!-- tp-offcanvus-area-start -->
+   <div class="tp-offcanvas-area">
+      <div class="tpoffcanvas">
+         <div class="tpoffcanvas__close-btn">
+            <button class="close-btn"><i class="fal fa-times"></i></button>
+         </div>
+         <div class="tpoffcanvas__logo">
+            <a href="{% url 'index' %}">
+               <img src="{% static 'assets/img/logo/logo4.jpg' %}"  style="height :80px" alt="">
+            </a>
+         </div>
+         <div class="tpoffcanvas__text">
+            <p>Start Your coding journey with FPE CC.</p>
+         </div>
+         <div class="mobile-menu"></div>
+         <div class="tpoffcanvas__info">
+            <h3 class="offcanva-title">Get In Touch</h3>
+            <div class="tp-info-wrapper mb-20 d-flex align-items-center">
+               <div class="tpoffcanvas__info-icon">
+                  <a href="#"><i class="fal fa-envelope"></i></a>
+               </div>
+               <div class="tpoffcanvas__info-address">
+                  <span>Email</span>
+                  <a href="maito:princegeestar@gmail.com">Help@FPECC.com</a>
+               </div>
+            </div>
+            <div class="tp-info-wrapper mb-20 d-flex align-items-center">
+               <div class="tpoffcanvas__info-icon">
+                  <a href="#"><i class="fal fa-phone-alt"></i></a>
+               </div>
+               <div class="tpoffcanvas__info-address">
+                  <span>Phone</span>
+                  <a href="tel:+2347067208917">+2347067208917</a>
+               </div>
+            </div>
+            <div class="tp-info-wrapper mb-20 d-flex align-items-center">
+               <div class="tpoffcanvas__info-icon">
+                  <a href="#"><i class="fas fa-map-marker-alt"></i></a>
+               </div>
+               <div class="tpoffcanvas__info-address">
+                  <span>Location</span>
+                 The Federal Plytechnic
+                     Ede, Osun </a>
+               </div>
+            </div>
+         </div>
+       
+      </div>
+   </div>
+   <div class="body-overlay"></div>
+   <!-- tp-offcanvus-area-end -->
+
+   <main>
+
+      <!-- breadcrumb area start -->
+      <div class="breadcrumb__area breadcrumb-height p-relative grey-bg"
+         data-background="/static/assets/img/breadcrumb/breadcrumb.jpg">
+         <div class="breadcrumb__scroll-bottom smooth">
+            <a href="#login">
+               <i class="far fa-arrow-down"></i>
+            </a>
+         </div>
+         <div class="container">
+            <div class="row">
+               <div class="col-xxl-12">
+                  <div class="breadcrumb__content text-center">
+                     <h3 class="breadcrumb__title">Get Started</h3>
+                     <div class="breadcrumb__list">
+                        <span><a href="#">Home</a></span>
+                        <span class="dvdr"><i class="fa fa-angle-right"></i></span>
+                        <span>Join our community</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- breadcrumb area end -->
+
+        <!--login-area-start -->
+      <div class="tp-login-area">
+         <div class="container-fluid p-0">
+            <div class="row gx-0 align-items-center">
+               <div class="col-xl-6 col-lg-6 col-12">
+                  <div class="tp-login-thumb login-space sky-bg d-flex justify-content-center">
+                     <img src="{% static 'assets/img/contact/login.jpg' %}" alt="">
+                  </div>
+               </div>
+               <div class="col-xl-6 col-lg-6 col-12">
+                  <div class="tp-login-wrapper login-space d-flex justify-content-center">
+                     <div id="login" class="tplogin">
+                        <div class="tplogin__title">
+                           <h3 class="tp-login-title">Sign up Here</h3>
+                        </div>
+                        <div>
+                           
+                           {% for message in messages%}
+
+                              <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert" style="width:auto">
+                                 <strong> {{message}}</strong>
+                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                              </div>
+                              {%endfor%}
+                              {% block head %}
+                              {{ wizard.form.media }}
+                              {% endblock %}
+              
+                              
+                              <p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
+                              
+                              <form action="/register/"  method="post" enctype="multipart/form-data">
+                                  {% csrf_token %}
+                                <table>
+                              {{ wizard.management_form }}
+                              {% if wizard.form.forms %}
+                                  {{ wizard.form.management_form }}
+                                  {% for form in wizard.form.forms %}
+
+                                      {{ form|crispy }}
+                                  {% endfor %}
+                              {% else %}
+                                  {{ wizard.form|crispy}}
+                              {% endif %}
+                                </table>
+                              {% if wizard.steps.prev %}
+                              <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% trans "first step" %}</button>
+                              <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% trans "prev step" %}</button>
+                              {% endif %}
+                              
+                              <div class="tp-login-button">
+                                <input class="tp-btn-blue-square w-100" type="submit" value="{% trans "submit" %}"/>
+                              </div>
+                              <div class="tp-signup d-flex justify-content-between">
+                                 <div class="account">
+                                    <a href="#">Already have an account?</a>
+                                 </div>
+                                 <div class="signin">
+                                    <a href="/login/">Sign in now</a>
+                                 </div>
+                              </div>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- login-area-end -->
+
+   </main>
+
+   <footer>
+    <!-- tp-footer-area-start -->
+    <div class="tp-footer__area theme-bg pt-120 pb-50">
+       <div class="container">
+          <div class="row">
+             <div class="col-xl-12">
+                <div class="tp-footer__content text-center">
+                   <h3 class="tp-section-title text-white">You at the right place, don't doubt</h3>
+                   <p>Discover your new updates, from various programming languages.</p>
+                </div>
+                
+             </div>
+          </div>
+       </div>
+        <div class="tp-footer-bottom__area mt-80 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".9s">
+          <div class="container">
+             <div class="tp-footer-bottom__border-top pt-40">
+                <div class="row align-items-center">
+                   <div class="col-xl-2 col-lg-2 col-md-6 col-12 order-2 order-lg-1 text-center text-md-start">
+                      <div class="tp-footer-bottom__logo">
+                         <a href="{% url 'index' %}"><img src="{% static 'assets/img/logo/logo1.jpg' %}" style="height:100px" alt=""></a>
+                      </div>
+                      <div class="copyright-area">
+                         <p class="copyright-text" style="color:white">© <script>document.write(/\d{4}/.exec(Date())[0])</script>,  <span
+                                 class="fas fa-star"></span> by <strong>Gabriel</strong>.</p>
+                     </div>
+                   </div>
+                   <div class="col-xl-7 col-lg-7 col-md-12 col-12 order-1 order-lg-2 d-none d-sm-block">
+                      <div class="tp-footer-bottom__menu">
+                         <ul>
+                            <li><a href="/question/">Ask Now</a></li>
+                            <li><a href="/answer/">Q & A</a></li>
+                          
+                            <li><a href="/blogs/">Contents</a></li>
+                            <li><a href="https://wa.me/2347067208917">Contact</a></li>
+                            <li>
+                               
+                         </ul>
+                      </div>
+                      
+                   </div>
+                   
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+    <!-- tp-footer-area-end -->
+ </footer>
+
+   <!-- JS here -->
+   <script src="{% static 'assets/js/jquery.js' %}"></script>
+   <script src="{% static 'assets/js/waypoints.js' %}"></script>
+   <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+   <script src="{% static 'assets/js/swiper-bundle.js' %}"></script>
+   <script src="{% static 'assets/js/slick.js' %}"></script>
+   <script src="{% static 'assets/js/magnific-popup.js' %}"></script>
+   <script src="{% static 'assets/js/counterup.js' %}"></script>
+   <script src="{% static 'assets/js/wow.js' %}"></script>
+   {% comment %} <script src="{% static 'assets/js/nice-select.js' %}"></script> {% endcomment %}
+   <script src="{% static 'assets/js/meanmenu.js' %}"></script>
+   <script src="{% static 'assets/js/isotope-pkgd.js' %}"></script>
+   <script src="{% static 'assets/js/imagesloaded-pkgd.js' %}"></script>
+   <script src="{% static 'assets/js/ajax-form.js' %}"></script>
+   <script src="{% static 'assets/js/main.js' %}"></script>
 
    
+	
 
-    <!-- jquery -->
-    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
-    <script src="{% static 'assets/js/jquery-migrate.min.js' %}"></script>
-    <!-- Plugin JavaScript -->
-    <script src="{% static 'assets/js/jquery.easing.min.js' %}"></script>
-    <!-- popper -->
-    <script src="{% static 'assets/js/popper.min.js' %}"></script>
-    <!-- bootstrap -->
-    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'assets/js/slick.min.js' %}"></script>
-    <!-- Scrolling Nav Plugin -->
-    <script src="{% static 'assets/js/scrolling-nav.js' %}"></script>
-    <!-- magnific popup -->
-    <script src="{% static 'assets/js/jquery.magnific-popup.js' %}"></script>
-    <!-- wow -->
-    <script src="{% static 'assets/js/wow.min.js' %}"></script>
-    <!-- owl carousel -->
-    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
-    <!-- waypoint -->
-    <script src="{% static 'assets/js/waypoints.min.js' %}"></script>
-    <!-- counterup -->
-    <script src="{% static 'assets/js/jquery.counterup.min.js' %}"></script>
-    <!-- imageloaded -->
-    <script src="{% static 'assets/js/imagesloaded.pkgd.min.js' %}"></script>
-    <!-- isotope -->
-    <script src="{% static 'assets/js/isotope.pkgd.min.js' %}"></script>
-    <!-- DropDown Select Plugin -->
-    <script src="{% static 'assets/js/selectbox.min.js' %}"></script>
-    <script src="{% static 'assets/js/jquery.countdown.min.js' %}"></script>
-    <!-- Date Picker -->
-    <script src="{% static 'assets/js/datepicker.min.js' %}"></script>
-    <script src="{% static 'assets/js/datepicker.en.js' %}"></script>
-    <!-- Time Picker -->
-    <script src="{% static 'assets/js/wickedpicker.min.js' %}"></script>
-    <!-- main js -->
-    <script src="{% static 'assets/js/main.js' %}"></script>
-    
+
+
 </body>
 
 
-<!-- Mirrored from zwin.io/html/malixhost/registration.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Feb 2023 19:24:20 GMT -->
 </html>

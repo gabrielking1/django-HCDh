@@ -27,7 +27,7 @@ class AnswerAdmin(admin.ModelAdmin):
     list_display = ('username', 'question','likes')
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('username', 'country','bio')
+    list_display = ('username', 'state','bio')
 # admin.site.register(Answer)
 admin.site.register(Like)
 

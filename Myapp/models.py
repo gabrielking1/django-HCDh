@@ -27,7 +27,7 @@ class Tag(models.Model):
 class Blog(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100) 
-    image = models.ImageField(blank=True,upload_to='blogs/') 
+    cover_picture = models.ImageField(blank=True,default='blogs/content.jpeg',upload_to='blogs/') 
     body =  RichTextField()
     slug = AutoSlugField(populate_from = 'title', unique=True)
     category = models.ForeignKey(Category,on_delete=models.CASCADE, related_name='blog')
@@ -63,7 +63,7 @@ class Contact(models.Model):
 class Question(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100) 
-    image = models.ImageField(blank=True, default='blog/blog-13.jpg',upload_to='question/') 
+    screenshot = models.ImageField(blank=True, default='/blogs/q.png',upload_to='question/') 
     body =  models.TextField(max_length=5000)
     slug = AutoSlugField(populate_from = 'title', unique=True, max_length=100)
     tag = models.ForeignKey(Tag,on_delete=models.CASCADE)
@@ -96,15 +96,24 @@ class Like(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 
+class Location(models.Model):
+    name = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name
+
 class Profile(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar =  models.ImageField(upload_to='profilePic/')
     bio = models.CharField(max_length=1000)
     phone = models.CharField(max_length=11)
-    country = CountryField()
+    # country = CountryField()
+    state = models.ForeignKey(Location,on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return f'{self.username}'
+    
+
 
 
 class LikeContent(models.Model):

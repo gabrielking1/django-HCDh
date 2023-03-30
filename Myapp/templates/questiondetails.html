@@ -2,48 +2,35 @@
 {% load crispy_forms_tags %}
 
 
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html class="no-js" lang="zxx">
 
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fpe Codin Community</title>
-    <!-- favicon -->
-    <link rel=icon href=favicon.png sizes="20x20" type="image/png">
-    <!-- animate -->
-    <link rel="stylesheet" href="/static/assets/css/animate.css">
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
-    <!-- magnific popup -->
-    <link rel="stylesheet" href="/static/assets/css/magnific-popup.css">
-    <!-- owl carousel -->
-    <link rel="stylesheet" href="/static/assets/css/owl.carousel.min.css">
-    <!-- fontawesome -->
-    <link rel="stylesheet" href="/static/assets/css/fontawesome-all.min.css">
-    <!-- flaticon -->
-    <link rel="stylesheet" href="/static/assets/css/flaticon.css">
-    <!-- slick slider -->
-    <link rel="stylesheet" href="/static/assets/css/slick.css" />
-    <!-- slick slider Theme -->
-    <link rel="stylesheet" href="/static/assets/css/slick-theme.css" />
-    <!-- selectbox -->
-    <link href="/static/assets/css/selectbox.min.css" rel="stylesheet">
-    <!-- Date Picker -->
-    <link href="/static/assets/css/datepicker.min.css" rel="stylesheet" type="text/css">
-    <!-- Time Picker -->
-    <link rel="stylesheet" href="/static/assets/css/wickedpicker.min.css">
-    <!-- Off Canvas Menu Stylesheet -->
-    <link rel="stylesheet" href="/static/assets/css/jquery.popuplayer.min.css">
-    <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="/static/assets/css/style.css">
-    <!-- responsive Stylesheet -->
-    <link rel="stylesheet" href="/static/assets/css/responsive.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons" media="all">
+   <meta charset="utf-8">
+   <meta http-equiv="x-ua-compatible" content="ie=edge">
+   <title>FPE Coding Community</title>
+   <meta name="description" content="">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <!-- Place favicon.ico in the root directory -->
+   <link rel="shortcut icon" type="image/x-icon" href="/static/assets/img/logo/logo1.jpg">
+
+   <!-- CSS here -->
+   <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+   <link rel="stylesheet" href="/static/assets/css/animate.css">
+   <link rel="stylesheet" href="/static/assets/css/custom-animation.css">
+   <link rel="stylesheet" href="/static/assets/css/swiper-bundle.css">
+   <link rel="stylesheet" href="/static/assets/css/slick.css">
+   <link rel="stylesheet" href="/static/assets/css/nice-select.css">
+   <link rel="stylesheet" href="/static/assets/css/flaticon.css">
+   <link rel="stylesheet" href="/static/assets/css/meanmenu.css">
+   <link rel="stylesheet" href="/static/assets/css/font-awesome-pro.css">
+   <link rel="stylesheet" href="/static/assets/css/magnific-popup.css">
+   <link rel="stylesheet" href="/static/assets/css/spacing.css">
+   <link rel="stylesheet" href="/static/assets/css/style.css">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons" media="all">
+   <script src="{% static 'assets/js/htmx.min.js' %}"></script>
     <style>
         .wrapper {
             position:relative;
@@ -78,14 +65,14 @@
           }
           
           .bell .layer-1 {
-            color:lightblue;
+            color:#007FFF;
             z-index:9;
             animation: animation-layer-1 5000ms infinite;      
             opacity:0;  
           }
           
           .bell .layer-2 {
-            color:lightblue;
+            color:#007FFF;
             z-index:8;
             position:absolute;top:0;left:0;   
             animation: animation-layer-2 5000ms infinite;    
@@ -157,523 +144,532 @@
             70.0% { transform: rotate(0deg);opacity:1; }
           }
         </style>
-        
-
 </head>
 
 <body>
-    
-    <!-- preloader area start -->
-    <div class="preloader" id="preloader">
-        <div class="preloader-inner">
-            <div class="spinner">
-                <div class="dot1"></div>
-                <div class="dot2"></div>
+
+   <!-- preloader -->
+   <div id="preloader">
+      <div class="preloader">
+         <span></span>
+         <span></span>
+      </div>
+   </div>
+   <!-- preloader end  -->
+
+   <!-- back-to-top-start  -->
+   <button class="scroll-top scroll-to-target" data-target="html">
+      <i class="far fa-angle-double-up"></i>
+   </button>
+   <!-- back-to-top-end  -->
+
+
+
+   <header>
+      <!-- tp-header-area-start -->
+      <div class="tp-header__top-area theme-bg tp-header__space-3 d-none d-sm-block">
+         <div class="container-fluid">
+            <div class="row align-items-center">
+               <div class="col-xxl-8 col-xl-8 col-lg-6 col-md-6 col-6">
+                  <div class="tp-header__top-left">
+                     <a href="tel:+2347067208917">
+                        <svg width="14" height="19" viewBox="0 0 14 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <circle cx="2" cy="2" r="2" fill="#3EB7FD" />
+                           <circle cx="7" cy="2" r="2" fill="#3EB7FD" />
+                           <circle cx="12" cy="2" r="2" fill="#3EB7FD" />
+                           <circle cx="12" cy="7" r="2" fill="#3EB7FD" />
+                           <circle cx="12" cy="12" r="2" fill="#3EB7FD" />
+                           <circle cx="7" cy="7" r="2" fill="#3EB7FD" />
+                           <circle cx="7" cy="12" r="2" fill="#3EB7FD" />
+                           <circle cx="7" cy="17" r="2" fill="#3EB7FD" />
+                           <circle cx="2" cy="7" r="2" fill="#3EB7FD" />
+                           <circle cx="2" cy="12" r="2" fill="#3EB7FD" />
+                        </svg>
+                        <span>Help Desk : <b class="frist-child">+2347067208917 </b></span>
+                     </a>
+                     {% comment %} <a class="last-child" href="#">
+                        <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <path
+                              d="M16 7.3125C16 6.68359 15.6445 6.10938 15.125 5.80859V1.65234C15.125 1.40625 14.9336 0.75 14.25 0.75C14.0312 0.75 13.8398 0.832031 13.7031 0.96875L11.3516 2.82812C10.2031 3.75781 8.72656 4.25 7.25 4.25H2C1.01562 4.25 0.25 5.04297 0.25 6V8.625C0.25 9.60938 1.01562 10.375 2 10.375H2.90234C2.875 10.6758 2.84766 10.9766 2.84766 11.25C2.84766 12.3438 3.09375 13.3828 3.55859 14.2852C3.69531 14.5859 3.99609 14.75 4.32422 14.75H6.34766C7.05859 14.75 7.49609 13.957 7.05859 13.3828C6.62109 12.7812 6.34766 12.0703 6.34766 11.25C6.34766 10.9492 6.40234 10.6758 6.45703 10.375H7.25C8.72656 10.375 10.2031 10.8945 11.3516 11.8242L13.7031 13.6836C13.8125 13.793 14.0586 13.875 14.2227 13.875C14.9062 13.875 15.0977 13.2734 15.0977 13V8.84375C15.6445 8.54297 16 7.96875 16 7.3125ZM13.375 11.1953L12.4453 10.457C10.9688 9.28125 9.13672 8.625 7.25 8.625V6C9.13672 6 10.9688 5.37109 12.4453 4.19531L13.375 3.45703V11.1953Z"
+                              fill="#3EB7FD" />
+                        </svg>
+                        <span><b>Now Hiring: </b>Are you a driven and motivated 1st Line IT Support Engineer?</span>
+                     </a> {% endcomment %}
+                  </div>
+               </div>
+               
             </div>
-        </div>
-    </div>
-    <!-- preloader area end -->
+         </div>
+      </div>
 
-    <!-- preloader area end -->
-    <nav class="navbar navbar-area navbar-expand-lg nav-absolute">
-        <div class="container nav-container">
-            <div class="navbar-brand">
-                <a href="{% url 'index' %}" class="site-logo"><img src="{% static 'assets/img/logo1.png' %}" style="height:120px" alt="Malix Host"></a>
-                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
-                    data-target="#malixhost_main_menu" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon-wrap"><i class="fa fa-bars"></i></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse white-nav" id="malixhost_main_menu">
-                <ul class="navbar-nav">
-                    <li class="menu-item-has-children">
-                        <a href="#">Home</a>
-                        <ul class="sub-menu">
-                            <li><a href="{% url 'index' %}">Home </a></li>
-                            
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children">
-                        <a href="#">Question</a>
-                        <ul class="sub-menu">
-                            <li><a href="/question/">Ask A Question</a></li>
-                            <li><a href="/answer/">Q & A</a></li>
-                            
-                        </ul>
-                    </li>
-                    <li><a href="/about/">About</a></li>
-                    <!-- <li><a href="whmcs.html">Whmcs</a></li> -->
-                    <li class="menu-item-has-children">
-                        <a href="#">Pages</a>
-                        <ul class="sub-menu">
-                            <li><a href="/report/">Report an Abuse</a></li>
-                           
-                            <li><a href="https://wa.me/2347067208917">Contact Us</a></li>
-                            <li><a href="/login/">Sign In</a></li>
-                            <li><a href="/register/">Sign Up</a></li>
-                           
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children">
-                        <a href="#">Content</a>
-                        <ul class="sub-menu">
-                            <li><a href="/create/">Create a Content</a></li>
-                            <li><a href="/blogs/">Content Lists</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="https://wa.me/2347067208917">Contact</a></li>
-                    <li class="menu-item-has-children">
-                        
-                        {%if notify|length != 0%}
-                        <a href="#">
-                            
-                            <div class="wrapper">
-
-                                <div class="bell" id="bell-1">
-                                    <i class="flaticon-cart-item-num" style="background-color:black;colorwhite;
-                                    font-weight: bold;border:3px;border-radius:5px">{{notify|length}}</i>
-                                  <div class="anchor material-icons layer-1">notifications_active</div>
-                                  <div class="anchor material-icons layer-2">notifications</div>
-                                  <div class="anchor material-icons layer-3">notifications</div>
-                                  
-                                </div>
-                              
-                              </div>
-                             
-                             
-                              
-                              
-                        </a>
-                        {%endif%}
-                        <ul class="sub-menu">
-                            {%for note in notify reversed%}
-                            {%if note.isread == "Unread" %}
-                            <li   class="form-inline"style="display:inline"><b><a href="/view/{{note.ids}}">{{note.user}} {{note.topic}}</a></b>
-                                <form action="/read/" class="form-inline" method="post" >
-                                    {% csrf_token %}
-                            <input type = "text" value = "{{note.id}}" name="like" hidden >
-                            <button type="submit" style="border:none;background:inherit;font-weight: bold;font: 18px Arial, Helvetica, sans-serif;"><img src="{% static 'assets/img/correct.png' %}" style="height:35px !important" alt=""
-                                class="float-bob-y"></button>
-                                </form>
-                            </li>
-                            {%endif%}
-                            {%endfor%}
-                            
-                        </ul>
-                        
-                        {% comment %} {%endif%} {% endcomment %}
-                    </li>
-                </ul>
-            </div>
-            <div class="nav-right-content white-right-content">
-                <ul>
-                    
-                   
-                    {% if request.user.is_authenticated %}
-                    <li><a href="/logout/" class="signin-btn">Sign Out</a></li>
-                    {%else%}
-                    <li><a href="/login/" class="signin-btn">Sign in</a></li>
-                    {%endif%}
-                    <li><a href="/register/" class="signin-btn">Sign Up</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!-- header Part Start-->
-    <header>
-        <div class="breadcrumb-area" style="background-image:url(/static/assets/img/faq.png);">
-            <div class="container ">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="breadcrumb-inner desktop-center">
-                            <ul class="page-list">
-                                <li><a href="index.html">Home</a></li>
-                                <li>{{blog.tag}}</li>
-                            </ul>
-                            <h1 class="page-title margin-top-20">{{blog.title}}</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>  
-        </div>
-    </header>
-    <!-- header Part END-->
-    <!-- Main Sec Part Start Here-->
-    <section class="blog-page-area margin-top-100 ">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-8">
-                    <div class="blog-details-wrapper">
-                        <div class="bolg-details-title-wrapper">
-                            <h2 class="bolg-details-title">{{blog.title}}.</h2>
-                        </div>
-                        <div class="blog-detail-calender-view-wrapper margin-bottom-20">
-                            <div class="calender-wrapper">
-                                <i class="flaticon-calendar"></i>
-                                <h6 class="blog-date">{{blog.created_at}}</h6>
-                            </div>
-                            <div class="view-wrapper">
-                                <i class="flaticon-eye"></i>
-                                <h6 class="blog-view">{{blog.views}} Viewed</h6>
-                            </div>
-                            <div class="comment-wrapper">
-                                <i class="flaticon-chat"></i>
-                                <h6 class="blog-comment">{{number}} Answers</h6>
-                            </div>
-                        </div>
-                        <div class="blog-para-wrapper margin-bottom-20">
-                            {{blog.body|safe}}
-                       </div>
-                        {% comment %} <div class="blog-banner margin-bottom-20" style="background-image:url(/static/assets/img/blog-quote-bg.png);" >
-                            <div class="blog-quote-wrapper margin-top-20">
-                                <h3 class="blog-quote blog-pad">
-                                    m
-                                </h3>
-                                <h4 class="bloger-name margin-top-20">- Johnny Make</h4>
-                            </div>
-                        </div> {% endcomment %}
-                        
-                        <!--Blog  writer sec-->
-                        
-
-                        <div id="comments" class="comments-area margin-top-50">
-                                <h2 class="comments-title">
-                                    answer({{number}})
-                                </h2>
-                                <!-- .comments-title -->
-
-                                <ul class="comment-list">
-                                    
-                                    <!-- #comment-## -->
-                                   
-                                    {% if request.user.is_authenticated %}
-                                        <ul class="children">
-                                            <li class="comment byuser comment-author-ir_tech bypostauthor odd alt depth-2 item " id="comment-9">
-                                                <div id="div-comment-9" class="">
-                                                    {% for comment in comm %}
-                                                    <div class="single-comment-wrap">
-                                                        <!-- single comment wrap -->
-                                                        <div class="thumb">
-                                                            <img alt="coment img" src="{% static 'assets/img/profimg.png' %}" class="avatar avatar-80 photo">
-                                                        </div>
-                                                        <div class="content">
-                                                            <h4 class="title">
-                                                                {{comment.username}}
-                                                            </h4>
-                                                            <div class="comment-content">
-                                                                <p>
-                                                                        {{comment.comment}}.
-                                                                </p>
-                                                            </div>
-                                                            {% if very %}
-                                                            {%else%}
-                                                            <form action ="{% url 'like' %}" method='post' >
-                                                                 {% comment %} hx-get="view-url/" hx-trigger="load" hx-target="#htmxCanvas"> {% endcomment %}
-                                                                
-                                                                {% csrf_token %}
-                                                                <input type="text" name="blogo" value={{blog.slug}} hidden>
-                                                                <input type = "text" name="title" value = {{blog.title}} hidden>
-                                                                <input type="text" name="usa" value={{blog.username}} hidden>
-                                                                <input type="text" name="blogger" value={{comment.id}} hidden >
-                                                                {% comment %} <input type="hidden" name="reply_id" value="{{ reply.id }}"> {% endcomment %}
-                                                                <button type="submit" class="btn btn-primary">
-                                                                    {% if request.user in comment.liker.all %}
-                                                                        Downvote
-                                                                    {% else %}
-                                                                        Upvote
-                                                                    {% endif %}
-                                                                </button>
-                                                                    
-                                                                </form>
-                                                                {%endif%}
-                                                                <br>
-                                                                <h5> number of vote(s) {{comment.liker.count}} </h5>
-                                                        </div>
-                                                        
-                                                    </div>{%endfor%}
-                                                    <!-- //. single comment wrap -->
-                                                </div>
-                                            </li>
-                                            <!-- #comment-## -->
-                                        </ul>
-                                        <hr>
-                                        <!-- .children -->
-                                    {%else%}
-                                    <a hreg="/login/" class="btn btn-primary">Login to comment </a>
-                                    {%endif%}
-                                    <!-- #comment-## -->
-                                    
-                                <!-- .comment-list -->
-                                {% for message in messages %}
-                                    <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        {{ message }}
-                                    </div>
-                                    {% endfor %}
-                                {%if blog.username_id == request.user.id%}
-                                <h2> you can't reply yourself </h2>
-                                {%else%}
-                                <div class="row margin-top-50 margin-bottom-120">
-                                    <div class="col-xl-12">
-                                        <div id="respond" class="comment-respond">
-                                            <h3 id="reply-title" class="comment-reply-title margin-bottom-30">
-                                                Provide an answer
-                                            </h3>
-                                            <form action="#" method="post" id="commentform" class="comment-form" novalidate="">
-                                                {% csrf_token %}
-                                                <div class="form-group">
-                                                    <textarea name="comment" id="comment" class="form-control" placeholder="Type your comment" cols="30" rows="5"></textarea>
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="text" id="author" name="blog" tabindex="1" value="{{blog.id}}" class="form-control" placeholder="Type your name" hidden>
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" name="user" id="email" value="{{request.user.id}}" tabindex="2" placeholder="Type your email" hidden>
-                                                </div>
-                                                <div class="btn-wrapper margin-top-40">
-                                                    <button  class="primary-home-sec-btn"><i class="fas fa-comments"></i>Answer</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <!-- #respond -->
-                                    </div>
-                                </div>{%endif%}
-                            </div>
-
-                    </div>
-                </div>
-                <div class="col-xl-4">
-                    <!--Widget about Start-->
-                    <div class="widget widget_about">
-                        <h2 class="widget-title">About Me</h2>
-                        <p class="widget-para">{{profile.bio}}.</p>
-                        <div class="widget-profile margin-top-30">
-                            <div class="profile-img-wrapper">
-                                <img  src="{{profile.avatar.url}}" alt="profile_img" style="border:1px; border-radius:20px; height:80px !important">
-                            </div>
-                            
-                        </div>
-                        <h3><a href="{% url 'profile' profile.username %}"> see {{profile.username.username}} profile</a>.</h3>
-                    </div>
-                    <!--Widget about End-->
-                    <!--Search Bar Start-->
-                    <div class="widget widget_search">
-                        <form class="search-form">
-                            <div class="form-group">
-                                <input type="text" placeholder="Search">
-                            </div>
-                            <a href="#" class="search-icon">
-                                <i class="flaticon-ui"></i>
-                            </a>
-                        </form>
-                    </div>
-                    <!--Search bar End-->
-                    <!--Popular Post Start-->
-
-                    <div class="widget widget-popular-post">
-                        <h2 class="widget-title">Popular Post</h2>
+      <div id="header-sticky"
+         class="tp-header__area tp-header__space-3 tp-header__transparent z-index-5 tp-header__bottom p-relative">
+         <div class="container-fluid">
+            <div class="row align-items-center">
+               <div class="col-xl-2 col-lg-2 col-md-6 col-7">
+                  <div class="tp-header__logo">
+                     <a href="{% url 'index' %}">
+                        <img src="{% static 'assets/img/logo/logo3.png' %}"  style="height:100px" alt="">
+                     </a>
+                  </div>
+               </div>
+               <div class="col-xl-7 col-lg-7 d-none d-lg-block">
+                  <div class="tp-header__main-menu tp-header__black-menu tp-header__menu-3">
+                     <nav id="mobile-menu">
                         <ul>
-                            {% for blog in blogdetails %}
-                            <li>
-                                <div class="media">
-                                    <div class="media-body">
-                                        <div class="date-wrapper">
-                                            <i class="flaticon-calendar"></i>
-                                            <h6 class="blog-date">{{blog.created_at}}</h6>
-                                        </div>
-                                        <h6 class="title"><a href="/blog/{{blog.slug}}">{{blog.title}}</a></h6>
-                                    </div>
-                                    <img src="{% static 'assets/img/gal-2.png' %}" alt="widget">
-                                </div>
-                            </li>{%endfor%}
-                            
-                        </ul>
-                    </div>
-                    <!--Popular Post End-->
-                    <!--Popular Tag Start-->
-                    <div class="widget widget_popular_tag">
-                        <h5 class="widget-title">Popular tags</h5>
-                        <ul class="navs navs--tag">
-                            {% for tag in tag %}
-                            <li class="navs__item">
-                                <a href="/tag/{{tag.slug}}" class="navs__link navs__link--tag">{{tag.tag}}</a>
-                            </li>
-                            {%endfor%}
-                          
-                            
-                        </ul>
-                    </div>
-                    <!--Popular Tag End-->
-                   
-
-                    <div class="widget widget-archives">
-                    
-            </div>
-        </div>
-    </section>
-    <!-- Main Sec Part End Here-->
-    
-    <!--Footer Start-->
-    <footer class="footer-sec">
-        <div class="container">
-            <div class="row justify-content-end">
-                <div class="col-xl-11">
-                    <div class="row">
-                        <div class="col-xl-3 col-lg-4 col-md-6">
-                            <div class="footer-widget widget">
-                              <div class="widget-white">
-                                    <div class="footer-logo">
-                                        <img src="{% static 'assets/img/logo.jpg' %}" style= "height:120px" alt="Logo" class="img-responsive"> 
-                                    </div>
-                                    <div class="widget-contact margin-top-20">
-                                        <ul>
-                                            <li class="link">
-                                                <i class="flaticon-mail"></i>
-                                                <p class="address-text mb-text m-0-auto"><a href="mailto:princegeestar@gmail.com">help@FpeCc.com</a></p>
-                                            </li>
-                                            <li class="link">
-                                                <i class="flaticon-placeholder"></i>
-                                                <p class="address-text mb-text ">The Federal Polytechnic, Ede</p>
-                                            </li>
-                                            <li class="link">
-                                                <i class="flaticon-phone-call"></i>
-                                                <p class="address-text mb-text m-0-auto">+234 7067 2089 17</p>
-                                            </li>                                 
-                                        </ul>
-                                    </div>
+                           <li><a href="{% url 'index' %}">Home</a>
+                             
+                           </li>
+                           <li><a href="#">Pages</a>
+                              <ul class="submenu">
+                                 <li><a href="/profile/{{user.username}}">Profile</a></li>
+                                 <li><a href="/about/">About Us</a></li>
+                                 <li><a href="https://wa.me/2347067208917">Contact Us</a></li>
+                                 <li><a href="/report/">Report an Abuse</a></li>
+                                 
+                              </ul>
+                           </li>
+                           <li><a href="#">Content</a>
+                              <ul class="submenu">
+                                 <li><a href="/create/">Create Content</a></li>
+                                 <li><a href="/blogs/">Content Lists</a></li>
+                              </ul>
+                           </li>
+                           <li><a href="#">Question</a>
+                              <ul class="submenu">
+                                 <li><a href="/question/">Ask A Question</a></li>
+                                 <li><a href="/answer/">Q & A</a></li>
+                              </ul>
+                           </li>
+                           
+                           <li>
+                        
+                              {%if notify|length != 0%}
+                              <a >
+                                <button type="button"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                  <div class="wrapper">
+      
+                                      <div class="bell" id="bell-1">
+                                       <span class="notify-badge">{{notify|length}}</span>
+                                        <div class="anchor material-icons layer-1">notifications_active</div>
+                                        <div class="anchor material-icons layer-2">notifications</div>
+                                        <div class="anchor material-icons layer-3">notifications</div>
+                                        
+                                      </div>
                                     
-                              </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-3 offset-xl-1 col-md-6">
-                            <div class="footer-widget widget margin-top-30">
-                                <h3 class="widget-title">Company</h3>
-                                <div class="footer-widget widget widget_pages margin-bottom-20">
-                                    <ul>
-                                        <li><a href="/about/">About us</a></li>
-                                        <li><a href="https://wa.me/2347067208917">Contact Us</a></li>
-                                      
-                                </div>
-                            </div>
-                        </div>
+                                    </div>
+                                 </button>
+                                   
+                                   
+                                    
+                                    
+                              </a>
+                              {%endif%}
+                     
+                              
+                              
+                              {% comment %} {%endif%} {% endcomment %}
+                          </li>
+                        </ul>
+                     </nav>
+                  </div>
+               </div>
+               <div class="col-xl-3 col-lg-3 col-md-6 col-5">
+                  <div class="tp-header__right-two d-flex align-items-center justify-content-end">
+                    {%if request.user.is_active and request.user.is_authenticated%}
+                    <a class="tp-btn-blue-square d-none d-md-block" href="/profile/{{user.username}}"><span>Profile</span></a>
+                    <a class="tp-header__bars tp-menu-bar d-lg-none" href="/logout/" ><span>Bye </span></a>
+                    {%else%}
+                    <a class="tp-header__bars tp-menu-bar d-lg-none" href="/login/">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <path
+                              d="M15.364 11.636C14.3837 10.6558 13.217 9.93013 11.9439 9.49085C13.3074 8.55179 14.2031 6.9802 14.2031 5.20312C14.2031 2.33413 11.869 0 9 0C6.131 0 3.79688 2.33413 3.79688 5.20312C3.79688 6.9802 4.69262 8.55179 6.05609 9.49085C4.78308 9.93013 3.61631 10.6558 2.63605 11.636C0.936176 13.3359 0 15.596 0 18H1.40625C1.40625 13.8128 4.81279 10.4062 9 10.4062C13.1872 10.4062 16.5938 13.8128 16.5938 18H18C18 15.596 17.0638 13.3359 15.364 11.636ZM9 9C6.90641 9 5.20312 7.29675 5.20312 5.20312C5.20312 3.1095 6.90641 1.40625 9 1.40625C11.0936 1.40625 12.7969 3.1095 12.7969 5.20312C12.7969 7.29675 11.0936 9 9 9Z"
+                              fill="currentColor" />
+                        </svg>
                        
-                        <div class="col-xl-2 col-lg-2 col-md-6">
-                            <div class="footer-widget widget margin-top-30">
-                                <h3 class="widget-title">Explore</h3>
-                                <div class="footer-widget widget widget_pages margin-bottom-20">
-                                    <ul>
-                                       
-                                        <li><a href="/answer/">Solutions</a></li>
-                                        <li><a href="/blogs/">Contents</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-12">
-                            <div class="copyright-area">
-                                <p class="copyright-text">© <script>document.write(/\d{4}/.exec(Date())[0])</script>,  <span
-                                        class="fas fa-star"></span> by <strong>Gabriel</strong>.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                     </a>
+                     {%endif%}
+                     {% if request.user.is_active and request.user.is_authenticated %}
+                     <a class="tp-btn-blue-square d-none d-md-block" href="/logout/"><span>Sign Out</span></a>
+                     {%else%}
+                     <a class="tp-btn-blue-square d-none d-md-block" href="/register/"><span>Get Started</span></a>
+                     {%endif%}
+                     <a class="tp-header__bars tp-menu-bar d-lg-none" href="#"><i class="far fa-bars"></i></a>
+                  </div>
+               </div>
             </div>
+         </div>
+      </div>
+
+      <!-- tp-header-area-end -->
+   </header>
+   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Notifications</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            {%for note in notify reversed%}
+            {%if note.isread == "Unread" %}
+            <li><b></b>                                     
+                <form action="{% url 'read' %}?next={{ request.path }}" class="form-inline" method="post" >
+                    {% csrf_token %}
+                    <a href='{{note.notify}}{{note.ids}}'>{{note.user}} {{note.topic}} </a> 
+                  <input type = "text" value = "{{note.id}}" name="like"  hidden>
+               
+                  <button type="submit"><img src="{% static 'assets/img/mark.png' %}" style="height:35px;margin !important" alt=""
+                ></button>
+                </form>
+            </li>
+            <hr>
+            {%endif%}
+            {%endfor%}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+           
+          </div>
         </div>
-    </footer>
-    <!--Footer End-->
-
-
-
-    <!-- back to top area start -->
-    <div class="back-to-top">
-        <span class="back-top"><svg class="icon" height="12px" width="12px" version="1.1" id="Capa_1"
-                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                viewBox="0 0 284.929 284.929" style="enable-background:new 0 0 284.929 284.929;" xml:space="preserve">
-                <g>
-                    <path d="M282.082,195.285L149.028,62.24c-1.901-1.903-4.088-2.856-6.562-2.856s-4.665,0.953-6.567,2.856L2.856,195.285
-            C0.95,197.191,0,199.378,0,201.853c0,2.474,0.953,4.664,2.856,6.566l14.272,14.271c1.903,1.903,4.093,2.854,6.567,2.854
-            c2.474,0,4.664-0.951,6.567-2.854l112.204-112.202l112.208,112.209c1.902,1.903,4.093,2.848,6.563,2.848
-            c2.478,0,4.668-0.951,6.57-2.848l14.274-14.277c1.902-1.902,2.847-4.093,2.847-6.566
-            C284.929,199.378,283.984,197.188,282.082,195.285z"></path>
-                </g>
-            </svg></span>
+      </div>
     </div>
-    <!-- back to top area end -->
+   <!-- tp-offcanvus-area-start -->
+   <div class="tp-offcanvas-area">
+      <div class="tpoffcanvas">
+         <div class="tpoffcanvas__close-btn">
+            <button class="close-btn"><i class="fal fa-times"></i></button>
+         </div>
+         <div class="tpoffcanvas__logo">
+            <a href="{% url 'index' %}">
+               <img src="{% static 'assets/img/logo/logo4.jpg' %}"  style="height:100px" alt="">
+            </a>
+         </div>
+         <div class="tpoffcanvas__text">
+            <p>Start Your coding journey with FPE CC.</p>
+         </div>
+         <div class="mobile-menu"></div>
+         <div class="tpoffcanvas__info">
+            <h3 class="offcanva-title">Get In Touch</h3>
+            <div class="tp-info-wrapper mb-20 d-flex align-items-center">
+               <div class="tpoffcanvas__info-icon">
+                  <a href="#"><i class="fal fa-envelope"></i></a>
+               </div>
+               <div class="tpoffcanvas__info-address">
+                  <span>Email</span>
+                  <a href="maito:princegeestar@gmail.com">Help@FPECC.com</a>
+               </div>
+            </div>
+            <div class="tp-info-wrapper mb-20 d-flex align-items-center">
+               <div class="tpoffcanvas__info-icon">
+                  <a href="#"><i class="fal fa-phone-alt"></i></a>
+               </div>
+               <div class="tpoffcanvas__info-address">
+                  <span>Phone</span>
+                  <a href="tel:+2347067208917">+2347067208917</a>
+               </div>
+            </div>
+            <div class="tp-info-wrapper mb-20 d-flex align-items-center">
+               <div class="tpoffcanvas__info-icon">
+                  <a href="#"><i class="fas fa-map-marker-alt"></i></a>
+               </div>
+               <div class="tpoffcanvas__info-address">
+                  <span>Location</span>
+                 The Federal Plytechnic
+                     Ede, Osun </a>
+               </div>
+            </div>
+         </div>
+       
+      </div>
+   </div>
+   <div class="body-overlay"></div>
+   <!-- tp-offcanvus-area-end -->
 
-   
+   <main>
 
-    <!-- jquery -->
-    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
-    <script src="{% static 'assets/js/jquery-migrate.min.js' %}"></script>
-    <!-- Plugin JavaScript -->
-    <script src="{% static 'assets/js/jquery.easing.min.js' %}"></script>
-    <!-- popper -->
-    <script src="{% static 'assets/js/popper.min.js' %}"></script>
-    <!-- bootstrap -->
-    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
-    <script  src="{% static 'assets/js/slick.min.js' %}"></script>
-    <!-- Scrolling Nav Plugin -->
-    <script src="{% static 'assets/js/scrolling-nav.js' %}"></script>
-    <!-- magnific popup -->
-    <script src="{% static 'assets/js/jquery.magnific-popup.js' %}"></script>
-    <!-- wow -->
-    <script src="{% static 'assets/js/wow.min.js' %}"></script>
-    <!-- owl carousel -->
-    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
-    <!-- waypoint -->
-    <script src="{% static 'assets/js/waypoints.min.js' %}"></script>
-    <!-- counterup -->
-    <script src="{% static 'assets/js/jquery.counterup.min.js' %}"></script>
-    <!-- imageloaded -->
-    <script src="{% static 'assets/js/imagesloaded.pkgd.min.js' %}"></script>
-    <!-- isotope -->
-    <script src="{% static 'assets/js/isotope.pkgd.min.js' %}"></script>
-    <!-- DropDown Select Plugin -->
-    <script src="{% static 'assets/js/selectbox.min.js' %}"></script>
-    <!-- Date Picker -->
-    <script src="{% static 'assets/js/datepicker.min.js' %}"></script>
-    <script src="{% static 'assets/js/datepicker.en.js' %}"></script>
-    <!-- Time Picker -->
-    <script src="{% static 'assets/js/wickedpicker.min.js' %}"></script>
-    <!-- Offcanvas Menu -->
-    <script src="{% static 'assets/js/jquery.popuplayer.min.js' %}"></script>
-    <!-- main js -->
-    <script src="{% static 'assets/js/main.js' %}"></script>
-    
-    <!-- JS here -->
+      <!-- breadcrumb area start -->
+      <div class="breadcrumb__area breadcrumb-height p-relative grey-bg"
+         data-background="/static/assets/img/breadcrumb/breadcrumb.jpg">
+         <div class="breadcrumb__scroll-bottom smooth">
+            <a href="#Blog-Details">
+               <i class="far fa-arrow-down"></i>
+            </a>
+         </div>
+         <div class="container">
+            <div class="row">
+               <div class="col-xxl-12">
+                  <div class="breadcrumb__content text-center">
+                     <h3 class="breadcrumb__title">Question Details</h3>
+                     <div class="breadcrumb__list">
+                        <span><a href="#">Home</a></span>
+                        <span class="dvdr"><i class="fa fa-angle-right"></i></span>
+                        <span>View Question</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- breadcrumb area end -->
+   {% if request.user.is_active and request.user.is_authenticated %}
+      <!-- postbox area start -->
+      <div class="postbox__area pt-120 pb-120">
+         <div class="container">
+            <div class="row">
+               <div class="col-xxl-8 col-xl-8 col-lg-8 col-12">
+                  <div id="Blog-Details" class="postbox__wrapper postbox__p-right">
+                     <article class="postbox__item format-image transition-3">
+                        <div class="postbox__content">
+                           <p><img class="w-100" src="{{blog.cover_picture.url}}" alt=""></p>
+                           <div class="postbox__meta">
+                              <span><a href="/profile/{{blog.username}}"><i class="fal fa-user-circle"></i> {{blog.username}} </a></span>
+                              <span><a href="#"><i class="fal fa-clock"></i> {{blog.created_at}}</a></span>
+                              <span><a href="#"><i class="fal fa-comment-alt-lines"></i> {{number}}</a></span>
+                           </div>
+                           <h3 class="postbox__title">
+                             {{blog.title}}
+                           </h3>
+                           <div class="postbox__text">
+                              <p>
+                              {{blog.body|safe}}</p>
+                           </div>
+                           
+                           
+                           <div class="postbox__social-wrapper">
+                              <div class="row">
+                                 <div class="col-xl-12 col-lg-12">
+                                    <div class="postbox__tag tagcloud">
+                                       <span>Tag</span>
+                                       <a href="/tag/{{blog.tag.slug}}">{{blog.tag}}</a>
+                                     
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </article>
+                     <div class="postbox__comment mb-65">
+                        <h3 class="postbox__comment-title">{{number}} Answers</h3>
+                        <ul>
+                           {% for comment in comm %}
+                           <li>
+                              <div class="postbox__comment-box d-flex">
+                                 <div class="postbox__comment-info ">
+                                    <div class="postbox__comment-avater mr-20">
+                                       <img src="{{comment.username.profile.avatar.url}}" alt="">
+                                    </div>  
+                                 </div>
+                                 <div class="postbox__comment-text">
+                                    <div class="postbox__comment-name">
+                                       <h5>{{comment.username}}</h5>
+                                       
+                                    </div>
+                                    <p> {{comment.comment}}.</p>
+                                    {% for message in messages%}
 
-	<script src="{% static 'js/vendor/modernizr-3.5.0.min.js' %}"></script>
-	<script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
-	<script src="{% static 'js/vendor/popper.min.js' %}"></script>
-	<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
-	<script src="{% static 'js/slick.min.js' %}"></script>
-	<script src="{% static 'js/jquery.supermarquee.min.js' %}"></script>
-	<script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
-	<script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
-	<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
-	<script src="{% static 'js/metisMenu.min.js' %}"></script>
-	<script src="{% static 'js/wow.min.js' %}"></script>
-	<script src="{% static 'js/aos.js' %}"></script>
-	<script src="{% static 'js/jquery.counterup.min.js' %}"></script>
-	<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
-	<script src="{% static 'js/tilt.jquery.min.js' %}"></script>
-	<script src="{% static 'js/jquery.easypiechart.min.js' %}"></script>
-	<script src="{% static 'js/jquery-ui.js' %}"></script>
-	<script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
-	<script src="{% static 'js/plugins.js' %}"></script>
+                                       <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert" style="width:auto">
+                                          <strong> {{message}}</strong>
+                                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                       </div>
+                                       {%endfor%}
+                                    <form action ="{% url 'like' %}" method='post' >
+                                        {% comment %} hx-get="view-url/" hx-trigger="load" hx-target="#htmxCanvas"> {% endcomment %}
+                                       
+                                       {% csrf_token %}
+                                       <input type="text" name="blogo" value={{blog.slug}} hidden>
+                                       
+                                       <input type = "text" name="title" value = {{blog.title}} hidden>
+                                       <input type="text" name="usa" value={{blog.username}} hidden>
+                                       <input type="text" name="blogger" value={{comment.id}} hidden >
+                                       {% comment %} <input type="hidden" name="reply_id" value="{{ reply.id }}"> {% endcomment %}
+                                       <button type="submit" class="btn btn-primary">
+                                           {% if request.user in comment.liker.all %}
+                                               Downvote
+                                           {% else %}
+                                               Upvote
+                                           {% endif %}
+                                       </button>
+                                           
+                                       </form>
+                              
+                                    
+                                       <br>
+                                       <h5> number of vote(s) {{comment.liker.count}} </h5>
+                                    
+                                 </div>
+                              </div>
+                           </li>{%endfor%}
+                           
+                        </ul>
+                     </div>
+                    
+                     <div class="postbox__comment-form">
+                        <h3 class="postbox__comment-form-title">Leave an Answer</h3>
+                        <form  method="post"  class="comment-form">
+                           {% csrf_token %}
+                           <div class="row">
+                            {% csrf_token %}
+                            <input type="text" name="user" value={{request.user.id}} hidden>
+                            <input type="text" name="blog" value={{blog.id}} hidden>
+                              
+                              <div class="col-xxl-12">
+                                 <div class="postbox__comment-input">
+                                    <textarea name="comment" id="comment" class="form-control" placeholder="Enter your comment ..."></textarea>
+                                 </div>
+                              </div>
+                              {% if blog.username.username == request.user.username%}
+                              {%else%}
+                              <div class="col-xxl-12">
+                                 <div class="postbox__comment-btn">
+                                    <button type="submit" class="tp-btn-blue-square"><span>Answer</span></button>
+                                 </div>
+                              </div>
+                              {%endif%}
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+      
+               <div class="col-xxl-4 col-xl-4 col-lg-4">
+                  <div class="sidebar__wrapper">
+                     
+                     <div class="sidebar__widget mb-40">
+                        <h3 class="sidebar__widget-title">Categories</h3>
+                        <div class="sidebar__widget-content">
+                           <ul>
+                              {% for cat in cat %}
+                              
+                              <li><a href="/category/{{cat.slug}}">{{cat.category}}<span>{{cat.blog_count}}</span></a></li>
+                              {%endfor%}
+                              
+                           </ul>
+                        </div>
+                     </div>
+                     
+                     <div class="sidebar__widget mb-40">
+                        <h3 class="sidebar__widget-title">Recent Content</h3>
+                        <div class="sidebar__widget-content">
+                           <div class="sidebar__post rc__post">
+                              {% for blog in blogdetails reversed%}
+                              <div class="rc__post mb-20 d-flex">
+                                 <div class="rc__post-thumb mr-20">
+                                    <a href="/blog/{{blog.slug}}"><img src="{{blog.cover_picture.url}}" alt=""></a>
+                                 </div>
+                                 <div class="rc__post-content">
+                                    <div class="rc__meta">
+                                       <span>{{blog.created_at}}</span>
+                                    </div>
+                                    <h3 class="rc__post-title">
+                                       <a href="/blog/{{blog.slug}}">{{blog.title}}</a>
+                                    </h3>
+                                 </div>
+                              </div>{%endfor%}
+                              
+                           </div>
+                        </div>
+                     </div>
+                     <div class="sidebar__widget mb-40">
+                        <h3 class="sidebar__widget-title">Tags</h3>
+                        <div class="sidebar__widget-content">
+                           <div class="tagcloud">
+                              {% for tag in tag %}
+                              <a href="/tag/{{tag.slug}}">{{tag.tag}} </a>
+                              {%endfor%}
+                              
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- postbox area end -->
 
-	<!--Custom JS here -->
-	<script src="{% static 'js/main.js' %}"></script>
-     <script src="https://unpkg.com/htmx.org@1.8.6"></script>
+   </main>
+   {%else%} 
+   {% for message in messages%}
+
+   <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert" style="width:auto">
+      <strong> {{message}}</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+   </div>
+   {%endfor%}
+      <div> <h2> Log in to see question and reply </h2></div>
+      {%endif%}
+
+      <footer>
+         <!-- tp-footer-area-start -->
+         <div class="tp-footer__area theme-bg pt-120 pb-50">
+            <div class="container">
+               <div class="row">
+                  <div class="col-xl-12">
+                     <div class="tp-footer__content text-center">
+                        <h3 class="tp-section-title text-white">You at the right place, don't doubt</h3>
+                        <p>Discover your new updates, from various programming languages.</p>
+                     </div>
+                     
+                  </div>
+               </div>
+            </div>
+             <div class="tp-footer-bottom__area mt-80 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".9s">
+               <div class="container">
+                  <div class="tp-footer-bottom__border-top pt-40">
+                     <div class="row align-items-center">
+                        <div class="col-xl-2 col-lg-2 col-md-6 col-12 order-2 order-lg-1 text-center text-md-start">
+                           <div class="tp-footer-bottom__logo">
+                              <a href="{% url 'index' %}"><img src="{% static 'assets/img/logo/logo1.jpg' %}" style="height:100px" alt=""></a>
+                           </div>
+                           <div class="copyright-area">
+                              <p class="copyright-text" style="color:white">© <script>document.write(/\d{4}/.exec(Date())[0])</script>,  <span
+                                      class="fas fa-star"></span> by <strong>Gabriel</strong>.</p>
+                          </div>
+                        </div>
+                        <div class="col-xl-7 col-lg-7 col-md-12 col-12 order-1 order-lg-2 d-none d-sm-block">
+                           <div class="tp-footer-bottom__menu">
+                              <ul>
+                                 <li><a href="/question/">Ask Now</a></li>
+                                 <li><a href="/answer/">Q & A</a></li>
+                               
+                                 <li><a href="/blogs/">Contents</a></li>
+                                 <li><a href="https://wa.me/2347067208917">Contact</a></li>
+                                 <li>
+                                    
+                              </ul>
+                           </div>
+                           
+                        </div>
+                        
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- tp-footer-area-end -->
+      </footer>
+
+   <!-- JS here -->
+   <script src="{% static 'assets/js/jquery.js' %}"></script>
+   <script src="{% static 'assets/js/waypoints.js' %}"></script>
+   <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+   <script src="{% static 'assets/js/swiper-bundle.js' %}"></script>
+   <script src="{% static 'assets/js/slick.js' %}"></script>
+   <script src="{% static 'assets/js/magnific-popup.js' %}"></script>
+   <script src="{% static 'assets/js/counterup.js' %}"></script>
+   <script src="{% static 'assets/js/wow.js' %}"></script>
+   <script src="{% static 'assets/js/nice-select.js' %}"></script>
+   <script src="{% static 'assets/js/meanmenu.js' %}"></script>
+   <script src="{% static 'assets/js/isotope-pkgd.js' %}"></script>
+   <script src="{% static 'assets/js/imagesloaded-pkgd.js' %}"></script>
+   <script src="{% static 'assets/js/ajax-form.js' %}"></script>
+   <script src="{% static 'assets/js/main.js' %}"></script>
+
+
 
 </body>
 
 
-<!-- Mirrored from zwin.io/html/malixhost/home-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Feb 2023 19:27:36 GMT -->
-</html>
-
-
-<!-- Mirrored from zwin.io/html/malixhost/contactus.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Feb 2023 19:32:29 GMT -->
+<!-- Mirrored from weblearnbd.net/tphtml/quitox-prev/quitox/blog-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 25 Mar 2023 18:25:58 GMT -->
 </html>

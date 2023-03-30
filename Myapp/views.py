@@ -63,7 +63,7 @@ def about(request):
     bnumb = blog.count
     question =  Question.objects.all()
     qnumb = question.count
-    return render(request, 'about.html',{'unumb':unumb,'anumb':anumb,'bnumb':bnumb,'qnumb':qnumb})
+    return render(request, 'about-us.html',{'unumb':unumb,'anumb':anumb,'bnumb':bnumb,'qnumb':qnumb})
 
 def register(request):
  
@@ -116,23 +116,26 @@ def logout(request):
     return redirect('login')
 
 def index(request):
+    
     notify = Notification.objects.filter(username=request.user.username,isread="Unread")
     blog = Blog.objects.all()
     
-    return render(request, 'home-3.html', {'blog': blog,'notify':notify})
+    return render(request, 'index.html', {'blog': blog,'notify':notify})
 
 def blogs(request):
     notify = Notification.objects.filter(username=request.user.username,isread="Unread")
     blog = Blog.objects.all()
+    blogi = Blog.objects.all().order_by('id')[:3]
     search  = request.GET.get('search')
     if search:
         blog =  Blog.objects.filter(title__icontains = search)
     
     category = Category.objects.annotate(blog_count=Count('blog'))
+    tag = Tag.objects.all()
     # django = Blog.object.filter(category_id =)
     page = request.GET.get('page', 1)
 
-    paginator = Paginator(blog, 1)
+    paginator = Paginator(blog, 3)
     try:
         page_obj = paginator.page(page)
     except PageNotAnInteger:
@@ -141,8 +144,8 @@ def blogs(request):
         page_obj = paginator.page(paginator.num_pages)
    
     
-    return render(request, 'blog.html', {'blogdetails': blog,
-        'cat':category, 'page_obj':page_obj,'notify':notify})
+    return render(request, 'blog.html', {'blogdetails': blogi,
+        'cat':category,'tag':tag, 'page_obj':page_obj,'notify':notify})
 
 
 def answer(request):
@@ -171,55 +174,65 @@ def answer(request):
     })
 
 def blog(request, slug):
-    try:
-        notify = Notification.objects.filter(username=request.user.username,isread="Unread")
-        category = Category.objects.annotate(blog_count=Count('blog'))
-        blogdetails = Blog.objects.all()
-        blog = Blog.objects.get(slug=slug)
-        profile = Profile.objects.get(username=blog.username)
-        like = LikeContent.objects.filter(blog=blog, username=request.user)
-        clike = LikeContent.objects.filter(blog=blog).count()
-        views = BlogView.objects.filter(blog=blog).count()
-        blog.views += 1
-        blog.save()
-        user = User.objects.get(id=blog.username_id)
-        comm = Comment.objects.filter(blog_id=blog)
-        number = comm.count()
-        com = Comment()
-        username = request.POST.get('user')
-        post = request.POST.get('blog')
-        comment = request.POST.get('comment')
+    # try:
+        if request.user.is_active and request.user.is_authenticated:
+            notify = Notification.objects.filter(username=request.user.username,isread="Unread")
+            category = Category.objects.annotate(blog_count=Count('blog'))
+            tag = Tag.objects.all()
+            blogdetails = Blog.objects.all().order_by('id')[:3]
+            blog = Blog.objects.get(slug=slug)
+            profile = Profile.objects.get(username=blog.username)
+            like = LikeContent.objects.filter(blog=blog, username=request.user)
+            clike = LikeContent.objects.filter(blog=blog).count()
+            views = BlogView.objects.filter(blog=blog).count()
+            blog.views += 1
+            blog.save()
+            user = User.objects.get(id=blog.username_id)
+            comm = Comment.objects.filter(blog_id=blog)
+            number = comm.count()
+            com = Comment()
+            username = request.POST.get('user')
+            post = request.POST.get('blog')
+            comment = request.POST.get('comment')
         # if username :
         #     messages.error(request,'you are not authorized')
         #     return redirect('register')
         # else:
-        if request.method == 'POST':
-            com.username_id = username
-            com.blog_id = post
-            com.comment = comment
-            com.save()
-            return HttpResponseRedirect(reverse("blog",args={blog.slug}))
-    
-        return render(request, 'blogdetails.html', {'blog': blog,'user':user,'number':number,'comm':comm,
-        'views':views,'blogdetails':blogdetails, 'cat':category,
-        'profile':profile,'like':like,'clike':clike,
-        'notify':notify
-        })
-    except:
-        messages.error(request,'you are not authorized to comment, register to do so')
-        return redirect('register')
+        
+
+            if request.method == 'POST':
+                com.username_id = username
+                com.blog_id = post
+                com.comment = comment
+                com.save()
+                return HttpResponseRedirect(reverse("blog",args={blog.slug}))
+        
+            return render(request, 'blogdetails.html', {'blog': blog,'user':user,'number':number,'comm':comm,
+            'views':views,'blogdetails':blogdetails, 'cat':category,
+            'profile':profile,'like':like,'clike':clike,'tag':tag,
+            'notify':notify
+            })
+        else:
+            messages.error(request, 'you are not logged in')
+            return render(request, 'blogdetails.html')
+
+    # except:
+    #     messages.error(request,'you are not authorized to comment, register to do so')
+    #     return redirect('register')
 
 def view(request, slug):
-    # try:
+    blog = Question.objects.get(slug=slug)
     if request.user.is_active and request.user.is_authenticated:
+        blogdetails = Blog.objects.all().order_by('id')[:3]
         notify = Notification.objects.filter(username=request.user.username,isread="Unread")
+        category = Category.objects.annotate(blog_count=Count('blog'))
         tag = Tag.objects.all()
-        blog = Question.objects.get(slug=slug)
+        
         profile = Profile.objects.get(username=blog.username)
         user = User.objects.get(id=blog.username_id)
         very = Answer.objects.select_related('question__username').filter(question=blog, username_id=request.user.id)
         comm = Answer.objects.filter(question_id=blog).order_by('id')
-       
+    
         answerr =  Like.objects.filter(answer__question=blog).filter( username=request.user)
         
         
@@ -240,20 +253,21 @@ def view(request, slug):
         
         comment = request.POST.get('comment')
 
-        # else:
+    # else:
+    
         if request.method == 'POST':
             com.username_id = username
             if com.username_id == user:
                 messages.error(request, 'you cannot reply your own question')
                 return HttpResponseRedirect(reverse("view",args={blog.slug}))
             else:
-               
+            
 
                 Notification.objects.create(
                             username = blog.username,
                             user = request.user.username,
                             topic = "answer your question",
-                            notify = blog.title,
+                            notify = "/view/",
                             ids = blog.slug
 
 
@@ -274,14 +288,16 @@ def view(request, slug):
         #         c = None
         
         return render(request, 'questiondetails.html', {'blog': blog,'user':user,'number':number,'comm':comm,
-            'com':com,'answer':answer,'user_liked': answerr,'tag':tag,'notify':notify,'profile':profile,'very':very
+            'com':com,'answer':answer,'user_liked': answerr,'tag':tag,'notify':notify,'profile':profile,'very':very,
+            'cat':category,'blogdetails':blogdetails,
                                         
     
         }
         )
     else:
-        messages.error(request, 'you are not logged in')
-        return redirect('login')
+        messages.error(request,'log in to see question and answers provided')
+        return render(request, 'questiondetails.html', {'blog': blog})
+    #     
     # except:
     #     messages.error(request,'you are not authorized to answer, register to do so')
 
@@ -379,40 +395,43 @@ def like(request):
     ids = request.POST.get('blogo')
     usa = request.POST.get('usa')
     title = request.POST.get('title')
-    
-    answer = get_object_or_404(Answer, id=answer_id)
     user = request.user
-   
-    if user in answer.liker.all():
-
-        Notification.objects.filter(user=request.user.username, notify=title).delete()
-        
-        answer.liker.remove(user)
-        liked = False
+    answer = get_object_or_404(Answer, id=answer_id)
+    print(answer.username)
+    print(request.user.username)
+    if request.user.id == answer.username_id:
+        messages.error(request, 'you are cannot upvote your answer')
+        return redirect(request.META.get('HTTP_REFERER'))
     else:
-        c= Notification.objects.filter(username=request.user, user=request.user)
-        if c.exists():
-            print("nothing ")
+   
+        if user in answer.liker.all():
+
+            Notification.objects.filter(user=request.user.username, notify=title).delete()
+            
+            answer.liker.remove(user)
+            # liked = False
         else:
+           
+         
             Notification.objects.create(
                             username = answer.username,
                             user = request.user.username,
                                 topic = "upvote your answer",
-                                notify = title,
+                                notify = '/view/',
                                 ids = ids
 
 
                         )
             answer.liker.add(user)
-            
-            liked = True
+                
+                # liked = True
 
-    context = {
-        'likes_count': answer.liker.count(),
-        'liked': liked,
-    }
-    # return JsonResponse(context)
-    return redirect(request.META.get('HTTP_REFERER'))
+        context = {
+            'likes_count': answer.liker.count(),
+            # 'liked': liked,
+        }
+        # return JsonResponse(context)
+        return redirect(request.META.get('HTTP_REFERER'))
 
 
 
@@ -427,7 +446,7 @@ def like_content(request, slug):
                             username = blog.username,
                             user = request.user.username,
                                 topic = "like your content",
-                                notify = blog.title,
+                                notify = "/blog/",
                                 ids = blog.slug
 
 
@@ -441,7 +460,7 @@ def like_content(request, slug):
 def unlike_content(request, slug):
     if request.user.is_active and request.user.is_authenticated:
         blog = get_object_or_404(Blog, slug=slug)
-        Notification.objects.filter(user=request.user.username, notify=blog.title).delete()
+        Notification.objects.filter(user=request.user.username, ids=blog.slug).delete()
         LikeContent.objects.filter(username=request.user, blog=blog).delete()
         return HttpResponseClientRedirect(reverse("blog",args={blog.slug}))
     else:
@@ -680,7 +699,7 @@ def report(request):
                 if Report.objects.filter(username=request.user, culprit=culprit):
                     messages.error(request, f'{culprit} already reported')
                     return redirect('report')
-                elif User.objects.filter(username=culprit) is False:
+                elif User.username!=culprit:
                     messages.error(request, f'{culprit} doesnt not exists')
                     return redirect('report')
             

@@ -7,6 +7,8 @@ from django import forms
 from django.db.models import fields
 from django.utils.text import slugify
 from django_countries.widgets import CountrySelectWidget
+from django_countries.fields import CountryField
+from django_select2.forms import Select2Widget
 # Create your forms here.
 
 class RegForm(UserCreationForm):
@@ -36,6 +38,7 @@ class conForm(forms.ModelForm):
         self.fields['username'].widget = forms.HiddenInput()
         # self.slug = slugify(self.fields)
         self.fields['views'].widget = forms.HiddenInput()
+        self.fields['category'].empty_label = "select category"
         
 class QForm(forms.ModelForm):
     class Meta:
@@ -48,9 +51,12 @@ class QForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(QForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget = forms.HiddenInput()
+        self.fields['tag'].empty_label = "select tag"
+        
         
 
 class ReportForm(forms.ModelForm):
+    culprit = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':"Enter the person's name"}))
     class Meta:
         model = Report
         fields ="__all__"
@@ -65,11 +71,12 @@ class ReportForm(forms.ModelForm):
 class UpdateProfileForm(forms.ModelForm):
     avatar = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
     bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
-
+    # country = CountryField(blank_label="(Select country)")
     class Meta:
         model = Profile
-        fields = fields = {'avatar','bio','country','phone'}
-        widgets = {"country": CountrySelectWidget()}
+        fields = fields = {'avatar','bio','state','phone'}
+        # widget = {"country": CountrySelectWidget()}
     def __init__(self, *args, **kwargs):
         super(UpdateProfileForm, self).__init__(*args, **kwargs)
+        # self.fields['country'].empty_label = "select country"
         # self.fields['username'].widget = forms.HiddenInput()

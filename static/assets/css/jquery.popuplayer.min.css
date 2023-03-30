@@ -1,1 +1,0 @@
-body{-webkit-backface-visibility:hidden;}.popup-layer{overflow: hidden;position:fixed;display:none;top:0;right:0;bottom:0;left:0;z-index:1;background-color:#0a1c30d1}.popup-layer-content{position:absolute;box-shadow:0 0 22px#0a1c30d1}.popup-layer-blur{-webkit-filter:blur(6px)}

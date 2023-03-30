@@ -1,0 +1,759 @@
+{% load static%}
+{% load crispy_forms_tags %}
+
+
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="x-ua-compatible" content="ie=edge">
+   <title>FPE Coding Community</title>
+   <meta name="description" content="">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <!-- Place favicon.ico in the root directory -->
+   <link rel="shortcut icon" type="image/x-icon" href="/static/assets/img/logo/logo1.jpg">
+
+   <!-- CSS here -->
+   <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+   <link rel="stylesheet" href="/static/assets/css/animate.css">
+   <link rel="stylesheet" href="/static/assets/css/custom-animation.css">
+   <link rel="stylesheet" href="/static/assets/css/swiper-bundle.css">
+   <link rel="stylesheet" href="/static/assets/css/slick.css">
+   <link rel="stylesheet" href="/static/assets/css/nice-select.css">
+   <link rel="stylesheet" href="/static/assets/css/flaticon.css">
+   <link rel="stylesheet" href="/static/assets/css/meanmenu.css">
+   <link rel="stylesheet" href="/static/assets/css/font-awesome-pro.css">
+   <link rel="stylesheet" href="/static/assets/css/magnific-popup.css">
+   <link rel="stylesheet" href="/static/assets/css/spacing.css">
+   <link rel="stylesheet" href="/static/assets/css/style.css">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons" media="all">
+    <style>
+        .wrapper {
+            position:relative;
+            display: flex;
+            
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+          }
+          
+          .bell .material-icons { 
+            /* font-size:12rem !important; */
+            /* font-size:36px !important; */
+            font-size:3rem !important;
+          }
+          
+          .bell {
+            position:relative;
+            display:inline-block;  
+            /* border:dashed 1px rgba(0,0,0,.25); */
+            margin:0;
+            padding:0;  
+          }
+          
+          .bell .anchor {
+            transform-origin:center top;
+            display:inline-block;
+            margin:0;
+            padding:0;       
+          }
+          
+          .bell .layer-1 {
+            color:#007FFF;
+            z-index:9;
+            animation: animation-layer-1 5000ms infinite;      
+            opacity:0;  
+          }
+          
+          .bell .layer-2 {
+            color:#007FFF;
+            z-index:8;
+            position:absolute;top:0;left:0;   
+            animation: animation-layer-2 5000ms infinite;    
+          }
+          
+          .bell .layer-3 {
+            color:#333642;
+            z-index:7;
+            position:absolute;top:0;left:0; 
+            animation: animation-layer-3 5000ms infinite;    
+          }
+          
+          @keyframes animation-layer-1 {
+            0% { transform: rotate(0deg);opacity:0; }
+            8.0% { transform: rotate(0deg);opacity:0; }
+            12.0% { transform: rotate(42deg);opacity:.5; }
+            16.0% { transform: rotate(-35deg);opacity:.4; }
+            20.0% { transform: rotate(0deg);opacity:.1; }
+            23.0% { transform: rotate(28deg);opacity:.3; }
+            26.0% { transform: rotate(-20deg);opacity:.2; }
+            29.0% { transform: rotate(0deg);opacity:.1; }
+            31.0% { transform: rotate(16deg);opacity:0; }
+            33.0% { transform: rotate(-12deg);opacity:0; }
+            35.0% { transform: rotate(0deg);opacity:0; }	
+            37.0% { transform: rotate(-6deg);opacity:0; }
+            39.0% { transform: rotate(0deg);opacity:0; }
+          }
+          
+          @keyframes animation-layer-2 {
+            0% { transform: rotate(0deg); }
+            8.0% { transform: rotate(0deg); }
+            12.0% { transform: rotate(42deg); }
+            16.0% { transform: rotate(-35deg); }
+            20.0% { transform: rotate(0deg); }
+            23.0% { transform: rotate(28deg); }
+            26.0% { transform: rotate(-20deg); }
+            29.0% { transform: rotate(0deg); }
+            31.0% { transform: rotate(16deg); }
+            33.0% { transform: rotate(-12deg); }
+            35.0% { transform: rotate(0deg); }	
+            37.0% { transform: rotate(-6deg); }
+            39.0% { transform: rotate(0deg); }
+            40.0% { transform: rotate(6deg); }
+            44.0% { transform: rotate(-3deg); }
+            49.0% { transform: rotate(2deg);}
+            55.0% { transform: rotate(0deg); }
+            62.0% { transform: rotate(1deg); }
+            70.0% { transform: rotate(0deg); }  
+          }
+          
+          @keyframes animation-layer-3 {
+            0% { transform: rotate(0deg);opacity:1; }
+            8.0% { transform: rotate(0deg);opacity:1; }
+            12.0% { transform: rotate(52deg);opacity:.5; }
+            16.0% { transform: rotate(-48deg);opacity:.4; }
+            20.0% { transform: rotate(0deg);opacity:1; }
+            23.0% { transform: rotate(42deg);opacity:.3; }
+            26.0% { transform: rotate(-30deg);opacity:.2; }
+            29.0% { transform: rotate(0deg);opacity:1; }
+            31.0% { transform: rotate(26deg);opacity:.15; }
+            33.0% { transform: rotate(-18deg);opacity:.1; }
+            35.0% { transform: rotate(0deg);opacity:1; }	
+            37.0% { transform: rotate(-12deg);opacity:.8; }
+            40.0% { transform: rotate(6deg);opacity:1; }
+            44.0% { transform: rotate(-3deg);opacity:.8; }
+            49.0% { transform: rotate(2deg);opacity:1; }
+            55.0% { transform: rotate(0deg);opacity:1; }
+            62.0% { transform: rotate(1deg);opacity:1; }
+            70.0% { transform: rotate(0deg);opacity:1; }
+          }
+        </style>
+</head>
+
+<body>
+
+   <!-- preloader -->
+   <div id="preloader">
+      <div class="preloader">
+         <span></span>
+         <span></span>
+      </div>
+   </div>
+   <!-- preloader end  -->
+
+   <!-- back-to-top-start  -->
+   <button class="scroll-top scroll-to-target" data-target="html">
+      <i class="far fa-angle-double-up"></i>
+   </button>
+   <!-- back-to-top-end  -->
+
+
+
+   <header>
+      <!-- tp-header-area-start -->
+      <div class="tp-header__top-area theme-bg tp-header__space-3 d-none d-sm-block">
+         <div class="container-fluid">
+            <div class="row align-items-center">
+               <div class="col-xxl-8 col-xl-8 col-lg-6 col-md-6 col-6">
+                  <div class="tp-header__top-left">
+                     <a href="tel:+2347067208917">
+                        <svg width="14" height="19" viewBox="0 0 14 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <circle cx="2" cy="2" r="2" fill="#3EB7FD" />
+                           <circle cx="7" cy="2" r="2" fill="#3EB7FD" />
+                           <circle cx="12" cy="2" r="2" fill="#3EB7FD" />
+                           <circle cx="12" cy="7" r="2" fill="#3EB7FD" />
+                           <circle cx="12" cy="12" r="2" fill="#3EB7FD" />
+                           <circle cx="7" cy="7" r="2" fill="#3EB7FD" />
+                           <circle cx="7" cy="12" r="2" fill="#3EB7FD" />
+                           <circle cx="7" cy="17" r="2" fill="#3EB7FD" />
+                           <circle cx="2" cy="7" r="2" fill="#3EB7FD" />
+                           <circle cx="2" cy="12" r="2" fill="#3EB7FD" />
+                        </svg>
+                        <span>Help Desk : <b class="frist-child">+2347067208917 </b></span>
+                     </a>
+                     {% comment %} <a class="last-child" href="#">
+                        <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <path
+                              d="M16 7.3125C16 6.68359 15.6445 6.10938 15.125 5.80859V1.65234C15.125 1.40625 14.9336 0.75 14.25 0.75C14.0312 0.75 13.8398 0.832031 13.7031 0.96875L11.3516 2.82812C10.2031 3.75781 8.72656 4.25 7.25 4.25H2C1.01562 4.25 0.25 5.04297 0.25 6V8.625C0.25 9.60938 1.01562 10.375 2 10.375H2.90234C2.875 10.6758 2.84766 10.9766 2.84766 11.25C2.84766 12.3438 3.09375 13.3828 3.55859 14.2852C3.69531 14.5859 3.99609 14.75 4.32422 14.75H6.34766C7.05859 14.75 7.49609 13.957 7.05859 13.3828C6.62109 12.7812 6.34766 12.0703 6.34766 11.25C6.34766 10.9492 6.40234 10.6758 6.45703 10.375H7.25C8.72656 10.375 10.2031 10.8945 11.3516 11.8242L13.7031 13.6836C13.8125 13.793 14.0586 13.875 14.2227 13.875C14.9062 13.875 15.0977 13.2734 15.0977 13V8.84375C15.6445 8.54297 16 7.96875 16 7.3125ZM13.375 11.1953L12.4453 10.457C10.9688 9.28125 9.13672 8.625 7.25 8.625V6C9.13672 6 10.9688 5.37109 12.4453 4.19531L13.375 3.45703V11.1953Z"
+                              fill="#3EB7FD" />
+                        </svg>
+                        <span><b>Now Hiring: </b>Are you a driven and motivated 1st Line IT Support Engineer?</span>
+                     </a> {% endcomment %}
+                  </div>
+               </div>
+               
+            </div>
+         </div>
+      </div>
+
+      <div id="header-sticky"
+         class="tp-header__area tp-header__space-3 tp-header__transparent z-index-5 tp-header__bottom p-relative">
+         <div class="container-fluid">
+            <div class="row align-items-center">
+               <div class="col-xl-2 col-lg-2 col-md-6 col-7">
+                  <div class="tp-header__logo">
+                     <a href="{% url 'index' %}">
+                        <img src="{% static 'assets/img/logo/logo3.png' %}"  style="height:100px" alt="">
+                     </a>
+                  </div>
+               </div>
+               <div class="col-xl-7 col-lg-7 d-none d-lg-block">
+                  <div class="tp-header__main-menu tp-header__black-menu tp-header__menu-3">
+                     <nav id="mobile-menu">
+                        <ul>
+                           <li><a href="{% url 'index' %}">Home</a>
+                             
+                           </li>
+                           <li><a href="#">Pages</a>
+                              <ul class="submenu">
+                                 <li><a href="/profile/{{user.username}}">Profile</a></li>
+                                 <li><a href="/about/">About Us</a></li>
+                                 <li><a href="https://wa.me/2347067208917">Contact Us</a></li>
+                                 <li><a href="/report/">Report an Abuse</a></li>
+                                 
+                              </ul>
+                           </li>
+                           <li><a href="#">Content</a>
+                              <ul class="submenu">
+                                 <li><a href="/create/">Create Content</a></li>
+                                 <li><a href="/blogs/">Content Lists</a></li>
+                              </ul>
+                           </li>
+                           <li><a href="#">Question</a>
+                              <ul class="submenu">
+                                 <li><a href="/question/">Ask A Question</a></li>
+                                 <li><a href="/answer/">Q & A</a></li>
+                              </ul>
+                           </li>
+                           
+                           <li>
+                        
+                              {%if notify|length != 0%}
+                              <a >
+                                <button type="button"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                  <div class="wrapper">
+      
+                                      <div class="bell" id="bell-1">
+                                       <span class="notify-badge">{{notify|length}}</span>
+                                        <div class="anchor material-icons layer-1">notifications_active</div>
+                                        <div class="anchor material-icons layer-2">notifications</div>
+                                        <div class="anchor material-icons layer-3">notifications</div>
+                                        
+                                      </div>
+                                    
+                                    </div>
+                                 </button>
+                                   
+                                   
+                                    
+                                    
+                              </a>
+                              {%endif%}
+                     
+                              
+                              
+                              {% comment %} {%endif%} {% endcomment %}
+                          </li>
+                        </ul>
+                     </nav>
+                  </div>
+               </div>
+               <div class="col-xl-3 col-lg-3 col-md-6 col-5">
+                  <div class="tp-header__right-two d-flex align-items-center justify-content-end">
+                    {%if request.user.is_active and request.user.is_authenticated%}
+                    <a class="tp-btn-blue-square d-none d-md-block" href="/profile/{{user.username}}"><span>Profile</span></a>
+                    <a class="tp-header__bars tp-menu-bar d-lg-none" href="/logout/" ><span>Bye </span></a>
+                    {%else%}
+                    <a class="tp-header__bars tp-menu-bar d-lg-none" href="/login/">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                           <path
+                              d="M15.364 11.636C14.3837 10.6558 13.217 9.93013 11.9439 9.49085C13.3074 8.55179 14.2031 6.9802 14.2031 5.20312C14.2031 2.33413 11.869 0 9 0C6.131 0 3.79688 2.33413 3.79688 5.20312C3.79688 6.9802 4.69262 8.55179 6.05609 9.49085C4.78308 9.93013 3.61631 10.6558 2.63605 11.636C0.936176 13.3359 0 15.596 0 18H1.40625C1.40625 13.8128 4.81279 10.4062 9 10.4062C13.1872 10.4062 16.5938 13.8128 16.5938 18H18C18 15.596 17.0638 13.3359 15.364 11.636ZM9 9C6.90641 9 5.20312 7.29675 5.20312 5.20312C5.20312 3.1095 6.90641 1.40625 9 1.40625C11.0936 1.40625 12.7969 3.1095 12.7969 5.20312C12.7969 7.29675 11.0936 9 9 9Z"
+                              fill="currentColor" />
+                        </svg>
+                       
+                     </a>
+                     {%endif%}
+                     {% if request.user.is_active and request.user.is_authenticated %}
+                     <a class="tp-btn-blue-square d-none d-md-block" href="/logout/"><span>Sign Out</span></a>
+                     {%else%}
+                     <a class="tp-btn-blue-square d-none d-md-block" href="/register/"><span>Get Started</span></a>
+                     {%endif%}
+                     <a class="tp-header__bars tp-menu-bar d-lg-none" href="#"><i class="far fa-bars"></i></a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- tp-header-area-end -->
+   </header>
+   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Notifications</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            {%for note in notify reversed%}
+            {%if note.isread == "Unread" %}
+            <li><b></b>                                     
+                <form action="{% url 'read' %}?next={{ request.path }}" class="form-inline" method="post" >
+                    {% csrf_token %}
+                    <a href='{{note.notify}}{{note.ids}}'>{{note.user}} {{note.topic}} </a> 
+                  <input type = "text" value = "{{note.id}}" name="like"  hidden>
+               
+                  <button type="submit"><img src="{% static '{% static ' %}'assets/img/mark.png' %}" style="height:35px;margin !important" alt=""
+                ></button>
+                </form>
+            </li>
+            <hr>
+            {%endif%}
+            {%endfor%}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+   <!-- tp-offcanvus-area-start -->
+   <div class="tp-offcanvas-area">
+      <div class="tpoffcanvas">
+         <div class="tpoffcanvas__close-btn">
+            <button class="close-btn"><i class="fal fa-times"></i></button>
+         </div>
+         <div class="tpoffcanvas__logo">
+            <a href="{% url 'index' %}">
+               <img src="{% static 'assets/img/logo/logo4.jpg' %}"  style="height:100px" alt="">
+            </a>
+         </div>
+         <div class="tpoffcanvas__text">
+            <p>Start Your coding journey with FPE CC.</p>
+         </div>
+         <div class="mobile-menu"></div>
+         <div class="tpoffcanvas__info">
+            <h3 class="offcanva-title">Get In Touch</h3>
+            <div class="tp-info-wrapper mb-20 d-flex align-items-center">
+               <div class="tpoffcanvas__info-icon">
+                  <a href="#"><i class="fal fa-envelope"></i></a>
+               </div>
+               <div class="tpoffcanvas__info-address">
+                  <span>Email</span>
+                  <a href="maito:princegeestar@gmail.com">Help@FPECC.com</a>
+               </div>
+            </div>
+            <div class="tp-info-wrapper mb-20 d-flex align-items-center">
+               <div class="tpoffcanvas__info-icon">
+                  <a href="#"><i class="fal fa-phone-alt"></i></a>
+               </div>
+               <div class="tpoffcanvas__info-address">
+                  <span>Phone</span>
+                  <a href="tel:+2347067208917">+2347067208917</a>
+               </div>
+            </div>
+            <div class="tp-info-wrapper mb-20 d-flex align-items-center">
+               <div class="tpoffcanvas__info-icon">
+                  <a href="#"><i class="fas fa-map-marker-alt"></i></a>
+               </div>
+               <div class="tpoffcanvas__info-address">
+                  <span>Location</span>
+                 The Federal Plytechnic
+                     Ede, Osun </a>
+               </div>
+            </div>
+         </div>
+       
+      </div>
+   </div>
+   <div class="body-overlay"></div>
+   <!-- tp-offcanvus-area-end -->
+
+   <main>
+
+      <!-- breadcrumb area start -->
+      <div class="breadcrumb__area breadcrumb-height p-relative grey-bg"
+         data-background="assets/img/breadcrumb/breadcrumb.jpg">
+         <div class="breadcrumb__scroll-bottom smooth">
+            <a href="#tp-service__area">
+               <i class="far fa-arrow-down"></i>
+            </a>
+         </div>
+         <div class="container">
+            <div class="row">
+               <div class="col-xxl-12">
+                  <div class="breadcrumb__content text-center">
+                     <h3 class="breadcrumb__title">About Us</h3>
+                     <div class="breadcrumb__list">
+                        <span><a href="#">Home</a></span>
+                        <span class="dvdr"><i class="fa fa-angle-right"></i></span>
+                        <span>All you need to Know</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- breadcrumb area end -->
+
+      <!-- tp-about-area-start -->
+      <div id="about-inner__area" class="about-inner__area pt-130 pb-130">
+         <div class="container">
+            <div class="row justify-content-center">
+               <div class="col-lg-9 col-md-12">
+                  <div class="about-inner__section-box mb-70 text-center wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".3s">
+                     <span class="about-inner__subtitle">about Us</span>
+                     <h3 class="tp-section-title-md">Welcome to Fpe Coding Community</h3>
+                  </div>
+               </div>
+            </div>
+            <div class="row g-0">
+               
+               <div class="col-xl-12 col-lg-12 wow tpfadeRight" data-wow-duration=".9s" data-wow-delay=".7s">
+                  <div class="about-inner__right">
+                     <div class="about-inner__content">
+                        <p>At Fpe Coding Community, we are passionate about connecting coders from all over the world to share knowledge, collaborate on projects, and advance their coding skills. Our community is built on a foundation of inclusivity, where all members are encouraged to contribute their unique perspectives and ideas.
+
+                        Whether you are a beginner or an experienced developer, our community offers a supportive and welcoming space to learn and grow. We provide resources such as tutorials, forums, and meetups to help you stay up-to-date on the latest coding trends and best practices.</p>
+                                            
+                        <p>Our mission is to empower coders to reach their full potential, whether it be through career advancement, personal projects, or contributing to open-source initiatives. We believe that coding has the power to change the world, and we are committed to fostering a community that can make a positive impact on the global tech landscape.
+                        
+                        Join us today and become a part of the Fpe Coding Community. Let's code together and shape the future of technology.</p>
+                
+                     </div>
+                     
+                     
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- tp-about-area-end -->
+
+      <!-- tp-service-area-start -->
+      
+      <!-- tp-service-area-end -->
+
+      <div class="tp-counter-2__area tp-counter-2__space counter-inner grey-bg pb-100">
+         <div class="col-xl-6 margin-bottom-40">
+            <div class="purple-title-wrapper margin-bottom-20  wow fadeInDown" data-delay="5s">
+               <br>
+                 <h2 class="purple-title" style="text-align:center">Community Rules</h2>
+            </div>
+            <div class="sec-content-wrapper  wow fadeInDown" data-delay="5s">
+                
+            </div>
+         </div>
+         <div class="col-xl-12">
+             <div class="row margin-bottom-30">
+                 
+                 
+               <div class="col-xl-3 col-md-6 col-12 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".7s">
+                  <div class="tp-price__item tp-price__active z-index">
+                     <div class="tp-price__icon d-flex justify-content-between align-items-center">
+                             <div class="icon">
+                                 <h3>1</h3>
+                             </div>
+                         </div>
+                         <div class="card-content-wrapper">
+                            
+                            <div class="margin-bottom-20">
+                                 <h4>Be respectful</h4>
+                            </div>
+                             <p>Treat all members of the community with respect and kindness.
+                                  Do not engage in any form of hate speech, harassment, or discrimination.</p>
+                                  <br>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-xl-3 col-md-6 col-12 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".7s">
+                  <div class="tp-price__item tp-price__active z-index">
+                     <div class="tp-price__icon d-flex justify-content-between align-items-center">
+                             <div class="icon">
+                              <h4>2</h4>
+                             </div>
+                         </div>
+                         <div class="card-content-wrapper">
+                            
+                            <div class="margin-bottom-20">
+                                 <h4>Keep it professional</h4>
+                            </div>
+                             <p>This is a community for coding and tech-related discussions. 
+                                 Keep the conversations focused on coding-related topics and avoid discussing non-coding-related topics..</p>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-xl-3 col-md-6 col-12 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".7s">
+                  <div class="tp-price__item tp-price__active z-index">
+                     <div class="tp-price__icon d-flex justify-content-between align-items-center">
+                             <div class="icon">
+                              <h4>3</h4>
+                             </div>
+                         </div>
+                         <div class="card-content-wrapper">
+                             
+                            <div class="margin-bottom-20">
+                                 <h4>No self-promotion</h4>
+                            </div>
+                             <p>Do not use the community to promote your own products, services, or content. 
+                                 Self-promotion should be kept to a minimum and only allowed in designated areas.</p>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-xl-3 col-md-6 col-12 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".7s">
+                  <div class="tp-price__item tp-price__active z-index">
+                     <div class="tp-price__icon d-flex justify-content-between align-items-center">
+                             <div class="icon">
+                              <h4>4</h4>
+                             </div>
+                         </div>
+                         <div class="card-content-wrapper">
+                            
+                            <div class="margin-bottom-20">
+                                 <h4>Stay on topic</h4>
+                            </div>
+                             <p>Keep the conversations on topic and avoid derailing discussions. If you want to change the topic, start a new thread.</p>
+                           <br>
+                           <br>
+                           <br>
+                           </div>
+                     </div>
+                 </div>
+                 
+             </div>
+             <div class="row">
+
+               <div class="col-xl-3 col-md-6 col-12 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".7s">
+                  <div class="tp-price__item tp-price__active z-index">
+                     <div class="tp-price__icon d-flex justify-content-between align-items-center">
+                             <div class="icon">
+                              <h4>5</h4>
+                             </div>
+                         </div>
+                         <div class="card-content-wrapper">
+                            
+                            <div class="margin-bottom-20">
+                                 <h4>No spamming</h4>
+                            </div>
+                             <p>Do not post the same message or link repeatedly. Do not post irrelevant messages or links.
+                              <br>
+                              <br>
+                              <br>
+                              <br><br>
+                             </p>
+                            
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-xl-3 col-md-6 col-12 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".7s">
+                  <div class="tp-price__item tp-price__active z-index">
+                     <div class="tp-price__icon d-flex justify-content-between align-items-center">
+                             <div class="icon">
+                              <h4>6</h4>
+                             </div>
+                         </div>
+                         <div class="card-content-wrapper">
+                             
+                            <div class="margin-bottom-20">
+                                 <h4>Be helpful</h4>
+                            </div>
+                             <p>This community is built on the spirit of sharing knowledge and helping others. 
+                                 f you have knowledge that can help others, please share it. If you need help, please ask.</p>
+                              
+                                 <br>
+                                 
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-xl-3 col-md-6 col-12 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".7s">
+                  <div class="tp-price__item tp-price__active z-index">
+                     <div class="tp-price__icon d-flex justify-content-between align-items-center">
+                             <div class="icon">
+                              <h4>7</h4>
+                             </div>
+                         </div>
+                         <div class="card-content-wrapper">
+                             
+                            <div class="margin-bottom-20">
+                                 <h4>No plagiarism</h4>
+                            </div>
+                             <p>Do not copy and paste content from other sources without proper attribution. 
+                                 If you are using code from another source, make sure you have the necessary permissions and give proper credit.</p>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-xl-3 col-md-6 col-12 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".7s">
+                  <div class="tp-price__item tp-price__active z-index">
+                     <div class="tp-price__icon d-flex justify-content-between align-items-center">
+                             <div class="icon">
+                                 <h4>8</h4>
+                             </div>
+                         </div>
+                         <div class="card-content-wrapper">
+                            
+                            <div class="margin-bottom-20">
+                                 <h4>Follow The Rules</h4>
+                            </div>
+                             <p>The Community strictly operates based on the rules, any violation may lead to disabling of your account
+                                 and blocking of your device from accessing the community</p>
+                                 <br>
+                         </div>
+                     </div>
+                 </div>
+                 
+                 
+                 
+                 
+             </div>
+         </div>
+     </div>
+      <!-- tp-counter-area-start -->
+      <div class="tp-counter-2__area tp-counter-2__space counter-inner grey-bg pb-100">
+         <div class="container">
+            <div class="tp-counter-2__wrapper pt-65">
+               <div class="row">
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".5s">
+                     <div class="tp-counter-2__item d-flex align-items-center justify-content-sm-start justify-content-center">
+                        <div class="tp-counter-2__icon">
+                           <img src="{% static 'assets/img/counter/counter-5.png' %}" alt="">
+                        </div>
+                        <div class="tp-counter-2__content">
+                           <h4><span class="counter">{{qnumb}}</span>+</h4>
+                           <span>Questions Inquired</span>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".7s">
+                     <div class="tp-counter-2__item d-flex align-items-center justify-content-sm-start justify-content-center">
+                        <div class="tp-counter-2__icon">
+                           <img src="{% static 'assets/img/counter/counter-6.png' %}" alt="">
+                        </div>
+                        <div class="tp-counter-2__content">
+                           <h4 class="counter">{{anumb}}</h4>
+                           <span>Solutions Provided</span>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".9s">
+                     <div class="tp-counter-2__item d-flex align-items-center justify-content-sm-start justify-content-center">
+                        <div class="tp-counter-2__icon">
+                           <img src="{% static 'assets/img/counter/counter-7.png' %}" alt="">
+                        </div>
+                        <div class="tp-counter-2__content">
+                           <h4 class="counter">{{bnumb}}</h4>
+                           <span>Contents </span>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay="1s">
+                     <div class="tp-counter-2__item d-flex align-items-center justify-content-sm-start justify-content-center">
+                        <div class="tp-counter-2__icon">
+                           <img src="{% static 'assets/img/counter/counter-8.png' %}" alt="">
+                        </div>
+                        <div class="tp-counter-2__content">
+                           <h4 class="counter">{{unumb}}</h4>
+                           <span>Satisfied users </span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- tp-counter-area-end -->
+
+      <!-- tp-price-area-start -->
+      
+      <!-- tp-faq-area-end -->
+
+
+   </main>
+
+   <footer>
+      <!-- tp-footer-area-start -->
+      <div class="tp-footer__area theme-bg pt-120 pb-50">
+         <div class="container">
+            <div class="row">
+               <div class="col-xl-12">
+                  <div class="tp-footer__content text-center">
+                     <h3 class="tp-section-title text-white">You at the right place, don't doubt</h3>
+                     <p>Discover your new updates, from various programming languages.</p>
+                  </div>
+                  
+               </div>
+            </div>
+         </div>
+          <div class="tp-footer-bottom__area mt-80 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".9s">
+            <div class="container">
+               <div class="tp-footer-bottom__border-top pt-40">
+                  <div class="row align-items-center">
+                     <div class="col-xl-2 col-lg-2 col-md-6 col-12 order-2 order-lg-1 text-center text-md-start">
+                        <div class="tp-footer-bottom__logo">
+                           <a href="{% url 'index' %}"><img src="{% static 'assets/img/logo/logo1.jpg' %}" style="height:100px" alt=""></a>
+                        </div>
+                        <div class="copyright-area">
+                           <p class="copyright-text" style="color:white">© <script>document.write(/\d{4}/.exec(Date())[0])</script>,  <span
+                                   class="fas fa-star"></span> by <strong>Gabriel</strong>.</p>
+                       </div>
+                     </div>
+                     <div class="col-xl-7 col-lg-7 col-md-12 col-12 order-1 order-lg-2 d-none d-sm-block">
+                        <div class="tp-footer-bottom__menu">
+                           <ul>
+                              <li><a href="/question/">Ask Now</a></li>
+                              <li><a href="/answer/">Q & A</a></li>
+                            
+                              <li><a href="/blogs/">Contents</a></li>
+                              <li><a href="https://wa.me/2347067208917">Contact</a></li>
+                              <li>
+                                 
+                           </ul>
+                        </div>
+                        
+                     </div>
+                     
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- tp-footer-area-end -->
+   </footer>
+
+   <!-- JS here -->
+   <script src="{% static 'assets/js/jquery.js' %}"></script>
+   <script src="{% static 'assets/js/waypoints.js' %}"></script>
+   <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+   <script src="{% static 'assets/js/swiper-bundle.js' %}"></script>
+   <script src="{% static 'assets/js/slick.js' %}"></script>
+   <script src="{% static 'assets/js/magnific-popup.js' %}"></script>
+   <script src="{% static 'assets/js/counterup.js' %}"></script>
+   <script src="{% static 'assets/js/wow.js' %}"></script>
+   <script src="{% static 'assets/js/nice-select.js' %}"></script>
+   <script src="{% static 'assets/js/meanmenu.js' %}"></script>
+   <script src="{% static 'assets/js/isotope-pkgd.js' %}"></script>
+   <script src="{% static 'assets/js/imagesloaded-pkgd.js' %}"></script>
+   <script src="{% static 'assets/js/ajax-form.js' %}"></script>
+   <script src="{% static 'assets/js/main.js' %}"></script>
+
+
+
+</body>
+
+
+</html>
