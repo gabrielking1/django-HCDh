@@ -7,9 +7,8 @@ from django import forms
 from django.db.models import fields
 from django.utils.text import slugify
 from django_countries.widgets import CountrySelectWidget
-from django_countries.fields import CountryField
-from django_select2.forms import Select2Widget
-# Create your forms here.
+# from django_countries.fields import CountryField
+
 
 class RegForm(UserCreationForm):
 
