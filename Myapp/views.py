@@ -474,7 +474,7 @@ def unlike_content(request, slug):
 
 def profile(request, username):
     if request.user.is_superuser:
-        messages.error(request, 'you are not authorized, log in a user not admin')
+        messages.error(request, 'you are not authorized, log in as user not admin')
         return redirect('login')
     elif request.user.is_authenticated and request.user.is_active:
         notify = Notification.objects.filter(username=request.user.username,isread="Unread")
