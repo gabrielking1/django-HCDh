@@ -172,7 +172,7 @@ AUTHENTICATION_BACKENDS = [
 # AXES_USE_USER_AGENT = True (both user and ip)
 
 # number of attempt
-AXES_FAILURE_LIMIT = 3
+AXES_FAILURE_LIMIT = 4
 
 # block user for 2hrs
 AXES_COOLOFF_TIME = 2

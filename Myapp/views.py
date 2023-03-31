@@ -36,7 +36,7 @@ class ProfileView(SessionWizardView):
     template_name = 'registration.html'
     # Do something with the cleaned_data, then redirect
     # to a "success" page.
-    def done(self,  form_list,**kwargs):
+    def done(self, form_list,**kwargs):
         
         user_form = form_list[0]
         username = user_form.cleaned_data.get('username')
@@ -48,6 +48,8 @@ class ProfileView(SessionWizardView):
             profile = form_list[1].save(commit=False)
             profile.username =  userr
             profile.save()
+        
+
             return redirect('login')
         else:
             print("something is wrong ")
@@ -116,6 +118,7 @@ def logout(request):
     return redirect('login')
 
 def index(request):
+    
     
     notify = Notification.objects.filter(username=request.user.username,isread="Unread")
     blog = Blog.objects.all()
