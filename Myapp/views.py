@@ -473,38 +473,42 @@ def unlike_content(request, slug):
 
 
 def profile(request, username):
-    notify = Notification.objects.filter(username=request.user.username,isread="Unread")
-    userr = get_object_or_404(User, username=username)
-    profiler = Profile.objects.get(username=userr)
-    print(userr.username)
-    question = Question.objects.filter(username_id=userr.id)
-    qnumb = question.count()
-    answer = Answer.objects.filter(username=userr)
-    answerr = answer.count()
-    blog = Blog.objects.filter(username=userr)
-    bnumb = blog.count()
-    if request.method == "POST":
-        form = UpdateProfileForm(request.POST, request.FILES)
-#       {{content|safe }}
-        if form.is_valid():
+    if request.user.is_authenticated and request.user.is_active:
+        notify = Notification.objects.filter(username=request.user.username,isread="Unread")
+        userr = get_object_or_404(User, username=username)
+        profiler = Profile.objects.get(username=userr)
+        print(userr.username)
+        question = Question.objects.filter(username_id=userr.id)
+        qnumb = question.count()
+        answer = Answer.objects.filter(username=userr)
+        answerr = answer.count()
+        blog = Blog.objects.filter(username=userr)
+        bnumb = blog.count()
+        if request.method == "POST":
+            form = UpdateProfileForm(request.POST, request.FILES)
+    #       {{content|safe }}
+            if form.is_valid():
+                
+                
+                messages.success(request, 'Profile successfully Created')
+                form.save()
+                return HttpResponseRedirect(reverse("profile",args={userr.username}))
             
-            
-            messages.success(request, 'Profile successfully Created')
-            form.save()
-            return HttpResponseRedirect(reverse("profile",args={userr.username}))
-        
+            else:
+                messages.error(request, 'you can only create profile once but you can edit multiple times')
+                return HttpResponseRedirect(reverse("profile",args={userr.username}))
         else:
-            messages.error(request, 'you can only create profile once but you can edit multiple times')
-            return HttpResponseRedirect(reverse("profile",args={userr.username}))
+            form = UpdateProfileForm(initial = {'username':request.user.id,})
+        return render(request,"profile.html",
+                    {'question':question,'answer':answerr,
+                    'blog':blog,'qnumb':qnumb,'bnumb':bnumb,
+                    'ans':answer,'form':form,'userr':userr,
+                    'profile':profiler,'notify':notify
+                    }
+                    )
     else:
-        form = UpdateProfileForm(initial = {'username':request.user.id,})
-    return render(request,"profile.html",
-                  {'question':question,'answer':answerr,
-                   'blog':blog,'qnumb':qnumb,'bnumb':bnumb,
-                   'ans':answer,'form':form,'userr':userr,
-                   'profile':profiler,'notify':notify
-                   }
-                  )
+        messages.error(request, 'you are not authorized')
+        return redirect('login')
 
 
 

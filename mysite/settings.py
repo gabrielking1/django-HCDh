@@ -158,7 +158,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-
+CACHES = {
+    'default': {
+        'BACKEND':'django.core.cache.backends.redis.RedisCache',
+        'LOCATION':'redis://127.0.0.1:6739'
+     }
+}
 
 AUTHENTICATION_BACKENDS = [
     # AxesStandaloneBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
