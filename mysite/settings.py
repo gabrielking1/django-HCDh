@@ -161,7 +161,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CACHES = {
     'default': {
         'BACKEND':'django.core.cache.backends.redis.RedisCache',
-        'LOCATION':'redis://127.0.0.1:6739'
+        'LOCATION':[ '127.0.0.1:8000',
+        'https://django-server-production-c4c2.up.railway.app'
+        ]
      }
 }
 
