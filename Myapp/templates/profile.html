@@ -452,8 +452,8 @@
                         <ul class="nav nav-pills">
                          
                         {% if profile.username.username == user.username%}
-                        <li class = "nav-item"><button hx-get="{% url 'updateprofile' userr.username %}" hx-target="#dialog"class="btn btn-primary" 
-                            data-toggle="modal" data-target="#modal">
+                        <li class = "nav-item"><button hx-get="{% url 'updateprofile' userr.username %}" hx-target="#staticBackdrop" class="btn btn-primary" 
+                           type="button"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                         Edit Profile
                                 </button>
                             </li>
@@ -520,78 +520,35 @@
             </div>
          </div>
       </div>
-      <div class="tp-counter-2__area tp-counter-2__space counter-inner grey-bg pb-100">
-         <div class="container">
-            <div class="tp-counter-2__wrapper pt-65">
-               <div class="row">
-                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".5s">
-                     <div class="tp-counter-2__item d-flex align-items-center justify-content-sm-start justify-content-center">
-                        <div class="tp-counter-2__icon">
-                           <img src="{% static 'assets/img/counter/counter-5.png' %}" alt="">
-                        </div>
-                        <div class="tp-counter-2__content">
-                           <h4><span class="counter">20</span>+</h4>
-                           <span>Years of Experience </span>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".7s">
-                     <div class="tp-counter-2__item d-flex align-items-center justify-content-sm-start justify-content-center">
-                        <div class="tp-counter-2__icon">
-                           <img src="{% static 'assets/img/counter/counter-6.png' %}" alt="">
-                        </div>
-                        <div class="tp-counter-2__content">
-                           <h4 class="counter">1200</h4>
-                           <span>Projects completed </span>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay=".9s">
-                     <div class="tp-counter-2__item d-flex align-items-center justify-content-sm-start justify-content-center">
-                        <div class="tp-counter-2__icon">
-                           <img src="{% static 'assets/img/counter/counter-7.png' %}" alt="">
-                        </div>
-                        <div class="tp-counter-2__content">
-                           <h4 class="counter">280</h4>
-                           <span>Awards achieved </span>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-30 wow tpfadeUp" data-wow-duration=".9s" data-wow-delay="1s">
-                     <div class="tp-counter-2__item d-flex align-items-center justify-content-sm-start justify-content-center">
-                        <div class="tp-counter-2__icon">
-                           <img src="{% static 'assets/img/counter/counter-8.png' %}" alt="">
-                        </div>
-                        <div class="tp-counter-2__content">
-                           <h4 class="counter">260</h4>
-                           <span>Satisfied clients </span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
+      
       
       <!-- exprience-area-end -->
       
       <!-- contact-area-start -->
-      <div class="modal fade" id="modal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true" style="justify-content:center" >
-         <div id="dialog" class="modal-dialog" role="document" hx-target="this"></>
-         <div class="modal-content">
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+         <div class="modal-dialog">
+           <div class="modal-content">
              <div class="modal-header">
-             <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-             <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
-                 <span aria-hidden="true">&times;</span>
-             </button>
+               <h5 class="modal-title" id="staticBackdropLabel">Edit Profile</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
              </div>
-             <div class="modal-dialog modal-dialog-scrollable">
+             <div class="modal-body">
              
+                  
+                     <button type="submit"><img src="{% static 'assets/img/mark.png' %}" style="height:35px;margin !important" alt=""
+                   </button>
+                   </form>
+               </li>
+               <hr>
+               
              </div>
-     
+             <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              
+             </div>
+           </div>
          </div>
-         </div>
-     </div>
+       </div>>
       <!-- contact-area-end -->
 
 

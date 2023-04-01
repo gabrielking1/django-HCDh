@@ -36,8 +36,8 @@
 
                
                     <div class="container">
-                        <div class="row my-3 p-3">
-                            <img class="rounded-circle account-img" src="{{ user.profile.avatar.url }} " style="cursor: pointer;"/>
+                        <div class="row my-3 p-3" style="justify-content:center;background-color:gray">
+                            <img class="rounded-circle account-img" src="{{ user.profile.avatar.url }} " style="height:250px;width:250px; cursor: pointer;"/>
                         </div>
                         {% if user_form.errors %}
                             <div class="alert alert-danger alert-dismissible" role="alert">

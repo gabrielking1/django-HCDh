@@ -29,6 +29,7 @@ urlpatterns = [
     path('unlike_content/<slug:slug>', views.unlike_content, name='unlike_content'),
     path('updateprofile/<str:username>', views.updateprofile,name='updateprofile'),
     path('read/', views.read, name = 'read'),
+    path('blog/<slug:slug>/like/', views.like_blog, name='like-blog'),
     path('changepassword/',views.changepassword, name='chnagepassword')
     
 ]

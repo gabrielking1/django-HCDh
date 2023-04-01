@@ -36,7 +36,7 @@ class ProfileView(SessionWizardView):
     template_name = 'registration.html'
     # Do something with the cleaned_data, then redirect
     # to a "success" page.
-    def done(self, form_list,**kwargs):
+    def done(self,  form_list,**kwargs):
         
         user_form = form_list[0]
         username = user_form.cleaned_data.get('username')
@@ -48,8 +48,6 @@ class ProfileView(SessionWizardView):
             profile = form_list[1].save(commit=False)
             profile.username =  userr
             profile.save()
-        
-
             return redirect('login')
         else:
             print("something is wrong ")
@@ -118,7 +116,6 @@ def logout(request):
     return redirect('login')
 
 def index(request):
-    
     
     notify = Notification.objects.filter(username=request.user.username,isread="Unread")
     blog = Blog.objects.all()
@@ -473,46 +470,38 @@ def unlike_content(request, slug):
 
 
 def profile(request, username):
-    if request.user.is_superuser:
-        messages.error(request, 'you are not authorized, log in as user not admin')
-        return redirect('login')
-    elif request.user.is_authenticated and request.user.is_active:
-        notify = Notification.objects.filter(username=request.user.username,isread="Unread")
-        userr = get_object_or_404(User, username=username)
-        profiler = Profile.objects.get(username=userr)
-        print(userr.username)
-        question = Question.objects.filter(username_id=userr.id)
-        qnumb = question.count()
-        answer = Answer.objects.filter(username=userr)
-        answerr = answer.count()
-        blog = Blog.objects.filter(username=userr)
-        bnumb = blog.count()
-        if request.method == "POST":
-            form = UpdateProfileForm(request.POST, request.FILES)
-    #       {{content|safe }}
-            if form.is_valid():
-                
-                
-                messages.success(request, 'Profile successfully Created')
-                form.save()
-                return HttpResponseRedirect(reverse("profile",args={userr.username}))
+    notify = Notification.objects.filter(username=request.user.username,isread="Unread")
+    userr = get_object_or_404(User, username=username)
+    profiler = Profile.objects.get(username=userr)
+    print(userr.username)
+    question = Question.objects.filter(username_id=userr.id)
+    qnumb = question.count()
+    answer = Answer.objects.filter(username=userr)
+    answerr = answer.count()
+    blog = Blog.objects.filter(username=userr)
+    bnumb = blog.count()
+    if request.method == "POST":
+        form = UpdateProfileForm(request.POST, request.FILES)
+#       {{content|safe }}
+        if form.is_valid():
             
-            else:
-                messages.error(request, 'you can only create profile once but you can edit multiple times')
-                return HttpResponseRedirect(reverse("profile",args={userr.username}))
+            
+            messages.success(request, 'Profile successfully Created')
+            form.save()
+            return HttpResponseRedirect(reverse("profile",args={userr.username}))
+        
         else:
-            form = UpdateProfileForm(initial = {'username':request.user.id,})
-        return render(request,"profile.html",
-                    {'question':question,'answer':answerr,
-                    'blog':blog,'qnumb':qnumb,'bnumb':bnumb,
-                    'ans':answer,'form':form,'userr':userr,
-                    'profile':profiler,'notify':notify
-                    }
-                    )
-    
+            messages.error(request, 'you can only create profile once but you can edit multiple times')
+            return HttpResponseRedirect(reverse("profile",args={userr.username}))
     else:
-        messages.error(request, 'you are not authorized')
-        return redirect('login')
+        form = UpdateProfileForm(initial = {'username':request.user.id,})
+    return render(request,"profile.html",
+                  {'question':question,'answer':answerr,
+                   'blog':blog,'qnumb':qnumb,'bnumb':bnumb,
+                   'ans':answer,'form':form,'userr':userr,
+                   'profile':profiler,'notify':notify
+                   }
+                  )
 
 
 
@@ -759,3 +748,32 @@ def changepassword(request):
     return render(request, 'changepassword.html', {
         'form': form
     })
+@require_POST
+def like_blog(request):
+    blog_slug = request.POST.get('blog_slug')
+    blog = get_object_or_404(Blog, slug=blog_slug)
+    blog.likes += 1
+    blog.save()
+    response_data = {'success': True, 'message': 'Blog liked successfully!'}
+    return JsonResponse(response_data)
+
+@require_POST
+def unlike_blog(request):
+    blog_slug = request.POST.get('blog_slug')
+    blog = get_object_or_404(Blog, slug=blog_slug)
+    blog.likes -= 1
+    blog.save()
+    response_data = {'success': True, 'message': 'Blog unliked successfully!'}
+    return JsonResponse(response_data)
+
+def like_blog(request, slug):
+    blog = get_object_or_404(Blog, slug=slug)
+    user = request.user
+    liked = False
+    if blog.likes.filter(id=user.id).exists():
+        blog.likes.remove(user)
+    else:
+        blog.likes.add(user)
+        liked = True
+    context = {'liked': liked}
+    return JsonResponse(context)

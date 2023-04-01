@@ -434,26 +434,13 @@
                               <p>
                               {{blog.body|safe}}</p>
                            </div>
-                           <div class="blog-quote-wrapper margin-top-20">
-                              <h3 class="blog-quote blog-pad">
-                                 {% if like %}
-                                 <form  hx-post ="{% url 'unlike_content' blog.slug %}" hx-boost="true" hx-target="body" hx-swap="outerHTML">
-                                     {% csrf_token %}
-                                     <button type="submit" class="btn btn-link">
-                                         <span><img src = "/static/assets/img/heart1.png" style="height:50px"></span>
-                                     </button>
-                                 </form>
-                             {% else %}
-                                 <form  hx-post ="{% url 'like_content' blog.slug %}" hx-boost="true" hx-target="body" hx-swap="outerHTML">
-                                     {% csrf_token %}
-                                     <button type="submit" class="btn btn-link">
-                                         <span><img src = "/static/assets/img/heart.png" style="height:50px"></span>
-                                     </button>
-                                 </form>
-                             {% endif %}
-                             </h3>
-                              <h4 class="bloger-name margin-top-20">{{clike}} users like this content</h4>
-                          </div>
+                           <p>Likes: <span id="likes-count">{{ blog.likes.count }}</span></p>
+                              
+                                 {% if request.user in blog.likes.all %}
+                                    <button class="unlike-btn" data-url="{% url 'like-blog' blog.slug %}"><img src = "/static/assets/img/heart1.png" style="height:50px"></button>
+                                 {% else %}
+                                    <button class="like-btn" data-url="{% url 'like-blog' blog.slug %}"><img src = "/static/assets/img/heart.png" style="height:50px"></button>
+                                 {% endif %}
                            
                            <div class="postbox__social-wrapper">
                               <div class="row">
@@ -658,11 +645,43 @@
    <script src="{% static 'assets/js/imagesloaded-pkgd.js' %}"></script>
    <script src="{% static 'assets/js/ajax-form.js' %}"></script>
    <script src="{% static 'assets/js/main.js' %}"></script>
-
-
-
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <script>
+      $(document).ready(function() {
+        $('.like-btn, .unlike-btn').click(function(e) {
+          e.preventDefault();
+          var url = $(this).data('url');
+          var btn = $(this);
+          $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+              csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            dataType: 'json',
+            success: function(response) {
+              if (response.liked) {
+                btn.removeClass('like-btn').addClass('unlike-btn');
+                btn.children('img').attr('src', '{% static "assets/img/heart1.png" %}');
+                var likesCount = parseInt($('#likes-count').text()) + 1;
+                $('#likes-count').text(likesCount);
+              } else {
+                btn.removeClass('unlike-btn').addClass('like-btn');
+                btn.children('img').attr('src', '{% static "assets/img/heart.png" %}');
+                var likesCount = parseInt($('#likes-count').text()) - 1;
+                $('#likes-count').text(likesCount);
+              }
+            },
+            error: function(rs, e) {
+              console.log(rs.responseText);
+            }
+          });
+        });
+      });
+    </script>
+  
+   
 </body>
 
 
-<!-- Mirrored from weblearnbd.net/tphtml/quitox-prev/quitox/blog-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 25 Mar 2023 18:25:58 GMT -->
 </html>

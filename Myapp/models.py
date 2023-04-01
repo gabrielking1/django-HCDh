@@ -32,6 +32,9 @@ class Blog(models.Model):
     slug = AutoSlugField(populate_from = 'title', unique=True)
     category = models.ForeignKey(Category,on_delete=models.CASCADE, related_name='blog')
     views = models.IntegerField(default=0)
+    # likes = models.IntegerField(default=0)
+    likes = models.ManyToManyField(User, related_name='blog_likes', blank=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return str(self.title)
@@ -122,7 +125,7 @@ class LikeContent(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user} likes {self.blog}"
+        return f"{self.username} likes {self.blog}"
     
 class Type(models.Model):
     name = models.CharField(max_length=50)
