@@ -36,7 +36,7 @@ class ProfileView(SessionWizardView):
     template_name = 'registration.html'
     # Do something with the cleaned_data, then redirect
     # to a "success" page.
-    def done(self,  form_list,**kwargs):
+    def done(self, form_list,**kwargs):
         
         user_form = form_list[0]
         username = user_form.cleaned_data.get('username')
@@ -48,6 +48,8 @@ class ProfileView(SessionWizardView):
             profile = form_list[1].save(commit=False)
             profile.username =  userr
             profile.save()
+        
+
             return redirect('login')
         else:
             print("something is wrong ")
@@ -117,6 +119,7 @@ def logout(request):
 
 def index(request):
     
+    
     notify = Notification.objects.filter(username=request.user.username,isread="Unread")
     blog = Blog.objects.all()
     
@@ -175,13 +178,18 @@ def answer(request):
 
 def blog(request, slug):
     # try:
+        
         if request.user.is_active and request.user.is_authenticated:
             notify = Notification.objects.filter(username=request.user.username,isread="Unread")
             category = Category.objects.annotate(blog_count=Count('blog'))
             tag = Tag.objects.all()
             blogdetails = Blog.objects.all().order_by('id')[:3]
             blog = Blog.objects.get(slug=slug)
-            profile = Profile.objects.get(username=blog.username)
+            usar = User.objects.get(username__icontains = "Admin")
+            if usar:
+                profile = usar
+            else:
+                profile = Profile.objects.get(username=blog.username)
             like = LikeContent.objects.filter(blog=blog, username=request.user)
             clike = LikeContent.objects.filter(blog=blog).count()
             views = BlogView.objects.filter(blog=blog).count()
@@ -237,9 +245,7 @@ def view(request, slug):
         
         
         answer = Like.objects.raw('SELECT id, answer_id FROM Myapp_like WHERE username_id ='+ str(request.user.id))
-        for i in answer:
-            print(i.username_id, "this is user wey liek hae")
-
+       
             
         comma = Answer.objects.all()
         number = comm.count()
@@ -509,7 +515,32 @@ def profile(request, username):
                     }
                     )
     
+    else:
+        messages.error(request, 'you are not authorized')
+        return redirect('login')
 
+def updateprofile(request, username):
+    user = User.objects.get(username=username)
+    if request.method == 'POST':
+        # user_form = RegForm(request.POST, instance=user)
+        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=user.profile)
+
+        if  profile_form.is_valid():
+            # user_form.save()
+            profile_form.save()
+            messages.success(request, 'Your profile is updated successfully')
+            # return HttpResponseRedirect(reverse("updateprofile", args={'user'}))
+            return HttpResponse(
+               f"{user} updated. reload profile to see changes"
+                    
+            )
+    else:
+        # user_form = RegForm(instance=user)
+        profile_form = UpdateProfileForm(instance=user.profile, )
+
+    return render(request, 'updateprofile.html', {
+        # 'user_form': user_form,
+          'profile_form': profile_form,'user':user})
 
 
 # def update(request, slug):
@@ -669,28 +700,7 @@ def category(request, slug):
 
 
 # @login_required
-def updateprofile(request, username):
-    user = User.objects.get(username=username)
-    if request.method == 'POST':
-        # user_form = RegForm(request.POST, instance=user)
-        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=user.profile)
 
-        if  profile_form.is_valid():
-            # user_form.save()
-            profile_form.save()
-            messages.success(request, 'Your profile is updated successfully')
-            # return HttpResponseRedirect(reverse("updateprofile", args={'user'}))
-            return HttpResponse(
-               f"{user} updated. reload profile to see changes"
-                    
-            )
-    else:
-        # user_form = RegForm(instance=user)
-        profile_form = UpdateProfileForm(instance=user.profile, )
-
-    return render(request, 'updateprofile.html', {
-        # 'user_form': user_form,
-          'profile_form': profile_form,'user':user})
 
 
 def report(request):
@@ -755,23 +765,10 @@ def changepassword(request):
     return render(request, 'changepassword.html', {
         'form': form
     })
-@require_POST
-def like_blog(request):
-    blog_slug = request.POST.get('blog_slug')
-    blog = get_object_or_404(Blog, slug=blog_slug)
-    blog.likes += 1
-    blog.save()
-    response_data = {'success': True, 'message': 'Blog liked successfully!'}
-    return JsonResponse(response_data)
 
-@require_POST
-def unlike_blog(request):
-    blog_slug = request.POST.get('blog_slug')
-    blog = get_object_or_404(Blog, slug=blog_slug)
-    blog.likes -= 1
-    blog.save()
-    response_data = {'success': True, 'message': 'Blog unliked successfully!'}
-    return JsonResponse(response_data)
+
+
+
 
 def like_blog(request, slug):
     blog = get_object_or_404(Blog, slug=slug)
