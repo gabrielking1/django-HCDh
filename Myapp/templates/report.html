@@ -221,7 +221,10 @@
                            </li>
                            <li><a href="#">Pages</a>
                               <ul class="submenu">
+                                 {% if request.user.is_active and request.user.is_authenticated%}
+
                                  <li><a href="/profile/{{user.username}}">Profile</a></li>
+                                 {%endif%}
                                  <li><a href="/about/">About Us</a></li>
                                  <li><a href="https://wa.me/2347067208917">Contact Us</a></li>
                                  <li><a href="/report/">Report an Abuse</a></li>

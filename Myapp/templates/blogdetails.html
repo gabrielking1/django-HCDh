@@ -222,7 +222,10 @@
                            </li>
                            <li><a href="#">Pages</a>
                               <ul class="submenu">
+                                 {% if request.user.is_active and request.user.is_authenticated%}
+
                                  <li><a href="/profile/{{user.username}}">Profile</a></li>
+                                 {%endif%}
                                  <li><a href="/about/">About Us</a></li>
                                  <li><a href="https://wa.me/2347067208917">Contact Us</a></li>
                                  <li><a href="/report/">Report an Abuse</a></li>
@@ -485,7 +488,7 @@
                      </div>
                      <div class="postbox__comment-form">
                         <h3 class="postbox__comment-form-title">Leave a Comment</h3>
-                        <form action="#" method="post" id="commentform" class="comment-form" novalidate="" hx-boost="true">
+                        <form action="#" method="post" id="commentform" class="comment-form" novalidate="" >
                            {% csrf_token %}
                            <div class="row">
                               <div class="col-xxl-6 col-xl-6 col-lg-6">

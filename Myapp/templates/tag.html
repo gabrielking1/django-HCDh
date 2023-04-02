@@ -221,7 +221,10 @@
                            </li>
                            <li><a href="#">Pages</a>
                               <ul class="submenu">
+                                 {% if request.user.is_active and request.user.is_authenticated%}
+
                                  <li><a href="/profile/{{user.username}}">Profile</a></li>
+                                 {%endif%}
                                  <li><a href="/about/">About Us</a></li>
                                  <li><a href="https://wa.me/2347067208917">Contact Us</a></li>
                                  <li><a href="/report/">Report an Abuse</a></li>
@@ -431,7 +434,7 @@
          </div>
          <div class="container">
             <div class="row">
-               {% for blog in page_obj.object_list %}
+               {% for blog in question  %}
                <div class="col-xl-6 col-lg-6 wow tpfadeLeft" data-wow-duration=".9s" data-wow-delay=".5s" >
                   <div id="project" class="tp-project__item mb-30" style="background-color:#E8F6FF">
                      <div class="tp-project__thumb fix">

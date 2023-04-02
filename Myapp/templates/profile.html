@@ -328,7 +328,10 @@
                            </li>
                            <li><a href="#">Pages</a>
                               <ul class="submenu">
+                                 {% if request.user.is_active and request.user.is_authenticated%}
+
                                  <li><a href="/profile/{{user.username}}">Profile</a></li>
+                                 {%endif%}
                                  <li><a href="/about/">About Us</a></li>
                                  <li><a href="https://wa.me/2347067208917">Contact Us</a></li>
                                  <li><a href="/report/">Report an Abuse</a></li>
@@ -530,6 +533,13 @@
                   </div>
                </div>
             </div>
+            {% for message in messages%}
+
+   <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert" style="width:auto">
+      <strong> {{message}}</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+   </div>
+   {%endfor%}
             <div class="row ab-info-space">
                <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 mb-40 wow tpfadeUp" data-wow-duration=".7s" data-wow-delay=".7s">
                   <div id="about-me" class="amaboutinfo">
@@ -606,7 +616,7 @@
                            <img src="assets/img/counter/counter-3.png" alt="">
                         </div>
                         <div class="tp-counter-2__content">
-                           <h4 class="counter">{{anwser}}</h4>
+                           <h4 class="counter">{{anwserr}}</h4>
                            <span>Answers Provided </span>
                         </div>
                      </div>
@@ -631,16 +641,19 @@
       
       <!-- contact-area-end -->
      
-
+      
       <div id="id00" class="modall" style="background-color:gray;color:white" >
          
           <span onclick="document.getElementById('id00').style.display='none'" class="close" title="Close Modal">&times;</span>
-          <form class="modal-content" method="post" >
+          <form class="modal-content" method="post"enctype="multipart/form-data">
               {% csrf_token %}
               <div class="container">
               <h1 style="background-color:gray;color:white">Profile Update</h1>
               <p style="background-color:gray;color:white">Please fill in this form to Edit your profile.</p>
               <hr>
+              <div class="row my-3 p-3" style="justify-content:center;background-color:gray">
+               <img class="rounded-circle account-img" src="{{ user.profile.avatar.url }} " style="height:250px;width:250px; cursor: pointer;"/>
+            </div>
               {{form|crispy}}
               
              
