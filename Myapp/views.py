@@ -752,6 +752,7 @@ def read(request):
 
 def changepassword(request):
     if request.method == 'POST':
+        
         form = SetPasswordForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
