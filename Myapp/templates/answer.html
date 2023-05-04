@@ -428,6 +428,15 @@
                </div>
             </div>
          </div>
+         <div class ="container" style="width:auto">
+         {% for message in messages%}
+
+         <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert" style="width:auto">
+            <strong> {{message}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+         </div>
+         {%endfor%}
+      </div>
          <div class="container">
             <div class="row">
                {% for blog in page_obj.object_list %}
@@ -448,7 +457,7 @@
                      {% if page_obj.has_other_pages %}
                   <ul class="pagination">
                       {% if page_obj.has_previous %}
-                          <li><span id="prev"> <a class="page-numbers" href="{% url 'blogs' %}?page={{ page_obj.previous_page_number }}"
+                          <li><span id="prev"> <a class="page-numbers" href="{% url 'answer' %}?page={{ page_obj.previous_page_number }}"
                           ><i class="fal fa-arrow-left"></i></a></span></li>
                       {% else %}
                           <li class="disabled"><span><i class="fal fa-arrow-left"></i></a></span></li>
@@ -457,18 +466,22 @@
                           {% if page_obj.number == i %}
                           <li class="page-numbers" style="background-color:bkue"><span class="current">{{ i }} </span></li>
                           {% else %}
-                          <li><span id="prev"> <a class="page-numbers" href="{% url 'blogs' %}?page={{ i }}"
+                          <li><span id="prev"> <a class="page-numbers" href="{% url 'answer' %}?page={{ i }}"
                              >{{ i }}</a></span></li>
                           {% endif %}
                       {% endfor %}
                       {% if page_obj.has_next %}
-                      <li><span id="prev"> <a class="page-numbers" href="{% url 'blogs' %}?page={{ page_obj.next_page_number }}"
+                      <li><span id="prev"> <a class="page-numbers" href="{% url 'answer' %}?page={{ page_obj.next_page_number }}"
                         ><i class="fal fa-arrow-right"></i></a></span></li>
                       {% else %}
                           <li class="disabled"><span><i class="fal fa-arrow-right"></i></span></li>
+
                       {% endif %}
+                      
                       </ul>
-                  {% endif %}         
+
+                  {% endif %}   
+                       
                      </nav>
                </div>
                
@@ -556,7 +569,19 @@
    <script src="{% static 'assets/js/main.js' %}"></script>
    <script src="https://unpkg.com/htmx.org@1.9.2" integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h" crossorigin="anonymous"></script>
 
-
+   <script>
+      $(document).ready(function() {
+          // messages timeout for 10 sec 
+          setTimeout(function() {
+              $('.alert').fadeOut('slow');
+          }, 10000); // <-- time in milliseconds, 1000 =  1 sec
+  
+          // delete message
+          $('.del-msg').live('click',function(){
+              $('.del-msg').parent().attr('style', 'display:none;');
+          })
+      });
+  </script>
 
 
 </body>
