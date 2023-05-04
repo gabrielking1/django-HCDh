@@ -30,6 +30,7 @@
    <link rel="stylesheet" href="/static/assets/css/spacing.css">
    <link rel="stylesheet" href="/static/assets/css/style.css">
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons" media="all">
+   <script src="\static\pyscript-main\pyscriptjs\py.js"></script>
     <style>
         .wrapper {
             position:relative;
@@ -148,12 +149,7 @@
 <body>
 
    <!-- preloader -->
-   <div id="preloader">
-      <div class="preloader">
-         <span></span>
-         <span></span>
-      </div>
-   </div>
+   
    <!-- preloader end  -->
 
    <!-- back-to-top-start  -->
@@ -422,8 +418,8 @@
                <h3 class="sidebar__widget-title">Search Here</h3>
                <div class="sidebar__widget-content">
                   <div class="sidebar__search">
-                     <form style="width:auto">
-                        <div class="sidebar__search-input-2" >
+                     <form hx-get="{% url 'category' cat.slug %}"  hx-target = "body" hx-swap="innerHTML" style="width:auto"> 
+                        <div class="sidebar__search-input-2">
                            <input type="text" placeholder="Search your keyword..." name="search">
                            <button type="submit"><i class="far fa-search"></i></button>
                         </div>
@@ -433,7 +429,7 @@
             </div>
          </div>
          <div class="container">
-            <div class="row">
+            <div class="row" id="row">
                {% for blog in blog %}
                <div class="col-xl-6 col-lg-6 wow tpfadeLeft" data-wow-duration=".9s" data-wow-delay=".5s" >
                   <div id="project" class="tp-project__item mb-30" style="background-color:#E8F6FF">
@@ -510,7 +506,13 @@
                            <a href="{% url 'index' %}"><img src="{% static 'assets/img/logo/logo1.jpg' %}" style="height:100px" alt=""></a>
                         </div>
                         <div class="copyright-area">
-                           <p class="copyright-text" style="color:white">© <script>document.write(/\d{4}/.exec(Date())[0])</script>,  <span
+                           <p class="copyright-text"  style="color:white">© 
+                              <span id = "today">
+                              <py-script>
+                              import datetime as dt
+               
+                              pyscript.write('today', dt.date.today().strftime('%Y'))
+                                  </py-script></span>,  <span
                                    class="fas fa-star"></span> by <strong>Gabriel</strong>.</p>
                        </div>
                      </div>
@@ -552,6 +554,8 @@
    <script src="{% static 'assets/js/imagesloaded-pkgd.js' %}"></script>
    <script src="{% static 'assets/js/ajax-form.js' %}"></script>
    <script src="{% static 'assets/js/main.js' %}"></script>
+   <script src="https://unpkg.com/htmx.org@1.9.2" integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h" crossorigin="anonymous"></script>
+
 
 
 

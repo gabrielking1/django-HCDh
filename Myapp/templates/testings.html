@@ -1,0 +1,245 @@
+{% load static%}
+{% load crispy_forms_tags %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  </head>
+  <body>
+    
+</head>
+
+<body>
+
+   
+   <!-- back-to-top-end  -->
+
+
+
+  
+      <!-- breadcrumb area end -->
+   {% if request.user.is_active and request.user.is_authenticated %}
+      <!-- postbox area start -->
+      <div class="postbox__area pt-120 pb-120">
+         <div class="container">
+            <div class="row">
+               <div class="col-xxl-8 col-xl-8 col-lg-8 col-12">
+                  <div id="Blog-Details" class="postbox__wrapper postbox__p-right">
+                     <article >
+                        <div class="postbox__content">
+                           <p><img class="w-100" src="{{blog.screenshot.url}}" alt=""></p>
+                           <div class="postbox__meta">
+                              <span><a href="/profile/{{blog.username}}"><i class="fal fa-user-circle"></i> {{blog.username}} </a></span>
+                              <span><a href="#"><i class="fal fa-clock"></i> {{blog.created_at}}</a></span>
+                              <span><a href="#"><i class="fal fa-comment-alt-lines"></i> {{number}}</a></span>
+                           </div>
+                           <h3 class="postbox__title">
+                             {{blog.title}}
+                           </h3>
+                           <div class="postbox__text">
+                              <p>
+                              {{blog.body|safe}}</p>
+                           </div>
+                           
+                           
+                           <div class="postbox__social-wrapper">
+                              <div class="row">
+                                 <div class="col-xl-12 col-lg-12">
+                                    <div class="postbox__tag tagcloud">
+                                       <span>Tag</span>
+                                       <a href="/tag/{{blog.tag.slug}}">{{blog.tag}}</a>
+                                     
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </article>
+                     {% block gee %}
+                     <div class="postbox__comment mb-65" id ="gee">
+                        <h3 class="postbox__comment-title">{{number}} Answers</h3>
+                        <ul>
+                           {% for comment in comm %}
+                           <li>
+                              <div class="postbox__comment-box d-flex">
+                                 <div class="postbox__comment-info ">
+                                    <div class="postbox__comment-avater mr-20">
+                                       <img src="{{comment.username.profile.avatar.url}}" alt="">
+                                    </div>  
+                                 </div>
+                                 <div class="postbox__comment-text">
+                                    <div class="postbox__comment-name">
+                                       <h5>{{comment.username}}</h5>
+                                       
+                                    </div>
+                                    <p> {{comment.comment}}.</p>
+                                    {% for message in messages %}
+                        
+                                    <div class="container-flui p-0">
+                                    <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+                                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                       <span aria-hidden="True">&times;</span>
+                                       </button>
+                                       {{ message }}
+                                    </div>
+                                    </div>
+                                    {% endfor %}
+                                    
+                                    <form hx-get="{% url 'like' blog.slug %}" hx-target="body" hx-swap="innerHTML" hx-trigger="click">                             
+                                       <input type="hidden" name="blogo" value="{{blog.slug}}">
+                                       <input type="hidden" name="title" value="{{blog.title}}">
+                                       <input type="hidden" name="usa" value="{{blog.username}}">
+                                       <input type="hidden" name="blogger" value="{{comment.id}}">
+                                       <button type="submit" class="btn btn-primary">
+                                           {% if request.user in comment.liker.all %}
+                                               Downvote
+                                           {% else %}
+                                               Upvote
+                                           {% endif %}
+                                       </button>
+                                   </form>
+                              
+                                    
+                                       <br>
+                                       <div id="vote-count-{{ comment.id }}">Number of votes: {{ comment.liker.count }}</div>
+                                    
+                                 </div>
+                              </div>
+                           </li>{%endfor%}
+                           
+                        </ul>
+                     </div>
+                     {%endblock%}
+                    
+                     <div class="postbox__comment-form">
+                        <h3 class="postbox__comment-form-title">Leave an Answer</h3>
+                        <form  method="post"  hx-post = "{% url 'view' blog.slug %}" hx-trigger="click" hx-target= "body" class="comment-form">
+                           {% csrf_token %}
+                           <div class="row">
+                            {% csrf_token %}
+                            <input type="text" name="user" value={{request.user.id}} hidden>
+                            <input type="text" name="blog" value={{blog.id}} hidden>
+                              
+                              <div class="col-xxl-12">
+                                 <div class="postbox__comment-input">
+                                    <textarea name="comment" id="comment" class="form-control" placeholder="provide your answer ..."></textarea>
+                                 </div>
+                              </div>
+                              {% if blog.username.username == request.user.username%}
+                              {%else%}
+                              <div class="col-xxl-12">
+                                 <div class="postbox__comment-btn">
+                                    <button type="submit" class="tp-btn-blue-square"><span>Answer</span></button>
+                                 </div>
+                              </div>
+                              {%endif%}
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+      
+               <div class="col-xxl-4 col-xl-4 col-lg-4">
+                  <div class="sidebar__wrapper">
+                     
+                     <div class="sidebar__widget mb-40">
+                        <h3 class="sidebar__widget-title">Categories</h3>
+                        <div class="sidebar__widget-content">
+                           <ul>
+                              {% for cat in cat %}
+                              
+                              <li><a href="/category/{{cat.slug}}">{{cat.category}}<span>{{cat.blog_count}}</span></a></li>
+                              {%endfor%}
+                              
+                           </ul>
+                        </div>
+                     </div>
+                     
+                     <div class="sidebar__widget mb-40">
+                        <h3 class="sidebar__widget-title">Recent Content</h3>
+                        <div class="sidebar__widget-content">
+                           <div class="sidebar__post rc__post">
+                              {% for blog in blogdetails reversed%}
+                              <div class="rc__post mb-20 d-flex">
+                                 <div class="rc__post-thumb mr-20">
+                                    <a href="/blog/{{blog.slug}}"><img src="{{blog.cover_picture.url}}" alt=""></a>
+                                 </div>
+                                 <div class="rc__post-content">
+                                    <div class="rc__meta">
+                                       <span>{{blog.created_at}}</span>
+                                    </div>
+                                    <h3 class="rc__post-title">
+                                       <a href="/blog/{{blog.slug}}">{{blog.title}}</a>
+                                    </h3>
+                                 </div>
+                              </div>{%endfor%}
+                              
+                           </div>
+                        </div>
+                     </div>
+                     <div class="sidebar__widget mb-40">
+                        <h3 class="sidebar__widget-title">Tags</h3>
+                        <div class="sidebar__widget-content">
+                           <div class="tagcloud">
+                              {% for tag in tag %}
+                              <a href="/tag/{{tag.slug}}">{{tag.tag}} </a>
+                              {%endfor%}
+                              
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- postbox area end -->
+
+   </main>
+   {%else%} 
+                                    {% for message in messages %}
+                        
+                                    <div class="container-flui p-0">
+                                    <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+                                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                       <span aria-hidden="True">&times;</span>
+                                       </button>
+                                       {{ message }}
+                                    </div>
+                                    </div>
+                                    {% endfor %}
+      <div> <h2> Log in to see question and reply </h2></div>
+      {%endif%}
+
+      
+
+   <!-- JS here -->
+
+   
+ 
+      
+  
+  
+   <script src="https://unpkg.com/htmx.org@1.9.2" integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h" crossorigin="anonymous"></script>
+   
+   <script>
+      $(document).ready(function() {
+          // messages timeout for 10 sec 
+          setTimeout(function() {
+              $('.container-flui').fadeOut('slow');
+          }, 10000); // <-- time in milliseconds, 1000 =  1 sec
+  
+          // delete message
+          $('.del-msg').live('click',function(){
+              $('.del-msg').parent().attr('style', 'display:none;');
+          })
+      });
+  </script>
+ 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+  </body>
+</html>

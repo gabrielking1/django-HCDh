@@ -26,6 +26,9 @@ from django.core.files.storage import FileSystemStorage
 from django.contrib.auth import update_session_auth_hash
 import os
 from django_htmx.http import HttpResponseClientRedirect
+from render_block import render_block_to_string
+from django.core.mail import send_mail, BadHeaderError
+from verify_email.email_handler import send_verification_email
 
 
 # Create your views here.
@@ -46,11 +49,15 @@ class ProfileView(SessionWizardView):
             user_form.save()
             userr = User.objects.get(username__icontains=username)
             profile = form_list[1].save(commit=False)
+            inactive_user = send_verification_email(self.request, user_form)
+        
             profile.username =  userr
             profile.save()
         
 
+            messages.info(self.request, " please check your email to verify your account")
             return redirect('login')
+        
         else:
             print("something is wrong ")
             
@@ -396,48 +403,56 @@ def view(request, slug):
 #         messages.error(request, 'you are not logged in')
 #         return HttpResponseRedirect(reverse("view",args={blog.slug}))
         
-def like(request):
-    answer_id = request.POST.get('blogger')
-    ids = request.POST.get('blogo')
-    usa = request.POST.get('usa')
-    title = request.POST.get('title')
-    user = request.user
-    answer = get_object_or_404(Answer, id=answer_id)
-    print(answer.username)
-    print(request.user.username)
-    if request.user.id == answer.username_id:
-        messages.error(request, 'you are cannot upvote your answer')
-        return redirect(request.META.get('HTTP_REFERER'))
-    else:
-   
-        if user in answer.liker.all():
+def like(request, slug):
+    if request.user.is_active and request.user.is_authenticated:
+        blog = Question.objects.get(slug=slug)
+        if request.method == "GET":
+            answer_id = request.GET.get('blogger')
+            ids = request.GET.get('blogo')
+            usa = request.GET.get('usa')
+            title = request.GET.get('title')
+            user = request.user
+            answer = get_object_or_404(Answer, id=answer_id)
+            print(answer.username)
+            print(request.user.username)
+            if request.user.id == answer.username_id:
+                messages.error(request, 'you are cannot upvote your answer')
+                # return redirect(request.META.get('HTTP_REFERER'))
+                return HttpResponseRedirect(reverse("view",args={blog.slug}))
+            else:
+        
+                if user in answer.liker.all():
 
-            Notification.objects.filter(user=request.user.username, notify=title).delete()
-            
-            answer.liker.remove(user)
-            # liked = False
-        else:
-           
-         
-            Notification.objects.create(
-                            username = answer.username,
-                            user = request.user.username,
-                                topic = "upvote your answer",
-                                notify = '/view/',
-                                ids = ids
-
-
-                        )
-            answer.liker.add(user)
+                    Notification.objects.filter(user=request.user.username, notify=title).delete()
+                    
+                    answer.liker.remove(user)
+                    # liked = False
+                else:
                 
-                # liked = True
+                
+                    Notification.objects.create(
+                                    username = answer.username,
+                                    user = request.user.username,
+                                        topic = "upvote your answer",
+                                        notify = '/view/',
+                                        ids = ids
 
-        context = {
-            'likes_count': answer.liker.count(),
-            # 'liked': liked,
-        }
-        # return JsonResponse(context)
-        return redirect(request.META.get('HTTP_REFERER'))
+
+                                )
+                    answer.liker.add(user)
+                        
+                        # liked = True
+
+                context = {
+                    'likes_count': answer.liker.count(),
+                    # 'liked': liked,
+                }
+                # return JsonResponse(context)
+                # return redirect(request.META.get('HTTP_REFERER'))
+                return HttpResponseRedirect(reverse("view",args={blog.slug}))
+    else:
+        messages.error(request, "you aint logged in ")
+        return redirect('login')
 
 
 

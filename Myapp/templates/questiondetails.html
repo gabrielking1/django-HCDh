@@ -3,7 +3,7 @@
 
 
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html id="oga">
 
 
 <head>
@@ -29,8 +29,9 @@
    <link rel="stylesheet" href="/static/assets/css/magnific-popup.css">
    <link rel="stylesheet" href="/static/assets/css/spacing.css">
    <link rel="stylesheet" href="/static/assets/css/style.css">
+   <script  src="https://code.jquery.com/jquery-3.5.1.js"></script>
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons" media="all">
-   <script src="{% static 'assets/js/htmx.min.js' %}"></script>
+   
     <style>
         .wrapper {
             position:relative;
@@ -146,18 +147,8 @@
         </style>
 </head>
 
-<body>
+<body id="oga">
 
-   <!-- preloader -->
-   <div id="preloader">
-      <div class="preloader">
-         <span></span>
-         <span></span>
-      </div>
-   </div>
-   <!-- preloader end  -->
-
-   <!-- back-to-top-start  -->
    <button class="scroll-top scroll-to-target" data-target="html">
       <i class="far fa-angle-double-up"></i>
    </button>
@@ -452,7 +443,8 @@
                            </div>
                         </div>
                      </article>
-                     <div class="postbox__comment mb-65">
+                     {% block gee %}
+                     <div class="postbox__comment mb-65" id ="gee">
                         <h3 class="postbox__comment-title">{{number}} Answers</h3>
                         <ul>
                            {% for comment in comm %}
@@ -469,23 +461,23 @@
                                        
                                     </div>
                                     <p> {{comment.comment}}.</p>
-                                    {% for message in messages%}
-
-                                       <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert" style="width:auto">
-                                          <strong> {{message}}</strong>
-                                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                       </div>
-                                       {%endfor%}
-                                    <form action ="{% url 'like' %}" method='post' >
-                                        {% comment %} hx-get="view-url/" hx-trigger="load" hx-target="#htmxCanvas"> {% endcomment %}
-                                       
-                                       {% csrf_token %}
-                                       <input type="text" name="blogo" value={{blog.slug}} hidden>
-                                       
-                                       <input type = "text" name="title" value = {{blog.title}} hidden>
-                                       <input type="text" name="usa" value={{blog.username}} hidden>
-                                       <input type="text" name="blogger" value={{comment.id}} hidden >
-                                       {% comment %} <input type="hidden" name="reply_id" value="{{ reply.id }}"> {% endcomment %}
+                                    {% for message in messages %}
+                        
+                                    <div class="container-flui p-0">
+                                    <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+                                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                       <span aria-hidden="True">&times;</span>
+                                       </button>
+                                       {{ message }}
+                                    </div>
+                                    </div>
+                                    {% endfor %}
+                                    
+                                    <form hx-get="{% url 'like' blog.slug %}" hx-target="body" hx-swap="innerHTML" hx-trigger="click">                             
+                                       <input type="hidden" name="blogo" value="{{blog.slug}}">
+                                       <input type="hidden" name="title" value="{{blog.title}}">
+                                       <input type="hidden" name="usa" value="{{blog.username}}">
+                                       <input type="hidden" name="blogger" value="{{comment.id}}">
                                        <button type="submit" class="btn btn-primary">
                                            {% if request.user in comment.liker.all %}
                                                Downvote
@@ -493,12 +485,10 @@
                                                Upvote
                                            {% endif %}
                                        </button>
-                                           
-                                       </form>
-                              
+                                   </form>
                                     
                                        <br>
-                                       <h5> number of vote(s) {{comment.liker.count}} </h5>
+                                       <div id="vote-count-{{ comment.id }}">Number of votes: {{ comment.liker.count }}</div>
                                     
                                  </div>
                               </div>
@@ -506,10 +496,11 @@
                            
                         </ul>
                      </div>
+                     {%endblock%}
                     
                      <div class="postbox__comment-form">
                         <h3 class="postbox__comment-form-title">Leave an Answer</h3>
-                        <form  method="post"  class="comment-form">
+                        <form  method="post"  hx-post = "{% url 'view' blog.slug %}" hx-trigger="click" hx-target= "body" class="comment-form">
                            {% csrf_token %}
                            <div class="row">
                             {% csrf_token %}
@@ -593,13 +584,17 @@
 
    </main>
    {%else%} 
-   {% for message in messages%}
-
-   <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert" style="width:auto">
-      <strong> {{message}}</strong>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-   </div>
-   {%endfor%}
+                                    {% for message in messages %}
+                        
+                                    <div class="container-flui p-0">
+                                    <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+                                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                       <span aria-hidden="True">&times;</span>
+                                       </button>
+                                       {{ message }}
+                                    </div>
+                                    </div>
+                                    {% endfor %}
       <div> <h2> Log in to see question and reply </h2></div>
       {%endif%}
 
@@ -626,7 +621,13 @@
                               <a href="{% url 'index' %}"><img src="{% static 'assets/img/logo/logo1.jpg' %}" style="height:100px" alt=""></a>
                            </div>
                            <div class="copyright-area">
-                              <p class="copyright-text" style="color:white">© <script>document.write(/\d{4}/.exec(Date())[0])</script>,  <span
+                              <p class="copyright-text"  style="color:white">© 
+                                 <span id = "today">
+                                 <py-script>
+                                 import datetime as dt
+                  
+                                 pyscript.write('today', dt.date.today().strftime('%Y'))
+                                     </py-script></span>,  <span
                                       class="fas fa-star"></span> by <strong>Gabriel</strong>.</p>
                           </div>
                         </div>
@@ -654,7 +655,7 @@
       </footer>
 
    <!-- JS here -->
-   <script src="{% static 'assets/js/jquery.js' %}"></script>
+   {% comment %} <script src="{% static 'assets/js/jquery.js' %}"></script> {% endcomment %}
    <script src="{% static 'assets/js/waypoints.js' %}"></script>
    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
    <script src="{% static 'assets/js/swiper-bundle.js' %}"></script>
@@ -667,7 +668,40 @@
    <script src="{% static 'assets/js/isotope-pkgd.js' %}"></script>
    <script src="{% static 'assets/js/imagesloaded-pkgd.js' %}"></script>
    <script src="{% static 'assets/js/ajax-form.js' %}"></script>
-   <script src="{% static 'assets/js/main.js' %}"></script>
+   {% comment %} <script src="{% static 'assets/js/main.js' %}"></script> {% endcomment %}
+   <script src="https://unpkg.com/htmx.org@1.9.2" integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h" crossorigin="anonymous"></script>
+   
+   <script>
+      $(document).ready(function() {
+          // messages timeout for 10 sec 
+          setTimeout(function() {
+              $('.container-flui').fadeOut('slow');
+          }, 10000); // <-- time in milliseconds, 1000 =  1 sec
+  
+          // delete message
+          $('.del-msg').live('click',function(){
+              $('.del-msg').parent().attr('style', 'display:none;');
+          })
+      });
+  </script>
+  <script>
+   document.getElementById("vote-form-{{comment.id}}").addEventListener("submit", function(event) {
+       event.preventDefault(); // prevent default form submission behavior
+
+       // send AJAX request to server
+       var xhr = new XMLHttpRequest();
+       xhr.open(this.method, this.action);
+       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+       xhr.onload = function() {
+           if (xhr.status === 200) {
+               // update vote count on the page
+               var voteCountElement = document.querySelector("#gee li:nth-child({{ forloop.counter }}) .postbox__comment-text h5");
+               voteCountElement.textContent = "number of vote(s) " + xhr.response;
+           }
+       };
+       xhr.send(new FormData(this));
+   });
+</script>
 
 
 

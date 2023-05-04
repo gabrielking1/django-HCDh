@@ -11,8 +11,8 @@ urlpatterns = [
     path('view/<slug:slug>', views.view, name = 'view'),
     path('tag/<slug:slug>', views.tag, name = 'tag'),
     path('category/<slug:slug>', views.category, name = 'category'),
-    # path('like/<slug:slug>', views.like, name = 'like'),
-    path('like/', views.like, name = 'like'),
+    path('like/<slug:slug>', views.like, name = 'like'),
+    # path('like/', views.like, name = 'like'),
     path('profile/<str:username>', views.profile, name = 'profile'),
     path('login/',views.login, name='login'),
     path('logout/', views.logout, name='logout'),
@@ -30,7 +30,8 @@ urlpatterns = [
     path('updateprofile/<str:username>', views.updateprofile,name='updateprofile'),
     path('read/', views.read, name = 'read'),
     path('blog/<slug:slug>/like/', views.like_blog, name='like-blog'),
-    path('changepassword/',views.changepassword, name='chnagepassword')
+    path('changepassword/',views.changepassword, name='chnagepassword'),
+    path('verification/', include('verify_email.urls')),	
     
 ]
 

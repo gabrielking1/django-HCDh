@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django_countries',
     'axes',
     'django_htmx',
+    'verify_email.apps.VerifyEmailConfig',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [
@@ -94,9 +95,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': "railway",
         'USER': "postgres",
-        'PASSWORD': "flNaTkqjAhYb7ejxMkIh",
-        'HOST': "containers-us-west-82.railway.app",
-        'PORT': "5751",
+        'PASSWORD': "boXh5HOHpA4huEwEpi0J",
+        'HOST': "containers-us-west-86.railway.app",
+        'PORT': "7373",
     }
 }
 
@@ -104,6 +105,17 @@ DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
 #         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME':'Community',
+#         'USER':'postgres',
+#         'PASSWORD':'Gabriel100%',
+#         # 'HOST':'localhost',
+#         'PORT': '5432',
 #     }
 # }
 
@@ -145,10 +157,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
-\
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -174,6 +187,21 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = False
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'solomonmyjoy@gmail.com'
+EMAIL_HOST_PASSWORD = 'hkjcczeuokynqbil'
+
+DEFAULT_FROM_EMAIL = 'noreply<no_reply@face.com>'
+
+
+LOGIN_URL = "login"
 
 # AXES_USE_USER_AGENT = True (both user and ip)
 

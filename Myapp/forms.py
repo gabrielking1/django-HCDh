@@ -37,6 +37,7 @@ class conForm(forms.ModelForm):
         self.fields['username'].widget = forms.HiddenInput()
         # self.slug = slugify(self.fields)
         self.fields['views'].widget = forms.HiddenInput()
+        self.fields['likes'].widget = forms.HiddenInput()
         self.fields['category'].empty_label = "select category"
         
 class QForm(forms.ModelForm):

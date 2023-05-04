@@ -11,6 +11,9 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
     list_display = ('username', 'title',)
+    readonly_fields = (
+        'username','title','body'
+    )
     # prepopulated_fields = {'slug': ('title',)}
 
 @admin.register(Tag)
@@ -19,8 +22,11 @@ class TagAdmin(admin.ModelAdmin):
     # prepopulated_fields = {'slug': ('tag',)}
 
 @admin.register(Question)
-class BlogAdmin(admin.ModelAdmin):
+class QuestionAdmin(admin.ModelAdmin):
     list_display = ('username', 'title',)
+    readonly_fields = (
+        'username','title','body','tag',
+    )
     # prepopulated_fields = {'slug': ('title',)}
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):

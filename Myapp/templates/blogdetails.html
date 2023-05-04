@@ -30,6 +30,11 @@
    <link rel="stylesheet" href="/static/assets/css/spacing.css">
    <link rel="stylesheet" href="/static/assets/css/style.css">
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons" media="all">
+  
+   
+   {% comment %} <link rel="stylesheet" href="/static\pyscript-main\examples\assets\css\main.css" /> {% endcomment %}
+  
+    <script src="\static\pyscript-main\pyscriptjs\py.js"></script>
    <script src="{% static 'assets/js/htmx.min.js' %}"></script>
     <style>
         .wrapper {
@@ -148,13 +153,6 @@
 
 <body>
 
-   <!-- preloader -->
-   <div id="preloader">
-      <div class="preloader">
-         <span></span>
-         <span></span>
-      </div>
-   </div>
    <!-- preloader end  -->
 
    <!-- back-to-top-start  -->
@@ -488,7 +486,7 @@
                      </div>
                      <div class="postbox__comment-form">
                         <h3 class="postbox__comment-form-title">Leave a Comment</h3>
-                        <form action="#" method="post" id="commentform" class="comment-form" novalidate="" >
+                        <form hx-post="{% url 'blog' blog.slug %}" method="post" id="commentform" class="comment-form" novalidate="" hx-target="body">
                            {% csrf_token %}
                            <div class="row">
                               <div class="col-xxl-6 col-xl-6 col-lg-6">
@@ -610,7 +608,13 @@
                               <a href="{% url 'index' %}"><img src="{% static 'assets/img/logo/logo1.jpg' %}" style="height:100px" alt=""></a>
                            </div>
                            <div class="copyright-area">
-                              <p class="copyright-text" style="color:white">© <script>document.write(/\d{4}/.exec(Date())[0])</script>,  <span
+                              <p class="copyright-text"  style="color:white">© 
+                                 <span id = "today">
+                                 <py-script>
+                                 import datetime as dt
+                  
+                                 pyscript.write('today', dt.date.today().strftime('%Y'))
+                                     </py-script></span>,  <span
                                       class="fas fa-star"></span> by <strong>Gabriel</strong>.</p>
                           </div>
                         </div>
@@ -652,6 +656,8 @@
    <script src="{% static 'assets/js/imagesloaded-pkgd.js' %}"></script>
    <script src="{% static 'assets/js/ajax-form.js' %}"></script>
    <script src="{% static 'assets/js/main.js' %}"></script>
+   <script src="https://unpkg.com/htmx.org@1.9.2" integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h" crossorigin="anonymous"></script>
+
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <script>
       $(document).ready(function() {

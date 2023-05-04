@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+admin.site.site_header = 'FPE Coding Community'
+admin.site.site_title = 'Fpecc-admin'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('Myapp.urls'))
+    path('Fpecc-admin/', admin.site.urls),
+    path('', include('Myapp.urls')),
+    path('verification/', include('verify_email.urls')),	
 ]
