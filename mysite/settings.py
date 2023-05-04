@@ -90,16 +90,16 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': "railway",
-        'USER': "postgres",
-        'PASSWORD': "boXh5HOHpA4huEwEpi0J",
-        'HOST': "containers-us-west-86.railway.app",
-        'PORT': "7373",
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': "railway",
+#         'USER': "postgres",
+#         'PASSWORD': "boXh5HOHpA4huEwEpi0J",
+#         'HOST': "containers-us-west-86.railway.app",
+#         'PORT': "7373",
+#     }
+# }
 
 # DATABASES = {
 #     'default': {
@@ -108,16 +108,16 @@ DATABASES = {
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME':'Community',
-#         'USER':'postgres',
-#         'PASSWORD':'Gabriel100%',
-#         # 'HOST':'localhost',
-#         'PORT': '5432',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':'Community',
+        'USER':'postgres',
+        'PASSWORD':'Gabriel100%',
+        # 'HOST':'localhost',
+        'PORT': '5432',
+    }
+}
 
 
 
@@ -159,17 +159,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-   
-    
-]
-    
-# Media Folder Settings
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 
 
