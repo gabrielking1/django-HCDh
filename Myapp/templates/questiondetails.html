@@ -271,7 +271,7 @@
                <div class="col-xl-3 col-lg-3 col-md-6 col-5">
                   <div class="tp-header__right-two d-flex align-items-center justify-content-end">
                     {%if request.user.is_active and request.user.is_authenticated%}
-                    <a class="tp-btn-blue-square d-none d-md-block" href="/profile/{{user.username}}"><span>Profile</span></a>
+                    <a class="tp-btn-blue-square d-none d-md-block" href="/profile/{{request.user.username}}"><span>Profile</span></a>
                     <a class="tp-header__bars tp-menu-bar d-lg-none" href="/logout/" ><span>Bye </span></a>
                     {%else%}
                     <a class="tp-header__bars tp-menu-bar d-lg-none" href="/login/">
