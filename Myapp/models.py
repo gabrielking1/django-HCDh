@@ -67,7 +67,7 @@ class Question(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100) 
     screenshot = models.ImageField(blank=True, default='/blogs/q.png',upload_to='question/') 
-    body =  models.TextField(max_length=5000)
+    body =  models.TextField(max_length=100000)
     slug = AutoSlugField(populate_from = 'title', unique=True, max_length=100)
     tag = models.ForeignKey(Tag,on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now=True)
