@@ -30,8 +30,8 @@ ALLOWED_HOSTS = ["*"]
 
 # FORM SUBMISSION
 # Comment out the following line and place your railway URL, and your production URL in the array.
-CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:8000","https://django-server-production-c4c2.up.railway.app",
-                        "https://www.django-server-production-c4c2.up.railway.app"]
+CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:8000","https://django-hcdh-production.up.railway.app",
+                        "https://django-hcdh-production.up.railway.app"]
 
 # Application definition
 
@@ -174,7 +174,7 @@ CACHES = {
     'default': {
         'BACKEND':'django.core.cache.backends.redis.RedisCache',
         'LOCATION':[ '127.0.0.1:8000',
-        'https://django-server-production-c4c2.up.railway.app'
+        'https://django-hcdh-production.up.railway.app'
         ]
      }
 }
