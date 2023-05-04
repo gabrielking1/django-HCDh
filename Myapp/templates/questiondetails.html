@@ -473,7 +473,7 @@
                                     </div>
                                     {% endfor %}
                                     
-                                    <form hx-get="{% url 'like' blog.slug %}" hx-target="body" hx-swap="innerHTML" hx-trigger="click">                             
+                                    <form hx-get="{% url 'like' blog.slug %}" hx-target="body" hx-swap="innerHTML" >                             
                                        <input type="hidden" name="blogo" value="{{blog.slug}}">
                                        <input type="hidden" name="title" value="{{blog.title}}">
                                        <input type="hidden" name="usa" value="{{blog.username}}">
