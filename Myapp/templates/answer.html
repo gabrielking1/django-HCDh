@@ -422,8 +422,8 @@
                <h3 class="sidebar__widget-title">Search Here</h3>
                <div class="sidebar__widget-content">
                   <div class="sidebar__search">
-                     <form style="width:auto">
-                        <div class="sidebar__search-input-2" >
+                     <form hx-get ="{% url 'anwser' %}" hx-target = "body">
+                        <div class="sidebar__search-input-2">
                            <input type="text" placeholder="Search your keyword..." name="search">
                            <button type="submit"><i class="far fa-search"></i></button>
                         </div>
@@ -552,6 +552,8 @@
    <script src="{% static 'assets/js/imagesloaded-pkgd.js' %}"></script>
    <script src="{% static 'assets/js/ajax-form.js' %}"></script>
    <script src="{% static 'assets/js/main.js' %}"></script>
+   <script src="https://unpkg.com/htmx.org@1.9.2" integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h" crossorigin="anonymous"></script>
+
 
 
 
