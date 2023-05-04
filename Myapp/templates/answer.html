@@ -29,6 +29,7 @@
    <link rel="stylesheet" href="/static/assets/css/magnific-popup.css">
    <link rel="stylesheet" href="/static/assets/css/spacing.css">
    <link rel="stylesheet" href="/static/assets/css/style.css">
+   <script src="\static\pyscript-main\pyscriptjs\py.js"></script>
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons" media="all">
     <style>
         .wrapper {
@@ -148,12 +149,7 @@
 <body>
 
    <!-- preloader -->
-   <div id="preloader">
-      <div class="preloader">
-         <span></span>
-         <span></span>
-      </div>
-   </div>
+   
    <!-- preloader end  -->
 
    <!-- back-to-top-start  -->
@@ -422,7 +418,7 @@
                <h3 class="sidebar__widget-title">Search Here</h3>
                <div class="sidebar__widget-content">
                   <div class="sidebar__search">
-                     <form hx-get ="{% url 'anwser' %}" hx-target = "body">
+                     <form hx-get ="{% url 'answer' %}" hx-target = "body">
                         <div class="sidebar__search-input-2">
                            <input type="text" placeholder="Search your keyword..." name="search">
                            <button type="submit"><i class="far fa-search"></i></button>
@@ -510,7 +506,13 @@
                            <a href="{% url 'index' %}"><img src="{% static 'assets/img/logo/logo1.jpg' %}" style="height:100px" alt=""></a>
                         </div>
                         <div class="copyright-area">
-                           <p class="copyright-text" style="color:white">© <script>document.write(/\d{4}/.exec(Date())[0])</script>,  <span
+                           <p class="copyright-text"  style="color:white">© 
+                              <span id = "today">
+                              <py-script>
+                              import datetime as dt
+               
+                              pyscript.write('today', dt.date.today().strftime('%Y'))
+                                  </py-script></span>,  <span
                                    class="fas fa-star"></span> by <strong>Gabriel</strong>.</p>
                        </div>
                      </div>

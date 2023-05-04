@@ -29,6 +29,7 @@
    <link rel="stylesheet" href="/static/assets/css/magnific-popup.css">
    <link rel="stylesheet" href="/static/assets/css/spacing.css">
    <link rel="stylesheet" href="/static/assets/css/style.css">
+   <script src="\static\pyscript-main\pyscriptjs\py.js"></script>
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons" media="all">
     <style>
         .wrapper {
@@ -510,7 +511,13 @@
                            <a href="{% url 'index' %}"><img src="{% static 'assets/img/logo/logo1.jpg' %}" style="height:100px" alt=""></a>
                         </div>
                         <div class="copyright-area">
-                           <p class="copyright-text" style="color:white">© <script>document.write(/\d{4}/.exec(Date())[0])</script>,  <span
+                           <p class="copyright-text"  style="color:white">© 
+                              <span id = "today">
+                              <py-script>
+                              import datetime as dt
+               
+                              pyscript.write('today', dt.date.today().strftime('%Y'))
+                                  </py-script></span>,  <span
                                    class="fas fa-star"></span> by <strong>Gabriel</strong>.</p>
                        </div>
                      </div>
