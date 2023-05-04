@@ -473,7 +473,7 @@
                                     </div>
                                     {% endfor %}
                                     
-                                    <form hx-get="{% url 'like' blog.slug %}" hx-target="body" hx-swap="innerHTML" >                             
+                                    <form hx-get="{% url 'like' blog.slug %}" hx-target="body" hx-swap="innerHTML" hx-trigger="click">                             
                                        <input type="hidden" name="blogo" value="{{blog.slug}}">
                                        <input type="hidden" name="title" value="{{blog.title}}">
                                        <input type="hidden" name="usa" value="{{blog.username}}">
@@ -500,7 +500,7 @@
                     
                      <div class="postbox__comment-form">
                         <h3 class="postbox__comment-form-title">Leave an Answer</h3>
-                        <form  method="post"  hx-post = "{% url 'view' blog.slug %}" hx-trigger="click" hx-target= "body" class="comment-form">
+                        <form  method="post"  hx-post = "{% url 'view' blog.slug %}"  hx-target= "body" class="comment-form">
                            {% csrf_token %}
                            <div class="row">
                             {% csrf_token %}
