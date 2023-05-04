@@ -188,15 +188,40 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp-mail.outlook.com'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'solomonmyjoy@gmail.com' # for gmail
+# EMAIL_HOST_PASSWORD = 'hkjcczeuokynqbil' # for gmail password
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_USE_TLS = False
+# # EMAIL_PORT = 465
+# EMAIL_PORT = 587
+# EMAIL_USE_SSL = True
+# EMAIL_HOST_USER = 'solomonmyjoy@gmail.com'
+# EMAIL_HOST_PASSWORD = 'hkjcczeuokynqbil'
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = False
-EMAIL_PORT = 465
-EMAIL_USE_SSL = True
-EMAIL_HOST_USER = 'solomonmyjoy@gmail.com'
-EMAIL_HOST_PASSWORD = 'hkjcczeuokynqbil'
+# EMAIL_HOST_USER = os.environ.get('prince21128@hotmail.com') # for outlook 
+
+# EMAIL_HOST_PASSWORD = os.environ.get('tdjfejelhuntddyw') # for outlook password
+# DEFAULT_FROM_EMAIL = 'noreply<princegeestar@gmail.com>'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp-mail.outlook.com'
+# EMAIL_USE_TLS = True
+# EMAIL_PORT = 465
+# # EMAIL_PORT = 587
+# # EMAIL_USE_SSL = True
+# EMAIL_HOST_USER = 'prince21128@hotmail.com'
+# EMAIL_HOST_PASSWORD = 'tdjfejelhuntddyw'
 
 DEFAULT_FROM_EMAIL = 'noreply<no_reply@face.com>'
 

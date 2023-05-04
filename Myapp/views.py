@@ -49,13 +49,13 @@ class ProfileView(SessionWizardView):
             user_form.save()
             userr = User.objects.get(username__icontains=username)
             profile = form_list[1].save(commit=False)
-            inactive_user = send_verification_email(self.request, user_form)
+            # inactive_user = send_verification_email(self.request, user_form)
         
             profile.username =  userr
             profile.save()
         
 
-            messages.info(self.request, " please check your email to verify your account")
+            messages.info(self.request, " account created successfully ")
             return redirect('login')
         
         else:
