@@ -26,7 +26,7 @@ from django.core.files.storage import FileSystemStorage
 from django.contrib.auth import update_session_auth_hash
 import os
 from django_htmx.http import HttpResponseClientRedirect
-from render_block import render_block_to_string
+
 from django.core.mail import send_mail, BadHeaderError
 from verify_email.email_handler import send_verification_email
 
