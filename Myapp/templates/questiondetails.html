@@ -144,6 +144,37 @@
             62.0% { transform: rotate(1deg);opacity:1; }
             70.0% { transform: rotate(0deg);opacity:1; }
           }
+
+          alert {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid transparent;
+            border-radius: 0.25rem;
+        }
+        
+        .alert-success {
+            color: white;
+            background-color: #4CAF50 ;
+            border-color: #c3e6cb;
+        }
+        
+        .alert-info {
+            color: white;
+            background-color: #ff9800;
+            border-color: #bee5eb;
+        }
+        
+        .alert-warning {
+            color: black;
+            background-color: #fff3cd;
+            border-color: #ffeeba;
+        }
+        
+        .alert-danger {
+            color: white;
+            background-color: #f44336;
+            border-color: #f5c6cb;
+        }
         </style>
 </head>
 
@@ -308,7 +339,7 @@
             {%for note in notify reversed%}
             {%if note.isread == "Unread" %}
             <li><b></b>                                     
-                <form action="{% url 'read' %}?next={{ request.path }}" class="form-inline" method="post" >
+                <form hx-post="{% url 'read' %}?next={{ request.path }}" class="form-inline" method="post" hx-trigger = "click" hx-target = "body">
                     {% csrf_token %}
                     <a href='{{note.notify}}{{note.ids}}'>{{note.user}} {{note.topic}} </a> 
                   <input type = "text" value = "{{note.id}}" name="like"  hidden>

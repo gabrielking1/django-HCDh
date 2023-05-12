@@ -29,6 +29,39 @@
    <link rel="stylesheet" href="/static/assets/css/magnific-popup.css">
    <link rel="stylesheet" href="/static/assets/css/spacing.css">
    <link rel="stylesheet" href="/static/assets/css/style.css">
+
+   <style>
+      alert {
+         padding: 1rem;
+         margin-bottom: 1rem;
+         border: 1px solid transparent;
+         border-radius: 0.25rem;
+     }
+     
+     .alert-success {
+         color: white;
+         background-color: #4CAF50 ;
+         border-color: #c3e6cb;
+     }
+     
+     .alert-info {
+         color: white;
+         background-color: #ff9800;
+         border-color: #bee5eb;
+     }
+     
+     .alert-warning {
+         color: black;
+         background-color: #fff3cd;
+         border-color: #ffeeba;
+     }
+     
+     .alert-danger {
+         color: white;
+         background-color: #f44336;
+         border-color: #f5c6cb;
+     }
+   </style>
    
 </head>
 
@@ -403,6 +436,19 @@
    <script src="{% static 'assets/js/main.js' %}"></script>
 
    
+ <script>
+   $(document).ready(function() {
+       // messages timeout for 10 sec 
+       setTimeout(function() {
+           $('.alert').fadeOut('slow');
+       }, 5000); // <-- time in milliseconds, 1000 =  1 sec
+
+       // delete message
+       $('.del-msg').live('click',function(){
+           $('.del-msg').parent().attr('style', 'display:none;');
+       })
+   });
+</script>
 	
 
 
