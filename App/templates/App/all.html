@@ -1,0 +1,27 @@
+{% for message in messages%}
+<h1> {{message}} </h1>
+{%endfor%}
+{% for users in users %}
+{% if users.username.username == request.user.username%}
+
+<h1> welcome {{users.username}} {{users.username_id}}
+{%else%}
+<ul>
+    <li> 
+        {{users.username}}
+        
+        {{users.username_id}}
+
+    <form action="/App/add/"  method="post" >
+        {% csrf_token %}
+  <input type = "text" value = "{{users.username_id}}" name="recipient" hidden>
+  <input type = "text" value = "{{request.user.id}}" name="sender" hidden>
+
+
+  <button type="submit" class = "btn btn-primary">
+    send friend request</button>
+</form>
+</li>
+</ul>
+{%endif%}
+{%endfor%}

@@ -1,0 +1,53 @@
+<div class="row ab-info-space">
+    <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 mb-40 wow tpfadeUp" data-wow-duration=".7s" data-wow-delay=".7s">
+       <div id="about-me" class="amaboutinfo">
+          <div class="amaboutinfo__client-info">
+             <h2>{{profile.username.first_name}} {{profile.username.last_name}}</h2>
+             
+             <h5 style="color:black">{{profile.bio}}</h5>
+             <h5> Followers : {{profile.follower.all.count}}</h5>
+             <h5> Following : {{following}}
+          </div>
+       </div>
+    </div>
+    <div class="col-xl-6 col-lg-5 col-md-4 col-sm-12 mb-40 d-flex justify-content-start justify-content-md-center wow tpfadeUp" data-wow-duration=".7s" data-wow-delay=".9s">
+       <div class="amaboutinfo">
+          <div class="amaboutinfo__experience">
+             <p><b>State:</b> {{profile.state}}</p>
+             
+             <p><a href="mailto:{{profile.username.email}}"><b>E-mail:</b> {{profile.username.email}}</a></p>
+             <p><a href="#"><b>Phone :</b> {{profile.phone}}</a></p> 
+             <p><a href="#"><b>Status :</b> {{profile.option}}</a></p>  
+          </div>
+       </div>
+    </div>
+    <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 mb-40 wow tpfadeUp" data-wow-duration=".7s" data-wow-delay="1s">
+       <div class="amaboutsocial text-start text-md-end">
+          <nav id="navbar-example2" class="navbar navbar-light bg-light">
+
+             <ul class="nav nav-pills">
+            
+                {% if profile.username.username == request.user.username %}
+                <li class="nav-item">
+                    <button class="btn btn-primary" onclick="document.getElementById('id00').style.display='block'" style="width:auto;">Edit Profile</button>
+                </li>
+            {% else %}
+                <form hx-post="{% url 'follower' profile.username %}" hx-trigger = "click" hx-target ="body" >
+                    {% csrf_token %}
+                    <input type="hidden" name="owner" value="{{ profile.username }}">
+                    <input type="hidden" name="followers" value="{{ request.user }}">
+                    <button type="submit" class="btn btn-primary">
+                        {% if request.user in profile.follower.all %}
+                            Following
+                        {% else %}
+                            Follow
+                        {% endif %}
+                    </button>
+                </form>
+            {% endif %}
+             </ul>
+           </nav>
+          
+       </div>
+    </div>
+ </div>

@@ -1,0 +1,52 @@
+
+  <h1>Friend Requests</h1>
+
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <h2 style="color:blue">{{ message }}</h2>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+  {% for request in profiles %}
+    <div class="friend-request">
+      
+      {% if  request.sender in profile.friends.all%}
+    
+      {%else%}
+      <p>From: {{ request.sender.username }}</p>
+      <form method="POST" action="{% url 'App:accept' profile.username %}">
+        {% csrf_token %}
+        <input type="hidden" name="sender" value="{{ request.sender.id }}">
+        <input type="hidden" name="send" value="{{ request.sender.username }}">
+        <button type="submit">Accept</button>
+      </form>
+      {%endif%}
+    </div>
+  {% empty %}
+    <p>No friend requests.</p>
+  {% endfor %}
+
+  <h2>Friends</h2>
+
+  {% if profile.friends.exists %}
+    <ul>
+      {% for friend in profile.friends.all %}
+        <li>{{ friend.username }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No friends yet.</p>
+  {% endif %}
+{% comment %} 
+  {%elif last.receiver.username == request.user.username and last.sender.username == friend.profiles.username.username%}
+                                                      {{last.timer|time:"H:i:A" }} p
+
+                                                      {% for online_user in online_users %}
+                                                        <p>{%if friend.profiles.username.username == online_user.user.username %} online 
+                                                            {%else%}offline
+                                                            {%endif%}</p>
+                                                    {% endfor %} {% endcomment %}
+
+  

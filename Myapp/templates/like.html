@@ -1,0 +1,59 @@
+<div class="postbox__comment mb-65" id ="gee">
+    <h3 class="postbox__comment-title">{{number}} Answers</h3>
+    <ul>
+       {% for comment in comm %}
+       <li>
+          <div class="postbox__comment-box d-flex">
+             <div class="postbox__comment-info ">
+                <div class="postbox__comment-avater mr-20">
+                   <img src="{{comment.username.profile.avatar.url}}" alt="">
+                </div>  
+             </div>
+             <div class="postbox__comment-text">
+                <div class="postbox__comment-name">
+                   <h5>{{comment.username}}</h5>
+                   
+                </div>
+                <p> {{comment.comment}}.</p>
+                {% for message in messages %}
+    
+                <div class="container-flui p-0">
+                <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                   <span aria-hidden="True">&times;</span>
+                   </button>
+                   {{ message }}
+                </div>
+                </div>
+                {% endfor %}
+                
+                <form hx-post ="{% url 'like' %}" method='post'  hx-trigger="click" hx-target= "#gee" >
+                    {% comment %} hx-get="view-url/" hx-trigger="load" hx-target="#htmxCanvas"> {% endcomment %}
+                   
+                   {% csrf_token %}
+                   <input type="text" name="blogo" value={{blog.slug}} hidden>
+                   
+                   <input type = "text" name="title" value = {{blog.title}} hidden>
+                   <input type="text" name="usa" value={{blog.username}} hidden>
+                   <input type="text" name="blogger" value={{comment.id}} hidden >
+                   {% comment %} <input type="hidden" name="reply_id" value="{{ reply.id }}"> {% endcomment %}
+                   <button type="submit" class="btn btn-primary">
+                       {% if request.user in comment.liker.all %}
+                           Downvote
+                       {% else %}
+                           Upvote
+                       {% endif %}
+                   </button>
+                       
+                   </form>
+          
+                
+                   <br>
+                   <h5> number of vote(s) {{comment.liker.count}} </h5>
+                
+             </div>
+          </div>
+       </li>{%endfor%}
+       
+    </ul>
+ </div>

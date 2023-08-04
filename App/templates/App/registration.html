@@ -1,0 +1,143 @@
+
+{% load static%}
+{% load crispy_forms_tags %}
+{% load i18n %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabriel Portfolio </title>
+
+    <link rel="icon" type="image/x-icon" href="/static/assets/images/logom.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://unpkg.com/htmx.org@1.9.2" integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h" crossorigin="anonymous"></script>
+
+    <script  src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <title>Gabriel Portfolio </title>
+    <style>
+      body {
+        font: 18px/1.5 "Open Sans", sans-serif;
+        background:color: #999999;
+        color: var(--white);
+        margin: 1.5rem 0;
+      }
+      
+        .alert {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid transparent;
+            border-radius: 0.25rem;
+        }
+        
+        .alert-success {
+            color: white;
+            background-color: #4CAF50 ;
+            border-color: #c3e6cb;
+        }
+        
+        .alert-info {
+            color: white;
+            background-color: #ff9800;
+            border-color: #bee5eb;
+        }
+        
+        .alert-warning {
+            color: black;
+            background-color: #fff3cd;
+            border-color: #ffeeba;
+        }
+        
+        .alert-danger {
+            color: white;
+            background-color: #f44336;
+            border-color: #f5c6cb;
+        }
+   
+    </style>
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+  </head>
+  <body>
+    <main class="drake-main">
+      <div id="smooth-wrapper">
+          <div id="smooth-content">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div >
+                  <h1 class="mt-2">Get in touch!</h1>
+                  <hr class="mt-0 mb-4">
+                  {% block content %}
+                  <div class="container">
+                    {% for message in messages %}
+                                
+                                            <div class="container-flui p-0">
+                                            <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+                                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                              <span aria-hidden="True">&times;</span>
+                                              </button>
+                                              {{ message }}
+                                            </div>
+                                            </div>
+                                            {% endfor %}
+                    
+                      {% block head %}
+                              {{ wizard.form.media }}
+                              {% endblock %}
+              
+                              
+                              <p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
+                              
+                              <form action="/App/register/"  method="post" enctype="multipart/form-data">
+                                  {% csrf_token %}
+                                <table>
+                              {{ wizard.management_form }}
+                              {% if wizard.form.forms %}
+                                  {{ wizard.form.management_form }}
+                                  {% for form in wizard.form.forms %}
+
+                                      {{ form|crispy }}
+                                  {% endfor %}
+                              {% else %}
+                                  {{ wizard.form|crispy}}
+                              {% endif %}
+                                </table>
+                              {% if wizard.steps.prev %}
+                              <button class="btn btn-secondary" name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% trans "first step" %}</button>
+                              <button class="btn btn-secondary" name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% trans "prev step" %}</button>
+                              {% endif %}
+                              
+                              <div class="tp-login-button">
+                                <input class="tp-btn-blue-square w-100" type="submit" value="{% trans "submit" %}"/>
+                              </div>
+                    
+                    </form>
+                  {% endblock %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
+    {% comment %} <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> {% endcomment %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  
+    <script>
+      $(document).ready(function() {
+          // messages timeout for 10 sec 
+          setTimeout(function() {
+              $('.container-flui').fadeOut('slow');
+          }, 5000); // <-- time in milliseconds, 1000 =  1 sec
+  
+          // delete message
+          $('.del-msg').live('click',function(){
+              $('.del-msg').parent().attr('style', 'display:none;');
+          })
+      });
+  </script> 
+  
+  </body>
+</html> 
