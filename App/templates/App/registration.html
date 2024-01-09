@@ -89,7 +89,8 @@
                               <p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
                               
                               <form action="/App/register/"  method="post" enctype="multipart/form-data">
-                                  {% csrf_token %}
+                                
+                                {% csrf_token %}
                                 <table>
                               {{ wizard.management_form }}
                               {% if wizard.form.forms %}

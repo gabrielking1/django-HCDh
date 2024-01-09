@@ -16,7 +16,7 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.db.models import Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from App.forms import RegForm, UpdateProfileForm, PictureForm, EditForm
+from App.forms import RegForm, UpdateProfileForm, PictureForm, EditForm, TwoEdit, PictureUpdate
 from django.http import HttpResponse
 from formtools.wizard.views import SessionWizardView
 from django.http import HttpResponseRedirect
@@ -38,6 +38,7 @@ from django.utils import timezone
 from django.urls import reverse
 from online_users.models import OnlineUserActivity
 from datetime import datetime, timedelta
+from django.contrib.auth.forms import PasswordChangeForm
 # import datetime
 from django.utils import timezone
 # Create your views here.
@@ -55,14 +56,20 @@ def get_online_users():
 
     return online_users
 
-
+@login_required(login_url='/App/login/')
 def post(request):
+    if request.user:
+        if Profile.objects.filter(username = request.user):
+            messages.error(request, "user not authorized")
+            return redirect('/Myapp/login/')
+        
     return render(request, 'App/post.html')
     # return HttpResponse('<div> i am post {{request.user.username}} </div>')
 
 
 class ProfileView(SessionWizardView):
     file_storage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'social/profilePic/'))
+    # form_list = [RegForm,PictureUpdate,UpdateProfileForm] for as many as possible steps 
     form_list = [RegForm,UpdateProfileForm]
     template_name = 'App/registration.html'
     # Do something with the cleaned_data, then redirect
@@ -145,8 +152,11 @@ def login(request):
         return render(request, 'App/login.html', {'form':form})
 
 
-
+@login_required(login_url='/App/login/')
 def picture(request):
+    if Profile.objects.filter(username = request.user):
+        messages.error(request, "you are not authorized")
+        return redirect("/Myapp/login")
     if request.method == 'POST':
         form = PictureForm(request.POST, request.FILES, request=request)
         if form.is_valid():
@@ -172,14 +182,23 @@ def picture(request):
         form = PictureForm(request=request)
     return render(request, 'App/picupload.html', {'form': form})
 
-
+@login_required(login_url='/App/login/')
 def all(request):
+    if Profile.objects.filter(username = request.user):
+        messages.error(request, "you are not authorized")
+        return redirect("/Myapp/login")
+    
     users = Profiles.objects.all()
     
 
     return render(request, 'App/all.html',{'users':users})
 
+@login_required(login_url='/App/login/')
 def add(request):
+    if Profile.objects.filter(username = request.user):
+        messages.error(request, "you are not authorized")
+        return redirect("/Myapp/login")
+    
     if request.user.is_active and request.user.is_authenticated:
     
         friend = FriendRequest()
@@ -210,8 +229,12 @@ def add(request):
     else:
         return redirect('/App/login/')        
 
-
+@login_required(login_url='/App/login/')
 def accept(request,username):
+    if Profile.objects.filter(username = request.user):
+        messages.error(request, "you are not authorized")
+        return redirect("/Myapp/login")
+    
     if request.user.is_active and request.user.is_authenticated:
     
         use = get_object_or_404(User, username=username)
@@ -247,6 +270,11 @@ def accept(request,username):
 
 @login_required(login_url='/App/login/')
 def chats(request):
+    if Profile.objects.filter(username = request.user):
+        messages.error(request, "you are not authorized")
+        return redirect("/Myapp/login")
+    
+    
     users = Profiles.objects.get(username = request.user)
     last_message = Chatt.objects.filter(
         Q(sender=request.user, receiver=users.username) |
@@ -256,6 +284,10 @@ def chats(request):
 
 @login_required(login_url='/App/login/')
 def conversation(request, username):
+    if Profile.objects.filter(username = request.user):
+        messages.error(request, "you are not authorized")
+        return redirect("/Myapp/login")
+    
     users = Profiles.objects.get(username = request.user)
     current = get_object_or_404(User, username=username)
     profile = Profiles.objects.get(username=current)  
@@ -275,18 +307,28 @@ def conversation(request, username):
     # is_friend = users.friends.filter(username=profile.username).exists()
     # print("this is the current user ",is_friend.username)
 
-    pform=EditForm(instance=current)
-
+    pform=EditForm(instance=request.user)
+    eform = TwoEdit(instance=users)
+    picform = PictureUpdate(request.POST, request.FILES, instance=users)
+    form = PasswordChangeForm(request.user)
     if request.method == "POST":
-        pform=EditForm(request.POST,instance=current)
+        pform=EditForm(request.POST,instance=request.user)
+        eform = TwoEdit(request.POST,instance=users)
+        picform = PictureUpdate(request.POST,instance=users)
 
         
-        if pform.is_valid():
+        if pform.is_valid() and eform.is_valid():
             pform.save()
+            eform.save()
             messages.add_message(request,messages.SUCCESS, f'Updated Successfully')
-            return render(request,'App/setting.html',)
+            
+            return redirect(request.META.get('HTTP_REFERER'))
         else:
             pform=EditForm(instance=request.user)
+            eform = TwoEdit(instance=users)
+            picform = PictureUpdate(instance=users)
+            print("something is wrong")
+            # return redirect(request.META.get('HTTP_REFERER'))
             
 
         text = request.POST.get("text")
@@ -314,12 +356,16 @@ def conversation(request, username):
 
     return render(request, 'App/chat-1.html', {'profile': profile, 'history': history, 'phistory': phistory, 'users':users,
             'last':last_message,'online_users': online_users,
-            'online':current_online,'pform':pform
+            'online':current_online,'pform':pform,'eform':eform,'picform':picform,'form':form
             
                                         })
 
 @login_required(login_url='/App/login/')
 def chatting(request, username):
+    if Profile.objects.filter(username = request.user):
+        messages.error(request, "you are not authorized")
+        return redirect("/Myapp/login")
+    
     current = get_object_or_404(User, username=username)
     profile = Profiles.objects.get(username=current)
     chatts = Chatt()
@@ -338,33 +384,112 @@ def chatting(request, username):
 
 @login_required(login_url='/App/login/')
 def dashboard(request):
+    if Profile.objects.filter(username = request.user):
+        messages.error(request, "you are not authorized")
+        return redirect("/Myapp/login")
+    
     userr = User.objects.get(username = request.user)
     
-
+    users = Profiles.objects.get(username = request.user)
     
         
-    if request.method == 'POST':
-        
+    pform=EditForm(instance=request.user)
+    eform = TwoEdit(instance=users)
+
+    if request.method == "POST":
         pform=EditForm(request.POST,instance=request.user)
-      
-        if pform.is_valid():
+        eform = TwoEdit(request.POST,instance=users)
+
+        
+        if pform.is_valid() and eform.is_valid():
             pform.save()
+            eform.save()
             messages.add_message(request,messages.SUCCESS, f'Updated Successfully')
-            return render(request,'App/setting.html',)
+            
+            return redirect(request.META.get('HTTP_REFERER'))
         else:
             pform=EditForm(instance=request.user)
+            eform = TwoEdit(instance=users)
+            print("something is wrong")
        
             context={
-            'form':pform,
+            'pform':pform,
         
             }
-        return render(request, 'App/setting.html',context)
-    return render(request, 'App/setting.html')
+        return redirect(request.META.get('HTTP_REFERER'))
+    
+        
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
+@login_required(login_url='/App/login/')
+def PictureUpdate(request):
+    if Profile.objects.filter(username = request.user):
+        messages.error(request, "you are not authorized")
+        return redirect("/Myapp/login")
+    
+    userr = User.objects.get(username = request.user)
+    
+    users = Profiles.objects.get(username = request.user)
+    
+      
+    picform = PictureUpdate(instance=users)
+
+    if request.method == "POST":
+     
+        picform = PictureUpdate(request.POST,instance=users)
+        if picform.is_valid():
+            picform.save()
+            
+            messages.add_message(request,messages.SUCCESS, f'Updated Successfully')
+            
+            return redirect(request.META.get('HTTP_REFERER'))
+        else:
+            pform=EditForm(instance=request.user)
+            eform = TwoEdit(instance=users)
+            print("something is wrong")
+        
+            context={
+            'picform':picform,
+        
+            }
+        return redirect(request.META.get('HTTP_REFERER'))
+    
+        
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
+
+def change_password(request):
+    if Profile.objects.filter(username = request.user):
+        messages.error(request, "you are not authorized")
+        return redirect("/Myapp/login")
+    
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect(request.META.get('HTTP_REFERER'))
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+        return redirect(request.META.get('HTTP_REFERER'))
+    
+        
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
+
 
 def logout(request):
     auth.logout(request)
     messages.info(request, 'Come back soon')
     return redirect('/App/login/')
+
+
 
 
 

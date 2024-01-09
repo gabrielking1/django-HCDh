@@ -141,21 +141,21 @@
                          </li>
                          <li><a href="#">Pages</a>
                             <ul class="submenu">
-                               <li><a href="/profile/{{user.username}}">Profile</a></li>
-                               <li><a href="/about/">About Us</a></li>
+                               <li><a href="/Myapp/profile/{{user.username}}">Profile</a></li>
+                               <li><a href="/Myapp/about/">About Us</a></li>
                                
                             </ul>
                          </li>
                          <li><a href="#">Content</a>
                             <ul class="submenu">
-                               <li><a href="/create/">Create Content</a></li>
-                               <li><a href="/blogs/">Content Lists</a></li>
+                               <li><a href="/Myapp/create/">Create Content</a></li>
+                               <li><a href="/Myapp/blogs/">Content Lists</a></li>
                             </ul>
                          </li>
                          <li><a href="#">Question</a>
                             <ul class="submenu">
-                               <li><a href="/question/">Ask A Question</a></li>
-                               <li><a href="/answer/">Q & A</a></li>
+                               <li><a href="/Myapp/question/">Ask A Question</a></li>
+                               <li><a href="/Myapp/answer/">Q & A</a></li>
                             </ul>
                          </li>
                          <li><a href="https://wa.me/2347067208917">Contact</a></li>
@@ -185,7 +185,7 @@
                             <ul class="sub-menu">
                                 {%for note in notify reversed%}
                                 {%if note.isread == "Unread" %}
-                                <li><b><a href="/view/{{note.ids}}">{{note.user}} {{note.topic}}</a></b>
+                                <li><b><a href="/Myapp/view/{{note.ids}}">{{note.user}} {{note.topic}}</a></b>
                                     <form action="{% url 'read' %}?next={{ request.path }}" class="form-inline" method="post" >
                                         {% csrf_token %}
                                 <input type = "text" value = "{{note.id}}" name="like" hidden >
@@ -206,7 +206,7 @@
              </div>
              <div class="col-xl-3 col-lg-3 col-md-6 col-5">
                 <div class="tp-header__right-two d-flex align-items-center justify-content-end">
-                   <a class="tp-btn-blue-square d-none d-md-block" href="/register/"><span>Get Started</span></a>
+                   <a class="tp-btn-blue-square d-none d-md-block" href="/Myapp/register/"><span>Get Started</span></a>
                    <a class="tp-header__bars tp-menu-bar d-lg-none" href="#"><i class="far fa-bars"></i></a>
                 </div>
              </div>

@@ -82,6 +82,33 @@ class UpdateProfileForm(forms.ModelForm):
 
 
 
+class PictureUpdate(forms.ModelForm):
+    avatar = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    cover = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    about = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
+    
+  
+    class Meta:
+        model = Profiles
+        fields = fields = {'avatar','about','cover'}
+        # widget = {"country": CountrySelectWidget()}
+
+
+
+class TwoEdit(forms.ModelForm):
+    phone = PhoneNumberField(
+        widget=PhoneNumberInternationalFallbackWidget()
+        
+    )
+    country = CountryField(blank_label='Select country').formfield(widget=CountrySelectWidget(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = Profiles
+        fields = fields = {'country','phone'}
+    
+
+
+
 
 
 # class PictureForm(forms.ModelForm):
@@ -109,6 +136,7 @@ class PictureForm(forms.ModelForm):
 
 
 class EditForm(forms.ModelForm):
+    username =forms.CharField(widget = forms.TextInput(attrs={'readonly':'readonly'}))
     email =forms.EmailField(widget = forms.TextInput(attrs={'readonly':'readonly'}))
     first_name=forms.CharField( max_length=30, required=True)
     last_name=forms.CharField( max_length=30, required=True)

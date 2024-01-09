@@ -1,6 +1,43 @@
 
 {% load crispy_forms_tags %}
 {%load widget_tweaks%}
+<style>
+   
+    
+    .alert {
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+    }
+    
+    .alert-success {
+        color: white;
+        background-color: #4CAF50 ;
+        border-color: #c3e6cb;
+    }
+    
+    .alert-info {
+        color: white;
+        background-color: #ff9800;
+        border-color: #bee5eb;
+    }
+    
+    .alert-warning {
+        color: black;
+        background-color: #fff3cd;
+        border-color: #ffeeba;
+    }
+    
+    .alert-danger {
+        color: white;
+        background-color: #f44336;
+        border-color: #f5c6cb;
+    }
+
+</style>
+
+                                    
 <div class="profile">
     <div class="page-main-heading sticky-top py-2 px-3 mb-3">
 
@@ -19,6 +56,18 @@
             <p class="text-muted mb-0">Update Personal Information &amp; Settings</p>
         </div>
     </div>
+    <div class="card mb-3">
+        {% for message in messages %}
+                                    
+                                                <div class="container-flui p-0">
+                                                <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+                                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                  <span aria-hidden="True">&times;</span>
+                                                  </button>
+                                                  {{ message }}
+                                                </div>
+                                                </div>
+                                                {% endfor %}
 
     <div class="container-xl px-2 px-sm-3">
         <div class="row">
@@ -30,6 +79,9 @@
                     </div>
                     
                     <div class="card-body">
+                        <form method="post"  enctype="multipart/form-data" action="{% url 'App:dashboard'  %}" >
+                        
+                            {% csrf_token %}
                         <div class="row">
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
@@ -48,32 +100,26 @@
                             </div>
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label for="mobileNumber">Mobile number</label>
-                                    <input type="text" class="form-control form-control-md"
-                                        id="mobileNumber" placeholder="Type your mobile number"
-                                        value="+01-222-364522">
+                                    {{pform.username.label_tag}}
+                                    {% render_field pform.username class="form-control form-control-md" %}
                                 </div>
                             </div>
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label for="birthDate">Birth date</label>
-                                    <input type="text" class="form-control form-control-md"
-                                        id="birthDate" placeholder="dd/mm/yyyy" value="20/11/1992">
+                                    {{pform.email.label_tag}}
+                                    {% render_field pform.email class="form-control form-control-md" %}
                                 </div>
                             </div>
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label for="emailAddress">Email address</label>
-                                    <input type="email" class="form-control form-control-md"
-                                        id="emailAddress" placeholder="Type your email address"
-                                        value="catherine.richardson@gmail.com">
+                                    {{eform.phone.label_tag}}
+                                    {% render_field eform.phone class="form-control form-control-md" %}
                                 </div>
                             </div>
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label for="webSite">Website</label>
-                                    <input type="text" class="form-control form-control-md" id="webSite"
-                                        placeholder="Type your website" value="www.catherichardson.com">
+                                    {{eform.country.label_tag}}
+                                    {% render_field eform.country class="form-control form-control-md" %}
                                 </div>
                             </div>
                             <div class="col-12">
@@ -85,12 +131,14 @@
                                 </div>
                             </div>
                         </div>
+                    
                     </div>
 
                     <div class="card-footer d-flex justify-content-end">
                         <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
-                        <button type="button" class="btn btn-primary">Save Changes</button>
+                        <input type="submit" class="btn btn-primary" value="Save Changes">
                     </div>
+                </form>
                 </div>
 
                 <div class="card mb-3">
@@ -134,54 +182,11 @@
 
                     <div class="card-footer d-flex justify-content-end">
                         <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
-                        <button type="button" class="btn btn-primary">Save Changes</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
                     </div>
                 </div>
 
-                <div class="card mb-3">
-                    <div class="card-header">
-                        <h6 class="mb-1">Password</h6>
-                        <p class="mb-0 text-muted small">Update personal &amp; contact information</p>
-                    </div>
-
-                    <div class="card-body">
-                        <form>
-                            <div class="row">
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="current-password">Current Password</label>
-                                        <input type="password" class="form-control form-control-md"
-                                            id="current-password" placeholder="Current password"
-                                            autocomplete="on">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="new-password">New Password</label>
-                                        <input type="password" class="form-control form-control-md"
-                                            id="new-password" placeholder="New password"
-                                            autocomplete="off">
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="repeat-password">Repeat Password</label>
-                                        <input type="password" class="form-control form-control-md"
-                                            id="repeat-password" placeholder="Repeat password"
-                                            autocomplete="off">
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="card-footer d-flex justify-content-end">
-                        <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
-                        <button type="button" class="btn btn-primary">Save Changes</button>
-                    </div>
-                </div>
+                {% include 'App/password.html'%}
 
                 <div class="card mb-3">
                     <div class="card-header">

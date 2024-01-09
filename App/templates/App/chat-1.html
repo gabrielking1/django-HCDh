@@ -1,9 +1,8 @@
-
+{%load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 
     
-<!-- Mirrored from themes.mintycodes.com/quicky/ltr/light-skin/chat-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 04 Jul 2023 09:46:48 GMT -->
 <head>
         <meta charset="UTF-8">
         <!-- Viewport-->
@@ -48,6 +47,7 @@
             /* Set the button style when hovered */
             background-color: green;
             border-color:white;
+          }
            
     </style>
     </head>
@@ -222,7 +222,7 @@
                                             </li>
                                         </ul>
                                     </div>
-
+                    
 
                                     <!-- Sidebar Header Start -->
                                     <div class="sidebar-sub-header">
@@ -280,11 +280,12 @@
                                     </div>
                                     <!-- Sidebar Header End -->
                                 </div>
-                                <!-- Chat Header End -->
-
-                                <!-- Chat Contact List Start -->
+                           
+                               
                                 <ul class="contacts-list" id="chatContactTab" data-chat-list="">
+                                
                                     <!-- Chat Item Start -->
+                                    
                                     {% if users.friends.exists %}
                                         
                                       
@@ -294,8 +295,7 @@
                                     <li class="contacts-item friends">
                                         <a class="contacts-link" href="{% url 'App:conversation' friend.profiles.username %}">
                                             
-                                            <div class="avatar {% for userss in online_users %}{% if friend.profiles.username.username == userss.user.username %}avatar-online{% endif %}{% endfor %}
-                                            ">
+                                            <div class="avatar {% for userss in online_users %}{% if friend.profiles.username.username == userss.user.username %}avatar-online{% endif %}{% endfor %}">
                                                 <img src="{{friend.profiles.profile_picture.url}}" alt="">
                                             </div>
                                             <div class="contacts-content">
@@ -305,17 +305,19 @@
                                                     <div class="chat-time">
                                                         
                                                         
-                                                      {% if last.sender.username == request.user.username and last.receiver.username == friend.profiles.username.username and last.title == request.user.username|add:profile.username.username %}
+                                                      {% if last.sender.username == request.user.username and last.receiver.username == friend.profiles.username.username or profile.username.username and last.title == request.user.username|add:profile.username.username %}
                                                     
                                                       {{last.timer|time:"H:i:A" }} r
-                                                      {%elif last.sender.username == profile.username.username  and last.receiver.username == request.user.username and last.title == request.user.username|add:profile.username.username %}
+                                                      {%endif%}
+                                                      {%if last.sender.username == profile.username.username  and last.receiver.username == request.user.username and last.title == request.user.username|add:profile.username.username %}
                                                       {{last.timer|time:"H:i:A" }} p
-                                                      {%elif last.sender.username == profile.username.username  and last.receiver.username == request.user.username and last.title == profile.username.username|add:request.user.username %}
+                                                      {% endif %}
+                                                      {%if last.sender.username == profile.username.username  and last.receiver.username == request.user.username and last.title == profile.username.username|add:request.user.username %}
                                                       {{last.timer|time:"H:i:A" }} pp
                                                       
                                                       {%endif%}
                                                       
-                                                </div>
+                                                    </div>
                                                   
                                                 </div>
                                                 <div class="contacts-texts">
@@ -1339,7 +1341,11 @@
                                                             <!-- <img class="injectable hw-20" src=".//static/chats/assets/media/heroicons/outline/dots-vertical.svg" alt=""> -->
                                                         </button>
                                                         <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="#">Change Profile Picture</a>
+                                                            <a class="dropdown-item" href="#"
+                                                             role="button" data-toggle="modal"
+                                                                        data-target="#addPicture">Change Profile Picture
+                                                               
+                                                            </a>
                                                             <a class="dropdown-item" href="#">Change Number</a>
                                                         </div>
                                                     </div>
@@ -1350,7 +1356,7 @@
                                             <!-- Card End -->
 
                                             <!-- Card Start -->
-                                            <div class="card mt-3">
+                                            <div class="card mt-3" style="color:black">
 
                                                 <!-- List Group Start -->
                                                 <ul class="list-group list-group-flush">
@@ -1638,12 +1644,12 @@
                                 <div class="media-body align-self-center ">
                                     <h6 class="text-truncate mb-0">{{profile.username.username}}</h6>
                                     <small class="text-muted">
-                                        {% for userss in online_users %}{% if profile.username.username == userss.user.username %}Online
                                         
+                                        {% for userss in online_users %}
+                                        {% if profile.username.username == userss.user.username %}Online
+                                        {%endif%}
                                      
-                                        {% else%}
-                                            Offline
-                                        {% endif %}
+                                        
                                         
                                         {% endfor %}
                                     </small>
@@ -2949,7 +2955,7 @@
                             </svg>
 
                             <!-- Alternate :: External File link -->
-                            <!-- <img class="injectable hw-20" src=".//static/chats/assets/media/heroicons/outline/arrow-left.svg" alt=""> -->
+                            <!-- <img class="injectable hw-20" src="./../../assets/media/heroicons/outline/arrow-left.svg" alt=""> -->
                         </button>
                     </div>
 
@@ -2964,7 +2970,7 @@
                         </svg>
 
                         <!-- Alternate :: External File link -->
-                        <!-- <img class="hw-20" src=".//static/chats/assets/media/heroicons/outline/view-grid.svg" alt="" class="injectable hw-20"> -->
+                        <!-- <img class="hw-20" src="./../../assets/media/heroicons/outline/view-grid.svg" alt="" class="injectable hw-20"> -->
                         <h6 class="mb-0 mt-1">Apps</h6>
                     </div>
 
@@ -2974,7 +2980,7 @@
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="translator-tab" data-toggle="tab" href="#translator" role="tab"
                                 aria-controls="translator" aria-selected="true">
-                                <!-- <img class="injectable hw-22" src=".//static/chats/assets/media/heroicons/outline/translate.svg" alt=""> -->
+                                <!-- <img class="injectable hw-22" src="./../../assets/media/heroicons/outline/translate.svg" alt=""> -->
 
                                 <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
@@ -2986,7 +2992,7 @@
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="notes-tab" data-toggle="tab" href="#notes" role="tab"
                                 aria-controls="notes" aria-selected="false">
-                                <!-- <img class="injectable hw-22" src=".//static/chats/assets/media/heroicons/outline/collection.svg" alt=""> -->
+                                <!-- <img class="injectable hw-22" src="./../../assets/media/heroicons/outline/collection.svg" alt=""> -->
                                 <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -2998,7 +3004,7 @@
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="todo-tab" data-toggle="tab" href="#todo" role="tab"
                                 aria-controls="todo" aria-selected="false">
-                                <!-- <img class="injectable hw-22" src=".//static/chats/assets/media/heroicons/outline/clipboard-check.svg" alt=""> -->
+                                <!-- <img class="injectable hw-22" src="./../../assets/media/heroicons/outline/clipboard-check.svg" alt=""> -->
                                 <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -3009,7 +3015,7 @@
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="quick-settings-tab" data-toggle="tab" href="#quick-settings"
                                 role="tab" aria-controls="quick-settings" aria-selected="false">
-                                <!-- <img class="injectable hw-22" src=".//static/chats/assets/media/heroicons/outline/cog.svg" alt=""> -->
+                                <!-- <img class="injectable hw-22" src="./../../assets/media/heroicons/outline/cog.svg" alt=""> -->
                                 <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -3063,7 +3069,7 @@
                                                 </svg>
 
                                                 <!-- Alternate :: External File link -->
-                                                <!-- <img class="injectable hw-22" src=".//static/chats/assets/media/heroicons/outline/x.svg" alt=""> -->
+                                                <!-- <img class="injectable hw-22" src="./../../assets/media/heroicons/outline/x.svg" alt=""> -->
 
                                             </div>
                                         </li>
@@ -3158,7 +3164,7 @@
                                                 </svg>
 
                                                 <!-- Alternate :: External File link -->
-                                                <!-- <img class="injectable hw-22" src=".//static/chats/assets/media/heroicons/outline/x.svg" alt=""> -->
+                                                <!-- <img class="injectable hw-22" src="./../../assets/media/heroicons/outline/x.svg" alt=""> -->
 
                                             </div>
                                         </li>
@@ -3211,7 +3217,7 @@
                                                         </svg>
 
                                                         <!-- Alternate :: External File link -->
-                                                        <!-- <img class="injectable hw-20" src=".//static/chats/assets/media/heroicons/outline/search.svg" alt=""> -->
+                                                        <!-- <img class="injectable hw-20" src="./../../assets/media/heroicons/outline/search.svg" alt=""> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -3238,7 +3244,7 @@
                                                             class="btn btn-secondary btn-icon btn-minimal btn-sm text-muted"
                                                             type="button" data-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="false">
-                                                            <!-- <img class="injectable hw-20" src=".//static/chats/assets/media/heroicons/outline/dots-vertical.svg" alt=""> -->
+                                                            <!-- <img class="injectable hw-20" src="./../../assets/media/heroicons/outline/dots-vertical.svg" alt=""> -->
                                                             <svg class="hw-20" xmlns="http://www.w3.org/2000/svg"
                                                                 height="24" width="24" fill="none" viewBox="0 0 24 24"
                                                                 stroke="currentColor">
@@ -3279,7 +3285,7 @@
                                                             class="btn btn-secondary btn-icon btn-minimal btn-sm text-muted"
                                                             type="button" data-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="false">
-                                                            <!-- <img class="injectable hw-20" src=".//static/chats/assets/media/heroicons/outline/dots-vertical.svg" alt=""> -->
+                                                            <!-- <img class="injectable hw-20" src="./../../assets/media/heroicons/outline/dots-vertical.svg" alt=""> -->
                                                             <svg class="hw-20" xmlns="http://www.w3.org/2000/svg"
                                                                 height="24" width="24" fill="none" viewBox="0 0 24 24"
                                                                 stroke="currentColor">
@@ -3319,7 +3325,7 @@
                                                             class="btn btn-secondary btn-icon btn-minimal btn-sm text-muted"
                                                             type="button" data-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="false">
-                                                            <!-- <img class="injectable hw-20" src=".//static/chats/assets/media/heroicons/outline/dots-vertical.svg" alt=""> -->
+                                                            <!-- <img class="injectable hw-20" src="./../../assets/media/heroicons/outline/dots-vertical.svg" alt=""> -->
                                                             <svg class="hw-20" xmlns="http://www.w3.org/2000/svg"
                                                                 height="24" width="24" fill="none" viewBox="0 0 24 24"
                                                                 stroke="currentColor">
@@ -3359,7 +3365,7 @@
                                                             class="btn btn-secondary btn-icon btn-minimal btn-sm text-muted"
                                                             type="button" data-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="false">
-                                                            <!-- <img class="injectable hw-20" src=".//static/chats/assets/media/heroicons/outline/dots-vertical.svg" alt=""> -->
+                                                            <!-- <img class="injectable hw-20" src="./../../assets/media/heroicons/outline/dots-vertical.svg" alt=""> -->
                                                             <svg class="hw-20" xmlns="http://www.w3.org/2000/svg"
                                                                 height="24" width="24" fill="none" viewBox="0 0 24 24"
                                                                 stroke="currentColor">
@@ -3413,7 +3419,7 @@
                                                 </svg>
 
                                                 <!-- Alternate :: External File link -->
-                                                <!-- <img class="injectable hw-22" src=".//static/chats/assets/media/heroicons/outline/x.svg" alt=""> -->
+                                                <!-- <img class="injectable hw-22" src="./../../assets/media/heroicons/outline/x.svg" alt=""> -->
 
                                             </div>
                                         </li>
@@ -3462,7 +3468,7 @@
                                                         </svg>
 
                                                         <!-- Alternate :: External File link -->
-                                                        <!-- <img class="injectable hw-20" src=".//static/chats/assets/media/heroicons/outline/search.svg" alt=""> -->
+                                                        <!-- <img class="injectable hw-20" src="./../../assets/media/heroicons/outline/search.svg" alt=""> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -3470,7 +3476,7 @@
                                         <!-- Sidebar Search End -->
                                     </div>
 
-                                    <div class="todo-container">
+                                    <div class="todo-container" style="color:black">
 
                                         <div class="todo-title">
                                             <h6 class="mb-0">20/07/2020</h6>
@@ -3616,7 +3622,7 @@
                     </div>
 
                     <div class="tab-pane h-100" id="quick-settings" role="tabpanel"
-                        aria-labelledby="quick-settings-tab">
+                        aria-labelledby="quick-settings-tab" style="color:black">
                         <div class="appnavbar-content-wrapper">
                             <div class="appnavbar-scrollable-wrapper">
                                 <div class="appnavbar-heading sticky-top">
@@ -3638,7 +3644,7 @@
                                                 </svg>
 
                                                 <!-- Alternate :: External File link -->
-                                                <!-- <img class="injectable hw-22" src=".//static/chats/assets/media/heroicons/outline/x.svg" alt=""> -->
+                                                <!-- <img class="injectable hw-22" src="./../../assets/media/heroicons/outline/x.svg" alt=""> -->
 
                                             </div>
                                         </li>
@@ -4467,6 +4473,36 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-light border" data-dismiss="modal">Close</button>
                             <button type="button" class="btn btn-primary">Add task</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal modal-lg-fullscreen fade" id="addPicture" tabindex="-1" role="dialog"
+                aria-labelledby="addTaskModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-dialog-zoom">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addTaskModalLabel">Update Picture</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    {{picform|crispy}}
+                                </div>
+                                <div class="form-group">
+                                    <label for="addTaskDetails" class="col-form-label">Task details:</label>
+                                    <textarea class="form-control hide-scrollbar" id="addTaskDetails" rows="4"
+                                        placeholder="Add task descriptions"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light border" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Change</button>
                         </div>
                     </div>
                 </div>

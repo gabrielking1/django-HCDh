@@ -58,7 +58,7 @@ class ProfileView(SessionWizardView):
         
 
             messages.info(self.request, " account created successfully ")
-            return redirect('login')
+            return redirect('Myapp:login')
         
         else:
             print("something is wrong ")
@@ -104,7 +104,7 @@ def login(request):
     
     if request.user.is_authenticated and request.user in Profile.objects.all():
 
-        return redirect('index')
+        return redirect('Myapp:index')
     # else:
     #     return redirect('/MyApp/login/')
      
@@ -276,7 +276,7 @@ def blog(request, slug):
                 com.blog_id = post
                 com.comment = comment
                 com.save()
-                return HttpResponseRedirect(reverse("blog",args={blog.slug}))
+                return HttpResponseRedirect(reverse("Myapp:blog",args={blog.slug}))
         
             return render(request, 'blogdetails.html', {'blog': blog,'user':user,'number':number,'comm':comm,
             'views':views,'blogdetails':blogdetails, 'cat':category,
@@ -328,7 +328,7 @@ def view(request, slug):
             com.username_id = username
             if com.username_id == user:
                 messages.error(request, 'you cannot reply your own question')
-                return HttpResponseRedirect(reverse("view",args={blog.slug}))
+                return HttpResponseRedirect(reverse("Myapp:view",args={blog.slug}))
             else:
             
 
@@ -345,7 +345,7 @@ def view(request, slug):
                 com.comment = comment
                 print(com.comment)
                 com.save()
-                return HttpResponseRedirect(reverse("view",args={blog.slug}))
+                return HttpResponseRedirect(reverse("Myapp:view",args={blog.slug}))
         # for i in Answer.objects.raw('SELECT id, question_id FROM Myapp_answer WHERE username_id = ' + str(request.user.id)):
         #     print(i.username.username,"make sense")
         #     print(i.id)
@@ -474,7 +474,7 @@ def like(request, slug):
             if request.user.id == answer.username_id:
                 messages.error(request, 'you are cannot upvote your answer')
                 # return redirect(request.META.get('HTTP_REFERER'))
-                return HttpResponseRedirect(reverse("view",args={blog.slug}))
+                return HttpResponseRedirect(reverse("Myapp:view",args={blog.slug}))
             else:
         
                 if user in answer.liker.all():
@@ -505,10 +505,10 @@ def like(request, slug):
                 }
                 # return JsonResponse(context)
                 # return redirect(request.META.get('HTTP_REFERER'))
-                return HttpResponseRedirect(reverse("view",args={blog.slug}))
+                return HttpResponseRedirect(reverse("Myapp:view",args={blog.slug}))
     else:
         messages.error(request, "you aint logged in ")
-        return redirect('login')
+        return redirect('Myapp:login')
 
 
 
@@ -529,7 +529,7 @@ def like_content(request, slug):
 
                         )
         LikeContent.objects.create(username=request.user, blog=blog)
-        return HttpResponseClientRedirect(reverse("blog",args={blog.slug}))
+        return HttpResponseClientRedirect(reverse("Myapp:blog",args={blog.slug}))
     
     else:
         return render(request,template_name="error.html")
@@ -539,7 +539,7 @@ def unlike_content(request, slug):
         blog = get_object_or_404(Blog, slug=slug)
         Notification.objects.filter(user=request.user.username, ids=blog.slug).delete()
         LikeContent.objects.filter(username=request.user, blog=blog).delete()
-        return HttpResponseClientRedirect(reverse("blog",args={blog.slug}))
+        return HttpResponseClientRedirect(reverse("Myapp:blog",args={blog.slug}))
     else:
         return render(request,template_name="error.html")
 
@@ -549,11 +549,11 @@ def unlike_content(request, slug):
 def profile(request, username):
     if request.user.is_superuser:
         messages.error(request, 'you are not authorized, log in as user not admin')
-        return redirect('login')
+        return redirect('Myapp:login')
     elif request.user.is_authenticated and request.user.is_active and not request.user.is_superuser:
         notify = Notification.objects.filter(username=request.user.username,isread="Unread")
         userr = get_object_or_404(User, username=username)
-        apper = Profiles.objects.get(username=userr)
+        apper = Profiles.objects.filter(username=userr)
         if apper:
             return redirect('/App/login/')
         else:
@@ -577,11 +577,11 @@ def profile(request, username):
                     
                     messages.success(request, 'Profile successfully Created')
                     form.save()
-                    return HttpResponseRedirect(reverse("profile",args={userr.username}))
+                    return HttpResponseRedirect(reverse("Myapp:profile",args={userr.username}))
                 
                 else:
                     messages.error(request, 'you can only create profile once but you can edit multiple times')
-                    return HttpResponseRedirect(reverse("profile",args={userr.username}))
+                    return HttpResponseRedirect(reverse("Myapp:profile",args={userr.username}))
             else:
                 form = UpdateProfileForm(instance=userr.profile, )
         
@@ -595,7 +595,7 @@ def profile(request, username):
     
     else:
         messages.error(request, 'you are not authorized')
-        return redirect('login')
+        return redirect('Myapp:login')
 
 def updateprofile(request, username):
     user = User.objects.get(username=username)
@@ -650,13 +650,13 @@ def contact(request):
             print("yesss oo na admin")
         if name !=request.user.username:
             print("oooooleeee")
-            return redirect('contact')
+            return redirect('Myapp:contact')
         elif email != request.user.email:
             print("oooooleeee twoo")
-            return redirect('contact')
+            return redirect('Myapp:contact')
         elif name == request.user.is_superuser:
             print("oooooleeee three")
-            return redirect('contact')
+            return redirect('Myapp:contact')
         else:
              
             
@@ -664,7 +664,7 @@ def contact(request):
             contact.email = email
             contact.message = comment
             # contact.save()
-            return redirect('contact')
+            return redirect('Myapp:contact')
     return render(request,'contact.html')
         
 def create(request):
@@ -680,18 +680,18 @@ def create(request):
                 print(title)
                 if Blog.objects.filter(title=title):
                     messages.error(request, 'Blog already exist')
-                    return redirect('create')
+                    return redirect('Myapp:create')
                 elif len(body)  < 255:
                     messages.error(request, 'your content is too small ')
-                    return redirect('create')
+                    return redirect('Myapp:create')
                 else:
                     messages.success(request, 'content created successfully')
                     form.save()
-                    return redirect('create')
+                    return redirect('Myapp:create')
             
             else:
                 print('some thing is wromh')
-                return redirect('create')
+                return redirect('Myapp:create')
         
         
         else:
@@ -699,7 +699,7 @@ def create(request):
             return render(request,'create.html',{'form':form,'notify':notify})
     else:
         messages.error(request, 'log in to create content')
-        return redirect('login')
+        return redirect('Myapp:login')
     
 def question(request):
     if request.user.is_active and request.user.is_authenticated:
@@ -714,7 +714,7 @@ def question(request):
                 if Blog.objects.filter(title=title):
                     messages.error(request, 'Question has been asked')
                     messages.error(request, 'check question and answer page')
-                    return redirect('answer')
+                    return redirect('Myapp:answer')
                 
                 else:
                     messages.success(request, 'Question successfully inquired')
@@ -732,7 +732,7 @@ def question(request):
     else:
         messages.error(request, 'login to ask a question')
         # form = QForm(initial = {'username':request.user.id})
-        return redirect('login')
+        return redirect('Myapp:login')
     
 
 def update(request, slug):
@@ -744,10 +744,10 @@ def update(request, slug):
             # username = form.cleaned_data['username']
             messages.success(request, 'updated successfully')
             form.save()
-            return redirect('profile')
+            return redirect('Myapp:profile')
         else:
             messages.error(request, 'your update wasnt successfuly ')
-            return HttpResponseRedirect(reverse("update", args={'product.slug'}))
+            return HttpResponseRedirect(reverse("Myapp:update", args={'product.slug'}))
     else:
         form = QForm(instance=product)
     return render(request, 'update.html', {
@@ -793,20 +793,20 @@ def report(request):
             
                 if Report.objects.filter(username=request.user, culprit=culprit):
                     messages.error(request, f'{culprit} already reported')
-                    return redirect('report')
+                    return redirect('Myapp:report')
                 elif User.username!=culprit:
                     messages.error(request, f'{culprit} doesnt not exists')
-                    return redirect('report')
+                    return redirect('Myapp:report')
             
                 else:
                     
                     messages.success(request, 'report created successfully')
                     form.save()
-                    return redirect('report')
+                    return redirect('Myapp:report')
             
             else:
                 print('some thing is wromh')
-                return redirect('report')
+                return redirect('Myapp:report')
         
         
         else:
@@ -837,7 +837,7 @@ def changepassword(request):
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
-            return redirect('login')
+            return redirect('Myapp:login')
         else:
             messages.error(request, 'Please correct the error below.')
     else:
@@ -899,7 +899,7 @@ def like_blog(request, slug):
 #                 return HttpResponseRedirect(reverse("profile",args={profile.username}))
 #     else:
 #         messages.error(request, "you aint logged in ")
-#         return redirect('login')
+#         return redirect('Myapp:login')
 
 
 
@@ -921,7 +921,7 @@ def follower(request, username):
                     profile.follower.add(request.user)
                     messages.success(request, 'You are now following {}.'.format(profile.username))
 
-        return redirect('profile', username=profile.username)
+        return redirect('Myapp:profile', username=profile.username)
     else:
         messages.error(request, 'You are not logged in.')
-        return redirect('login')
+        return redirect('Myapp:login')
