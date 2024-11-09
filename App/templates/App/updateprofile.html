@@ -1,0 +1,45 @@
+{% load crispy_forms_tags %}
+
+<div class="signup-section pt-150 pb-150 pt-lg-60 pb-lg-60" hx-encoding>
+    <div class="container">
+        <div class="row gx-4 gx-xxl-5 align-items-center justify-content-center">
+            
+                <div class="signup-form">
+    
+                    {% if request.user.is_superuser%}
+                     <p>Admin cannot send message </p>
+                    {%else%}
+                    {%if request.user.is_active and request.user.is_authenticated%}
+                    <div class="contact-form-two">
+                        {% for message in messages%}
+                            {{message}}
+                        {%endfor%}
+                        <form hx-post="{% url 'App:pictureUpdate' %}" hx-headers='{"X-CSRFToken":"{{ csrf_token }}"}' class="modal-content" hx-encoding="multipart/form-data">
+                        {% comment %} <form hx-post="{% url 'update' product.slug %}" enctype="multipart/form-data">
+                            {% csrf_token %} {% endcomment %}
+                            
+                            
+                            <div class="modal-body">
+                            
+                              <div class="form-group">
+                                  {{picform|crispy}}
+                              </div>
+                              
+                        
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-light border" data-dismiss="modal">Close</button>
+                          <input type="Submit" vlaue"oya">
+                      </div>
+                           
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                      </div>
+                    {%endif%}
+                    {%endif%}
+                </div>
+            
+        </div>
+    </div>

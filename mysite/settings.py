@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'App',
     'Home',
     'crispy_forms',
+    'crispy_bootstrap5',
     'ckeditor',
     'data_browser',
     'django_countries',
@@ -59,7 +60,9 @@ INSTALLED_APPS = [
     'online_users',
     'widget_tweaks',
 ]
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -215,6 +218,7 @@ AUTHENTICATION_BACKENDS = [
 LOGIN_URL = "login"
 
 # AXES_USE_USER_AGENT = True (both user and ip)
+AXES_ONLY_USER_FAILURES = True
 
 # number of attempt
 AXES_FAILURE_LIMIT = 4

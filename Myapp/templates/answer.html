@@ -343,7 +343,7 @@
             {%for note in notify reversed%}
             {%if note.isread == "Unread" %}
             <li><b></b>                                     
-                <form action="{% url 'read' %}?next={{ request.path }}" class="form-inline" method="post" >
+                <form action="{% url 'Myapp:read' %}?next={{ request.path }}" class="form-inline" method="post" >
                     {% csrf_token %}
                     <a href='{{note.notify}}{{note.ids}}'>{{note.user}} {{note.topic}} </a> 
                   <input type = "text" value = "{{note.id}}" name="like"  hidden>
@@ -474,10 +474,10 @@
                <div class="col-xl-6 col-lg-6 wow tpfadeLeft" data-wow-duration=".9s" data-wow-delay=".5s" >
                   <div id="project" class="tp-project__item mb-30" style="background-color:#E8F6FF">
                      <div class="tp-project__thumb fix">
-                        <a href="/view/{{blog.slug}}"><img src="{{blog.screenshot.url}}" style="height:330px" alt=""></a>
+                        <a href="/Myapp/view/{{blog.slug}}"><img src="{{blog.screenshot.url}}" style="height:330px" alt=""></a>
                      </div>
                      <div class="tp-project__content">
-                        <h3 class="tp-project__title"><a href="/view/{{blog.slug}}">{{blog.title}}</a></h3>
+                        <h3 class="tp-project__title"><a href="/Myapp/view/{{blog.slug}}">{{blog.title}}</a></h3>
                         <p>{{blog.body|truncatewords:20}}...</p>
                      </div>
                   </div>
@@ -559,7 +559,7 @@
                      <div class="col-xl-7 col-lg-7 col-md-12 col-12 order-1 order-lg-2 d-none d-sm-block">
                         <div class="tp-footer-bottom__menu">
                            <ul>
-                              <li><a href="/question/">Ask Now</a></li>
+                              <li><a href="/Myapp/question/">Ask Now</a></li>
                               <li><a href="/answer/">Q & A</a></li>
                             
                               <li><a href="/blogs/">Contents</a></li>

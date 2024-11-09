@@ -216,7 +216,7 @@ def blogs(request):
 
 def answer(request):
     notify = Notification.objects.filter(username=request.user.username,isread="Unread")
-    blog = Question.objects.all()
+    blog = Question.objects.all().order_by('-id')
     tag = Tag.objects.all()
     
     search  = request.GET.get('search')

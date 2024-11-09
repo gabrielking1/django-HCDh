@@ -347,7 +347,7 @@
             {%for note in notify reversed%}
             {%if note.isread == "Unread" %}
             <li><b></b>                                     
-                <form action="{% url 'read' %}?next={{ request.path }}" class="form-inline" method="post" >
+                <form action="{% url 'Myapp:read' %}?next={{ request.path }}" class="form-inline" method="post" >
                     {% csrf_token %}
                     <a href='{{note.notify}}{{note.ids}}'>{{note.user}} {{note.topic}} </a> 
                   <input type = "text" value = "{{note.id}}" name="like"  hidden>
@@ -466,7 +466,7 @@
                                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                               </div>
                               {%endfor%}
-                              <form action="/create/"  method="post" enctype="multipart/form-data" >
+                              <form action="/Myapp/create/"  method="post" enctype="multipart/form-data" >
                               {% csrf_token %}
                               <div class="form-group">
                                  {{form|crispy}}

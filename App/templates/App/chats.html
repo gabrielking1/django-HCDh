@@ -1226,21 +1226,24 @@
                                         <div class="col">
 
                                             <!-- Card Start -->
-                                            <div class="card card-body card-bg-5">
+                                            <div class="card card-body card-bg-5" style="background-image:url('{{users.cover.url}}');
+                                            color:white;opacity:0.9;background-repeat: no-repeat; background-size: cover;">
 
                                                 <!-- Card Details Start -->
-                                                <div class="d-flex flex-column align-items-center">
-                                                    <div class="avatar avatar-lg mb-3">
-                                                        <img class="avatar-img" src="/static/chats/assets/media/avatar/3.png"
+                                                <div class="d-flex flex-column align-items-center" >
+                                                    <div class="avatar avatar-lg mb-3" id="musted">
+                                                        <img class="avatar-img" src="{{users.profile_picture.url}}"
                                                             alt="">
                                                     </div>
 
-                                                    <div class="d-flex flex-column align-items-center">
-                                                        <h5>Catherine Richardson</h5>
+                                                    <div class="d-flex flex-column align-items-center" style="background-color:gray;border:0.5px; border-radius:10px">
+                                                        <h5>{{request.user.first_name}} {{request.user.last_name}}</h5>
                                                     </div>
+                                                    <br>
 
                                                     <div class="d-flex">
-                                                        <button class="btn btn-outline-default mx-1" type="button">
+                                                        <a href="/App/logout/">
+                                                        <button class="btn btn-outline-default mx-1" type="button" style="background-color:green;color:white">
                                                             <!-- Default :: Inline SVG -->
                                                             <svg class="hw-18 d-none d-sm-inline-block" fill="none"
                                                                 viewBox="0 0 24 24" stroke="currentColor">
@@ -1249,12 +1252,13 @@
                                                                     d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
                                                             </svg>
 
-                                                            <!-- Alternate :: External File link -->
-                                                            <!-- <img class="injectable hw-18" src="./../../assets/media/heroicons/outline/logout.svg" alt=""> -->
+                                                            
                                                             <span>Logout</span>
                                                         </button>
+                                                    </a>
+                                                        
                                                         <button class="btn btn-outline-default mx-1 d-xl-none"
-                                                            data-profile-edit="" type="button">
+                                                            data-profile-edit="" type="button" >
                                                             <!-- Default :: Inline SVG -->
                                                             <svg class="hw-18 d-none d-sm-inline-block" fill="none"
                                                                 viewBox="0 0 24 24" stroke="currentColor">
@@ -1267,7 +1271,7 @@
                                                             </svg>
 
                                                             <!-- Alternate :: External File link -->
-                                                            <!-- <img class="injectable hw-18" src="./../../assets/media/heroicons/outline/cog.svg" alt=""> -->
+                                                            <!-- <img class="injectable hw-18 d-sm-inline-block" src=".//static/chats/assets/media/heroicons/outline/cog.svg" alt=""> -->
                                                             <span>Settings</span>
                                                         </button>
                                                     </div>
@@ -1277,10 +1281,12 @@
                                                 <!-- Card Options Start -->
                                                 <div class="card-options">
                                                     <div class="dropdown">
-                                                        <button
+                                                        
+            
+                                                        <button 
                                                             class="btn btn-secondary btn-icon btn-minimal btn-sm text-muted text-muted"
                                                             type="button" data-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false">
+                                                            aria-expanded="false" id="musted">
                                                             <!-- Default :: Inline SVG -->
                                                             <svg class="hw-20" fill="none" viewBox="0 0 24 24"
                                                                 stroke="currentColor">
@@ -1288,12 +1294,20 @@
                                                                     stroke-width="2"
                                                                     d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                                                             </svg>
-
+                                                            
                                                             <!-- Alternate :: External File link -->
-                                                            <!-- <img class="injectable hw-20" src="./../../assets/media/heroicons/outline/dots-vertical.svg" alt=""> -->
+                                                            <!-- <img class="injectable hw-20" src=".//static/chats/assets/media/heroicons/outline/dots-vertical.svg" alt=""> -->
                                                         </button>
                                                         <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="#">Change Profile Picture</a>
+                                                            <button class="dropdown-item" hx-get="{% url 'App:pictureUpdate' %}"
+                                                             role="button" data-toggle="modal"
+                                                             data-target="#modal"    hx-target="#addPicture">Change Profile Picture
+                                                               
+                                                        </button>
+                                                        <button hx-get="{% url 'App:pictureUpdate' %}" hx-target="#modal" class="btn btn-success" 
+                                                            data-toggle="modal" data-target="#modal">
+                                                                        update product
+                                                                </button>
                                                             <a class="dropdown-item" href="#">Change Number</a>
                                                         </div>
                                                     </div>
@@ -1302,9 +1316,24 @@
 
                                             </div>
                                             <!-- Card End -->
-
+                                            <div class="modal fade" id="modal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true"> 
+                                                <div id="exampleModal" class="modal-dialog" role="document" hx-target="model"></>
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                    </div>
+                                                    <div class="modal-dialog modal-dialog-scrollable">
+                                                    
+                                                    </div>
+                                             
+                                                  </div>
+                                                </div>
+                                              </div>
                                             <!-- Card Start -->
-                                            <div class="card mt-3">
+                                            <div class="card mt-3" style="color:black">
 
                                                 <!-- List Group Start -->
                                                 <ul class="list-group list-group-flush">
@@ -1325,7 +1354,7 @@
                                                             </svg>
 
                                                             <!-- Alternate :: External File link -->
-                                                            <!-- <img class="injectable text-muted hw-20 ml-1" src="./../../assets/media/heroicons/outline/clock.svg" alt=""> -->
+                                                            <!-- <img class="injectable text-muted hw-20 ml-1" src=".//static/chats/assets/media/heroicons/outline/clock.svg" alt=""> -->
                                                         </div>
                                                     </li>
                                                     <!-- List Group Item End -->
@@ -1346,7 +1375,7 @@
                                                             </svg>
 
                                                             <!-- Alternate :: External File link -->
-                                                            <!-- <img class="injectable text-muted hw-20 ml-1" src="./../../assets/media/heroicons/outline/calendar.svg" alt=""> -->
+                                                            <!-- <img class="injectable text-muted hw-20 ml-1" src=".//static/chats/assets/media/heroicons/outline/calendar.svg" alt=""> -->
                                                         </div>
                                                     </li>
                                                     <!-- List Group Item End -->
@@ -1367,7 +1396,7 @@
                                                             </svg>
 
                                                             <!-- Alternate :: External File link -->
-                                                            <!-- <img class="injectable text-muted hw-20 ml-1" src="./../../assets/media/heroicons/outline/phone.svg" alt=""> -->
+                                                            <!-- <img class="injectable text-muted hw-20 ml-1" src=".//static/chats/assets/media/heroicons/outline/phone.svg" alt=""> -->
                                                         </div>
                                                     </li>
                                                     <!-- List Group Item End -->
@@ -1389,7 +1418,7 @@
                                                             </svg>
 
                                                             <!-- Alternate :: External File link -->
-                                                            <!-- <img class="injectable text-muted hw-20 ml-1" src="./../../assets/media/heroicons/outline/mail.svg" alt=""> -->
+                                                            <!-- <img class="injectable text-muted hw-20 ml-1" src=".//static/chats/assets/media/heroicons/outline/mail.svg" alt=""> -->
                                                         </div>
                                                     </li>
                                                     <!-- List Group Item End -->
@@ -1410,7 +1439,7 @@
                                                             </svg>
 
                                                             <!-- Alternate :: External File link -->
-                                                            <!-- <img class="injectable text-muted hw-20 ml-1" src="./../../assets/media/heroicons/outline/globe.svg" alt=""> -->
+                                                            <!-- <img class="injectable text-muted hw-20 ml-1" src=".//static/chats/assets/media/heroicons/outline/globe.svg" alt=""> -->
                                                         </div>
                                                     </li>
                                                     <!-- List Group Item End -->
@@ -1432,7 +1461,7 @@
                                                             </svg>
 
                                                             <!-- Alternate :: External File link -->
-                                                            <!-- <img class="injectable text-muted hw-20 ml-1" src="./../../assets/media/heroicons/outline/home.svg" alt=""> -->
+                                                            <!-- <img class="injectable text-muted hw-20 ml-1" src=".//static/chats/assets/media/heroicons/outline/home.svg" alt=""> -->
                                                         </div>
                                                     </li>
                                                     <!-- List Group Item End -->
@@ -1466,7 +1495,7 @@
                                                             </svg>
 
                                                             <!-- Alternate :: External File link -->
-                                                            <!-- <img class="injectable text-muted hw-20 ml-1" src="./../../assets/media/icons/facebook.svg" alt=""> -->
+                                                            <!-- <img class="injectable text-muted hw-20 ml-1" src=".//static/chats/assets/media/icons/facebook.svg" alt=""> -->
                                                         </div>
                                                     </li>
                                                     <!-- List Group Item End -->
@@ -1488,7 +1517,7 @@
                                                             </svg>
 
                                                             <!-- Alternate :: External File link -->
-                                                            <!-- <img class="injectable text-muted hw-20 ml-1" src="./../../assets/media/icons/twitter.svg" alt=""> -->
+                                                            <!-- <img class="injectable text-muted hw-20 ml-1" src=".//static/chats/assets/media/icons/twitter.svg" alt=""> -->
                                                         </div>
                                                     </li>
                                                     <!-- List Group Item End -->
@@ -1513,7 +1542,7 @@
                                                             </svg>
 
                                                             <!-- Alternate :: External File link -->
-                                                            <!-- <img class="injectable text-muted hw-20 ml-1" src="./../../assets/media/icons/instagram.svg" alt=""> -->
+                                                            <!-- <img class="injectable text-muted hw-20 ml-1" src=".//static/chats/assets/media/icons/instagram.svg" alt=""> -->
                                                         </div>
                                                     </li>
                                                     <!-- List Group Item End -->
@@ -1537,7 +1566,7 @@
                                                             </svg>
 
                                                             <!-- Alternate :: External File link -->
-                                                            <!-- <img class="injectable text-muted hw-20 ml-1" src="./../../assets/media/icons/linkedin.svg" alt=""> -->
+                                                            <!-- <img class="injectable text-muted hw-20 ml-1" src=".//static/chats/assets/media/icons/linkedin.svg" alt=""> -->
                                                         </div>
                                                     </li>
                                                     <!-- List Group Item End -->
@@ -2151,362 +2180,7 @@
                 <!-- Friends Page End -->
 
                 <!-- Profile Settings Start -->
-                <div class="profile">
-                    <div class="page-main-heading sticky-top py-2 px-3 mb-3">
-
-                        <!-- Chat Back Button (Visible only in Small Devices) -->
-                        <button class="btn btn-secondary btn-icon btn-minimal btn-sm text-muted d-xl-none" type="button"
-                            data-close="">
-                            <svg class="hw-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                            </svg>
-                            <!-- <img class="injectable hw-20" src="./../../assets/media/heroicons/outline/arrow-left.svg" alt=""> -->
-                        </button>
-
-                        <div class="pl-2 pl-xl-0">
-                            <h5 class="font-weight-semibold">Settings</h5>
-                            <p class="text-muted mb-0">Update Personal Information &amp; Settings</p>
-                        </div>
-                    </div>
-
-                    <div class="container-xl px-2 px-sm-3">
-                        <div class="row">
-                            <div class="col">
-                                <div class="card mb-3">
-                                    <div class="card-header">
-                                        <h6 class="mb-1">Account</h6>
-                                        <p class="mb-0 text-muted small">Update personal &amp; contact information</p>
-                                    </div>
-
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="firstName">First Name</label>
-                                                    <input type="text" class="form-control form-control-md"
-                                                        id="firstName" placeholder="Type your first name"
-                                                        value="Catherine">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="lastName">Last Name</label>
-                                                    <input type="text" class="form-control form-control-md"
-                                                        id="lastName" placeholder="Type your last name"
-                                                        value="Richardson">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="mobileNumber">Mobile number</label>
-                                                    <input type="text" class="form-control form-control-md"
-                                                        id="mobileNumber" placeholder="Type your mobile number"
-                                                        value="+01-222-364522">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="birthDate">Birth date</label>
-                                                    <input type="text" class="form-control form-control-md"
-                                                        id="birthDate" placeholder="dd/mm/yyyy" value="20/11/1992">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="emailAddress">Email address</label>
-                                                    <input type="email" class="form-control form-control-md"
-                                                        id="emailAddress" placeholder="Type your email address"
-                                                        value="catherine.richardson@gmail.com">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="webSite">Website</label>
-                                                    <input type="text" class="form-control form-control-md" id="webSite"
-                                                        placeholder="Type your website" value="www.catherichardson.com">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label for="Address">Address</label>
-                                                    <input type="text" class="form-control form-control-md" id="Address"
-                                                        placeholder="Type your address"
-                                                        value="1134 Ridder Park Road, San Fransisco, CA 94851">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="card-footer d-flex justify-content-end">
-                                        <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
-                                        <button type="button" class="btn btn-primary">Save Changes</button>
-                                    </div>
-                                </div>
-
-                                <div class="card mb-3">
-                                    <div class="card-header">
-                                        <h6 class="mb-1">Social network profiles</h6>
-                                        <p class="mb-0 text-muted small">Update personal &amp; contact information</p>
-                                    </div>
-
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="facebookId">Facebook</label>
-                                                    <input type="text" class="form-control form-control-md"
-                                                        id="facebookId" placeholder="Username">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="twitterId">Twitter</label>
-                                                    <input type="text" class="form-control form-control-md"
-                                                        id="twitterId" placeholder="Username">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="instagramId">Instagram</label>
-                                                    <input type="text" class="form-control form-control-md"
-                                                        id="instagramId" placeholder="Username">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <label for="linkedinId">Linkedin</label>
-                                                    <input type="text" class="form-control form-control-md"
-                                                        id="linkedinId" placeholder="Username">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="card-footer d-flex justify-content-end">
-                                        <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
-                                        <button type="button" class="btn btn-primary">Save Changes</button>
-                                    </div>
-                                </div>
-
-                                <div class="card mb-3">
-                                    <div class="card-header">
-                                        <h6 class="mb-1">Password</h6>
-                                        <p class="mb-0 text-muted small">Update personal &amp; contact information</p>
-                                    </div>
-
-                                    <div class="card-body">
-                                        <form>
-                                            <div class="row">
-                                                <div class="col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <label for="current-password">Current Password</label>
-                                                        <input type="password" class="form-control form-control-md"
-                                                            id="current-password" placeholder="Current password"
-                                                            autocomplete="on">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <label for="new-password">New Password</label>
-                                                        <input type="password" class="form-control form-control-md"
-                                                            id="new-password" placeholder="New password"
-                                                            autocomplete="off">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <label for="repeat-password">Repeat Password</label>
-                                                        <input type="password" class="form-control form-control-md"
-                                                            id="repeat-password" placeholder="Repeat password"
-                                                            autocomplete="off">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                    <div class="card-footer d-flex justify-content-end">
-                                        <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
-                                        <button type="button" class="btn btn-primary">Save Changes</button>
-                                    </div>
-                                </div>
-
-                                <div class="card mb-3">
-                                    <div class="card-header">
-                                        <h6 class="mb-1">Privacy</h6>
-                                        <p class="mb-0 text-muted small">Update personal &amp; contact information</p>
-                                    </div>
-
-                                    <div class="card-body p-0">
-                                        <ul class="list-group list-group-flush list-group-sm-column">
-
-                                            <li class="list-group-item py-2">
-                                                <div class="media align-items-center">
-                                                    <div class="media-body">
-                                                        <p class="mb-0">Profile Picture</p>
-                                                        <p class="small text-muted mb-0">Select who can see my profile
-                                                            picture</p>
-                                                    </div>
-                                                    <div class="dropdown mr-2">
-                                                        <button class="btn btn-outline-default dropdown-toggle"
-                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false">
-                                                            Public
-                                                        </button>
-                                                        <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="#">Public</a>
-                                                            <a class="dropdown-item" href="#">Friends</a>
-                                                            <a class="dropdown-item" href="#">Selected Friends</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-
-                                            <li class="list-group-item py-2">
-                                                <div class="media align-items-center">
-                                                    <div class="media-body">
-                                                        <p class="mb-0">Last Seen</p>
-                                                        <p class="small text-muted mb-0">Select who can see my last seen
-                                                        </p>
-                                                    </div>
-                                                    <div class="dropdown mr-2">
-                                                        <button class="btn btn-outline-default dropdown-toggle"
-                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false">
-                                                            Public
-                                                        </button>
-                                                        <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="#">Public</a>
-                                                            <a class="dropdown-item" href="#">Friends</a>
-                                                            <a class="dropdown-item" href="#">Selected Friends</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-
-                                            <li class="list-group-item py-2">
-                                                <div class="media align-items-center">
-                                                    <div class="media-body">
-                                                        <p class="mb-0">Groups</p>
-                                                        <p class="small text-muted mb-0">Select who can add you in
-                                                            groups</p>
-                                                    </div>
-                                                    <div class="dropdown mr-2">
-                                                        <button class="btn btn-outline-default dropdown-toggle"
-                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false">
-                                                            Public
-                                                        </button>
-                                                        <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="#">Public</a>
-                                                            <a class="dropdown-item" href="#">Friends</a>
-                                                            <a class="dropdown-item" href="#">Selected Friends</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-
-                                            <li class="list-group-item py-2">
-                                                <div class="media align-items-center">
-                                                    <div class="media-body">
-                                                        <p class="mb-0">Status</p>
-                                                        <p class="small text-muted mb-0">Select who can see my status
-                                                            updates</p>
-                                                    </div>
-                                                    <div class="dropdown mr-2">
-                                                        <button class="btn btn-outline-default dropdown-toggle"
-                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false">
-                                                            Public
-                                                        </button>
-                                                        <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="#">Public</a>
-                                                            <a class="dropdown-item" href="#">Friends</a>
-                                                            <a class="dropdown-item" href="#">Selected Friends</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-
-                                            <li class="list-group-item py-2">
-                                                <div class="media align-items-center">
-                                                    <div class="media-body">
-                                                        <p class="mb-0">Read receipts</p>
-                                                        <p class="small text-muted mb-0">If turn off this option you
-                                                            won't be able to see read recipts</p>
-                                                    </div>
-                                                    <div class="custom-control custom-switch mr-2">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="readReceiptsSwitch" checked="">
-                                                        <label class="custom-control-label"
-                                                            for="readReceiptsSwitch">&nbsp;</label>
-                                                    </div>
-                                                </div>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-
-                                    <div class="card-footer d-flex justify-content-end">
-                                        <button type="button" class="btn btn-link text-muted mx-1">Reset</button>
-                                        <button type="button" class="btn btn-primary">Save Changes</button>
-                                    </div>
-                                </div>
-
-                                <div class="card mb-3">
-                                    <div class="card-header">
-                                        <h6 class="mb-1">Security</h6>
-                                        <p class="mb-0 text-muted small">Update personal &amp; contact information</p>
-                                    </div>
-
-                                    <div class="card-body p-0">
-                                        <ul class="list-group list-group-flush list-group-sm-column">
-                                            <li class="list-group-item py-2">
-                                                <div class="media align-items-center">
-                                                    <div class="media-body">
-                                                        <p class="mb-0">Use two-factor authentication</p>
-                                                        <p class="small text-muted mb-0">Ask for a code if attempted
-                                                            login from an unrecognised device or browser.</p>
-                                                    </div>
-                                                    <div class="custom-control custom-switch mr-2">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="twoFactorSwitch" checked="">
-                                                        <label class="custom-control-label"
-                                                            for="twoFactorSwitch">&nbsp;</label>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item py-2">
-                                                <div class="media align-items-center">
-                                                    <div class="media-body">
-                                                        <p class="mb-0">Get alerts about unrecognised logins</p>
-                                                        <p class="small text-muted mb-0">You will be notified if anyone
-                                                            logs in from a device or browser you don't usually use</p>
-                                                    </div>
-                                                    <div class="custom-control custom-switch mr-2">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="unrecognisedSwitch" checked="">
-                                                        <label class="custom-control-label"
-                                                            for="unrecognisedSwitch">&nbsp;</label>
-                                                    </div>
-                                                </div>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-
-                                    <div class="card-footer d-flex justify-content-end">
-                                        <button class="btn btn-link text-muted mx-1">Reset</button>
-                                        <button class="btn btn-primary" type="button">Save Changes</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% include 'App/setting.html' %}
                 <!-- Profile Settings End -->
 
             </main>
@@ -3344,7 +3018,7 @@
                                         <div class="input-group w-100 bg-light">
                                             <input type="text"
                                                 class="form-control form-control-md search border-right-0 transparent-bg pr-0"
-                                                placeholder="Search">
+                                                placeholder="Search here ooo">
                                             <div class="input-group-append">
                                                 <div class="input-group-text transparent-bg border-left-0"
                                                     role="button">

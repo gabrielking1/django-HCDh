@@ -344,7 +344,7 @@
             {%for note in notify reversed%}
             {%if note.isread == "Unread" %}
             <li><b></b>                                     
-                <form action="{% url 'read' %}?next={{ request.path }}" class="form-inline" method="post" >
+                <form action="{% url 'Myapp:read' %}?next={{ request.path }}" class="form-inline" method="post" >
                     {% csrf_token %}
                     <a href='{{note.notify}}{{note.ids}}'>{{note.user}} {{note.topic}} </a> 
                   <input type = "text" value = "{{note.id}}" name="like"  hidden>
@@ -569,14 +569,14 @@
                               {% for blog in blogdetails reversed%}
                               <div class="rc__post mb-20 d-flex">
                                  <div class="rc__post-thumb mr-20">
-                                    <a href="/blog/{{blog.slug}}"><img src="{{blog.cover_picture.url}}" alt=""></a>
+                                    <a href="/Myapp/blog/{{blog.slug}}"><img src="{{blog.cover_picture.url}}" alt=""></a>
                                  </div>
                                  <div class="rc__post-content">
                                     <div class="rc__meta">
                                        <span>{{blog.created_at}}</span>
                                     </div>
                                     <h3 class="rc__post-title">
-                                       <a href="/blog/{{blog.slug}}">{{blog.title}}</a>
+                                       <a href="/Myapp/blog/{{blog.slug}}">{{blog.title}}</a>
                                     </h3>
                                  </div>
                               </div>{%endfor%}
@@ -650,7 +650,7 @@
                         <div class="col-xl-7 col-lg-7 col-md-12 col-12 order-1 order-lg-2 d-none d-sm-block">
                            <div class="tp-footer-bottom__menu">
                               <ul>
-                                 <li><a href="/question/">Ask Now</a></li>
+                                 <li><a href="/Myapp/question/">Ask Now</a></li>
                                  <li><a href="/answer/">Q & A</a></li>
                                
                                  <li><a href="/blogs/">Contents</a></li>

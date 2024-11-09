@@ -11,7 +11,7 @@ from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django_countries.widgets import CountrySelectWidget
 from phonenumber_field.formfields import PhoneNumberField
-from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
+from phonenumber_field.formfields import SplitPhoneNumberField
 from django import forms
 from crispy_bootstrap5.bootstrap5 import FloatingField
 from crispy_forms.bootstrap import Accordion, AccordionGroup
@@ -31,7 +31,6 @@ class RegForm(UserCreationForm):
 
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    # email = forms.EmailField(required=True,widget=forms.TextInput(attrs={'class': 'form-control','placeholder': 'Enter valid Email'}))
     email = forms.CharField(required=True,widget=forms.TextInput(attrs={'class': 'form-control','placeholder': 'Enter valid Email'}))
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -58,21 +57,15 @@ class RegForm(UserCreationForm):
 
 
 class UpdateProfileForm(forms.ModelForm):
-    avatar = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    profile_picture = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
     cover = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
     about = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
-    phone = PhoneNumberField(
-        widget=PhoneNumberInternationalFallbackWidget(attrs={
-            'placeholder': 'Enter valid Phone number',
-            'class': 'form-control'
-        }),
-        
-    )
+    phone = SplitPhoneNumberField()
     country = CountryField(blank_label='Select country').formfield(widget=CountrySelectWidget(attrs={'class': 'form-control'}))
     # country = CountryField(blank_label="(Select country)")
     class Meta:
         model = Profiles
-        fields = fields = {'avatar','about','country','cover','phone'}
+        fields = {'profile_picture','about','country','cover','phone'}
         # widget = {"country": CountrySelectWidget()}
     def __init__(self, *args, **kwargs):
         super(UpdateProfileForm, self).__init__(*args, **kwargs)
@@ -83,21 +76,21 @@ class UpdateProfileForm(forms.ModelForm):
 
 
 class PictureUpdate(forms.ModelForm):
-    avatar = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    profile_picture = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
     cover = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
     about = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
     
   
     class Meta:
         model = Profiles
-        fields = fields = {'avatar','about','cover'}
+        fields = {'profile_picture','about','cover'}
         # widget = {"country": CountrySelectWidget()}
 
 
 
 class TwoEdit(forms.ModelForm):
     phone = PhoneNumberField(
-        widget=PhoneNumberInternationalFallbackWidget()
+      
         
     )
     country = CountryField(blank_label='Select country').formfield(widget=CountrySelectWidget(attrs={'class': 'form-control'}))

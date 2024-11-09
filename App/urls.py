@@ -16,6 +16,7 @@ urlpatterns = [
     path('add/', views.add, name="add"),
     path('dashboard/', views.dashboard, name="dashboard"),
     path('logout/', views.logout, name='logout'),
+    path('pictureUpdate/', views.pictureUpdate, name='pictureUpdate'),
     path('accept/<str:username>', views.accept, name = 'accept'),
     path('chatting/<str:username>', views.chatting, name = 'chatting'),
     path('conversation/<str:username>', views.conversation, name = 'conversation'),

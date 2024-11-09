@@ -280,7 +280,32 @@ def chats(request):
         Q(sender=request.user, receiver=users.username) |
         Q(sender=users.username, receiver=request.user)
     ).last()
-    return render(request, 'App/chats.html', {'users':users,'last':last_message  })
+    pform=EditForm(instance=request.user)
+    eform = TwoEdit(instance=users)
+    picform = UpdateProfileForm(instance=users)
+    form = PasswordChangeForm(request.user)
+    if request.method == "POST":
+        pform=EditForm(request.POST,instance=request.user)
+        eform = TwoEdit(request.POST,instance=users)
+        picform = PictureUpdate(request.POST,instance=users)
+
+        
+        if pform.is_valid() and eform.is_valid():
+            pform.save()
+            eform.save()
+            messages.add_message(request,messages.SUCCESS, f'Updated Successfully')
+            
+            return redirect(request.META.get('HTTP_REFERER'))
+        else:
+            pform=EditForm(instance=request.user)
+            eform = TwoEdit(instance=users)
+            picform = PictureUpdate(instance=users)
+            print("something is wrong")
+            # return redirect(request.META.get('HTTP_REFERER'))
+    return render(request, 'App/chats.html', {'users':users,'last':last_message,
+                                              'pform':pform,'eform':eform,'picform':picform,'form':form
+            
+                                          })
 
 @login_required(login_url='/App/login/')
 def conversation(request, username):
@@ -309,7 +334,7 @@ def conversation(request, username):
 
     pform=EditForm(instance=request.user)
     eform = TwoEdit(instance=users)
-    picform = PictureUpdate(request.POST, request.FILES, instance=users)
+    picform = UpdateProfileForm(instance=users)
     form = PasswordChangeForm(request.user)
     if request.method == "POST":
         pform=EditForm(request.POST,instance=request.user)
@@ -423,7 +448,7 @@ def dashboard(request):
 
 
 @login_required(login_url='/App/login/')
-def PictureUpdate(request):
+def pictureUpdate(request):
     if Profile.objects.filter(username = request.user):
         messages.error(request, "you are not authorized")
         return redirect("/Myapp/login")
@@ -432,31 +457,25 @@ def PictureUpdate(request):
     
     users = Profiles.objects.get(username = request.user)
     
-      
-    picform = PictureUpdate(instance=users)
+
 
     if request.method == "POST":
-     
-        picform = PictureUpdate(request.POST,instance=users)
+        picform = PictureUpdate(request.POST,request.FILES, instance=users)
+       
         if picform.is_valid():
+          
             picform.save()
-            
-            messages.add_message(request,messages.SUCCESS, f'Updated Successfully')
-            
-            return redirect(request.META.get('HTTP_REFERER'))
-        else:
-            pform=EditForm(instance=request.user)
-            eform = TwoEdit(instance=users)
-            print("something is wrong")
+            return HttpResponse(
+               f"Profile updated. reload profile to see changes"
+                    
+            )
+    else:
+        picform = PictureUpdate(instance=users)
+    return render(request, 'App/updateprofile.html', {
+        'picform': picform,
         
-            context={
-            'picform':picform,
-        
-            }
-        return redirect(request.META.get('HTTP_REFERER'))
-    
-        
-    return redirect(request.META.get('HTTP_REFERER'))
+    })
+    # return redirect(request.META.get('HTTP_REFERER'))
 
 
 
